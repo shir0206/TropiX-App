@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TropiX</string>
+
+    <string name="btn_startGame">התחל משחקיX</string>
+    <string name="btn_store">החנות הטרופיX</string>
+
+    <string name="tv_chooseBoard">בחר לוחיX</string>
+    <string name="tv_board_3x3">3x3</string>
+    <string name="tv_board_4x4">4x4</string>
+    <string name="tv_board_5x5">5x5</string>
+    <string name="tv_board_6x6">6x6</string>
+
+    <string name="tv_me">אני</string>
+    <string name="tv_rival">היריב</string>
+    <string name="tv_choosePlayer">בחר טרופיXים</string>
+
+
+    <string name="tv_coins">נקודות</string>
+    <string name="tv_coinsSum">XX</string>
+
+    <string name="tv_char">טרופיX</string>
+    <string name="tv_price">מחיריX</string>
+    <string name="tv_lock">מנעוליX</string>
+
+    <string name="tv_gameCoins">ניקוד למשחק</string>
+    <string name="tv_gameCoinsSum">XX</string>
+
+    <string name="tv_cumulativeCoins">ניקוד מצטבר</string>
+    <string name="tv_cumulativeCoinsSum">YY</string>
+
+
+</resources>
