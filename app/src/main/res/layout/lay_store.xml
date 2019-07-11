@@ -1,6 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorYellowBright"
+    tools:context=".gui.Store">
+
+
+    <TableRow
+        android:id="@+id/tbl_coins"
+        android:layout_width="283dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/store"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/tv_coinsSum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/tv_coinsSum"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tv_coins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/tv_coins"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack" />
+
+    </TableRow>
+
+    <ScrollView
+        android:layout_width="372dp"
+        android:layout_height="376dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/store"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbl_coins">
+
+        <TableLayout
+            android:id="@+id/tbl_allPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorYellowMedium">
+
+                <TextView
+                    android:id="@+id/tv_lock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_lock"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_price"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="50dp"/>
+
+                <TextView
+                    android:id="@+id/tv_char"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_char"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="50dp"/>
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_t001_palm_lock"
+                    android:layout_width="38dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/t000_open"/>
+
+                <TextView
+                    android:id="@+id/tv_t001_palm_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_price"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    />
+
+                <Button
+                    android:id="@+id/tv_t001_palm_img"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/t005_banana"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+            </TableRow>
+
+
+
+
+        </TableLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
