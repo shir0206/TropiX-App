@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.shirzabolotnyklein.tropix">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,11 +26,11 @@
             android:screenOrientation="portrait"/>
 
 
-        <!--<activity android:name=".gui.Game3x3"
+        <activity android:name=".gui.Game3x3"
            android:label="@string/app_name"
            android:screenOrientation="portrait"/>
 
--->
+
        <activity android:name=".gui.Store"
            android:label="@string/app_name"
            android:screenOrientation="portrait"/>

@@ -1,6 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_details"
+        android:layout_width="330dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        android:background="@color/colorWhiteMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_rival"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/drw_fill_white_border_yellow"
+
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_rival"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:padding="16dp"
+                app:srcCompat="@drawable/t005_banana" />
+
+            <TextView
+                android:id="@+id/tv_rival"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/tv_rival"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_me"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/drw_fill_white_border_yellow"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_me"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:padding="16dp"
+
+                app:srcCompat="@drawable/t003_sunglasses" />
+
+            <TextView
+                android:id="@+id/tv_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/tv_me"
+
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_coins"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_gameCoins"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorYellowMedium"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_gameCoins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/tv_gameCoins"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tv_gameCoinsSum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/tv_gameCoinsSum"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_totalCoins"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorYellowMedium"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_totalCoins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/tv_totalCoins"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tv_totalCoinsSum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/tv_totalCoinsSum"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_board_3x3"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorYellowMedium"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_details">
+
+        <LinearLayout
+            android:id="@+id/ll_board_3x3_row1"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_0x0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_0x1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_0x2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_board_3x3_row2"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_1x0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_1x1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_1x2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_board_3x3_row3"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_2x0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_2x1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+
+            <Button
+                android:id="@+id/btn_board_3x3_cell_2x2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@color/colorYellowBright" />
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

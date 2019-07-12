@@ -10,12 +10,12 @@ public class Lock {
 
     //------------------------------------- Parameters -------------------------------------
 
-    private boolean status;
-    private String statusPic;
+    private LockStatus status;
+    private int statusPic;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Lock(boolean status, String statusPic) {
+    public Lock(LockStatus status, int statusPic) {
         this.status = status;
         this.statusPic = statusPic;
     }
@@ -23,19 +23,19 @@ public class Lock {
     //------------------------------------- Getters & Setters --------------------------------
 
 
-    public boolean isStatus() {
+    public LockStatus isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(LockStatus status) {
         this.status = status;
     }
 
-    public String getStatusPic() {
+    public int getStatusPic() {
         return statusPic;
     }
 
-    public void setStatusPic(String statusPic) {
+    public void setStatusPic(int statusPic) {
         this.statusPic = statusPic;
     }
 }

@@ -10,7 +10,7 @@ public class Player {
      * @param name      Player name
      * @param price     Player price (Some of the players have to be purchased before the user could choose them)
      * @param picture   Player picture (picture ID)
-     * @param lock      Player lock (Some of the players are locked, in order to open the lock the user should purchase them)
+     * @param islocked  Player lock (Some of the players are locked, in order to open the lock the user should purchase them)
      */
 
     //------------------------------------- Parameters -------------------------------------
@@ -18,17 +18,17 @@ public class Player {
     private int id;
     private String name;
     private int price;
-    private String picture;
-    private Lock lock;
+    private int picture;
+    private Lock islocked;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Player(int id, String name, int price, String picture, Lock lock) {
+    public Player(int id, String name, int price, int picture, Lock lock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.picture = picture;
-        this.lock = lock;
+        this.islocked = lock;
     }
 
     //------------------------------------- Getters & Setters --------------------------------
@@ -58,19 +58,19 @@ public class Player {
         this.price = price;
     }
 
-    public String getPicture() {
+    public int getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(int picture) {
         this.picture = picture;
     }
 
     public Lock getLock() {
-        return lock;
+        return islocked;
     }
 
-    public void setLock(Lock lock) {
-        this.lock = lock;
+    public void setLock(Lock islocked) {
+        this.islocked = islocked;
     }
 }

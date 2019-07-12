@@ -14,7 +14,6 @@
     <string name="tv_rival">היריב</string>
     <string name="tv_choosePlayer">בחר טרופיXים</string>
 
-
     <string name="tv_coins">נקודות</string>
     <string name="tv_coinsSum">XX</string>
 
@@ -25,8 +24,8 @@
     <string name="tv_gameCoins">ניקוד למשחק</string>
     <string name="tv_gameCoinsSum">XX</string>
 
-    <string name="tv_cumulativeCoins">ניקוד מצטבר</string>
-    <string name="tv_cumulativeCoinsSum">YY</string>
+    <string name="tv_totalCoins">ניקוד מצטבר</string>
+    <string name="tv_totalCoinsSum">YY</string>
 
 
 </resources>
