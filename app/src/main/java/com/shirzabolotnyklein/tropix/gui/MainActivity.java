@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Constants instance = Constants.getInstance();
 
 
-        instance.initAllPlayersList();
+        instance.getAllPlayers();
 
 
 

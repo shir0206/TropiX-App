@@ -2,8 +2,11 @@ package com.shirzabolotnyklein.tropix.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Lock;
@@ -16,8 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Constants implements Serializable {
+
     private static Constants instance = null;
+
     private List<Player> allPlayers;
+
     private Context context;
 
     private Constants() {
@@ -99,7 +105,7 @@ public class Constants implements Serializable {
     private final Player player50 = new Player(50, "compass", 1000, R.drawable.t050_compass, close);
 
 
-    public List<Player> initAllPlayersList() {
+    public List<Player> getAllPlayers() {
 
         if (allPlayers.isEmpty()) {
             Log.d("INSIDE if", "INSIDE if");
@@ -156,11 +162,33 @@ public class Constants implements Serializable {
             allPlayers.add(player50);
 
         }
-
         return allPlayers;
-
     }
 
+/*
+    private void changeColor() {
+
+        for (Player p : allPlayers) {
+
+            if (p.getIsLocked().getStatus() == LockStatus.CLOSE) {
+
+                //p.getPicture()
+
+                ImageView imageview = (ImageView) findViewById(R.id.btn_t001_palm);
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.setSaturation(0);
+
+                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                imageview.setColorFilter(filter);
+
+
+                // (ImageView)p.getPicture().setColorFilter(filter);
+            }
+
+
+        }
+    }
+    */
 
     //------------------------------------- Shared Preferences Methods -------------------------------------
 
