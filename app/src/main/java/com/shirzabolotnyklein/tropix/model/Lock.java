@@ -1,6 +1,8 @@
 package com.shirzabolotnyklein.tropix.model;
 
 public class Lock {
+
+
     /**
      * This class represents the player lock status.
      * Some of the players have to be purchased before the user could choose them.
@@ -23,7 +25,7 @@ public class Lock {
     //------------------------------------- Getters & Setters --------------------------------
 
 
-    public LockStatus isStatus() {
+    public LockStatus getStatus() {
         return status;
     }
 

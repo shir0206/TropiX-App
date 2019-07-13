@@ -1,7 +1,9 @@
 package com.shirzabolotnyklein.tropix.model;
 
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     /**
      * This class represents the player in the game.
      * In each game there are 2 players (the user and the computer).
@@ -66,11 +68,11 @@ public class Player {
         this.picture = picture;
     }
 
-    public Lock getLock() {
+    public Lock getIsLocked() {
         return islocked;
     }
 
-    public void setLock(Lock islocked) {
+    public void setIslocked(Lock islocked) {
         this.islocked = islocked;
     }
 }
