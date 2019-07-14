@@ -4,6 +4,7 @@ public class Board {
     /**
      * This class represents the board.
      * The user should choose which of the boards he would like to use. Each board is awarded a different coins score.
+     *
      * @param size          The board size
      * @param color         The board size
      * @param maxVicCoins   The sum of the coins that are added to the winner

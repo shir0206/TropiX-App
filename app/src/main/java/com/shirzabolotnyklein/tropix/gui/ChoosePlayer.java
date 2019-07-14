@@ -1,7 +1,9 @@
 package com.shirzabolotnyklein.tropix.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +12,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.shirzabolotnyklein.tropix.R;
-import com.shirzabolotnyklein.tropix.model.LockStatus;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
 
 import java.util.ArrayList;
 
 public class ChoosePlayer extends AppCompatActivity {
+
+    private Context context;
+    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     private Button btn_choosePlayer;
     private static final String TAG = "ChoosePlayerActivity";
@@ -32,8 +36,6 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_choose_player);
 
-        Log.d(TAG, "onCreate: Started");
-
         initImageBitmapsForRivalPlayers();
         initImageBitmapsForMyPlayers();
 
@@ -42,6 +44,7 @@ public class ChoosePlayer extends AppCompatActivity {
         btn_choosePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //vibrator.vibrate(50);
                 startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
             }
         });
@@ -68,7 +71,7 @@ public class ChoosePlayer extends AppCompatActivity {
     private void initRecyclerViewForRivalPlayers() {
         Log.d(TAG, "initRecyclerView: init recyclerview for rival players.");
         RecyclerView recyclerView = findViewById(R.id.rv_chooseRival);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, allRivalPlayers, allStatus);
+        ChoosePlayerRecyclerViewAdapter adapter = new ChoosePlayerRecyclerViewAdapter(this, allRivalPlayers, allStatus);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
     }
@@ -93,7 +96,7 @@ public class ChoosePlayer extends AppCompatActivity {
     private void initRecyclerViewForMyPlayers() {
         Log.d(TAG, "initRecyclerView: init recyclerview for My players.");
         RecyclerView recyclerView = findViewById(R.id.rv_chooseMy);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, allMyPlayers, allStatus);
+        ChoosePlayerRecyclerViewAdapter adapter = new ChoosePlayerRecyclerViewAdapter(this, allMyPlayers, allStatus);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
     }

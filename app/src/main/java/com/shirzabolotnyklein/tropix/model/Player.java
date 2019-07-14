@@ -8,6 +8,7 @@ public class Player implements Serializable {
      * This class represents the player in the game.
      * In each game there are 2 players (the user and the computer).
      * The user should choose which of the players would represent his moves and which the computer moves.
+     *
      * @param id        Player ID
      * @param name      Player name
      * @param price     Player price (Some of the players have to be purchased before the user could choose them)

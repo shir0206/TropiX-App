@@ -6,6 +6,7 @@ public class Lock {
     /**
      * This class represents the player lock status.
      * Some of the players have to be purchased before the user could choose them.
+     *
      * @param status    Player status (True = The user can use the player. False = the user cannot use the player).
      * @param statusPic Status picture (Picture ID)
      */

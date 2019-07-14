@@ -20,11 +20,8 @@ import java.util.Map;
 
 public class Constants implements Serializable {
 
+    //------------------------------------- Singleton ------------------------------------------
     private static Constants instance = null;
-
-    private List<Player> allPlayers;
-
-    private Context context;
 
     private Constants() {
         allPlayers = new ArrayList<>();
@@ -37,7 +34,13 @@ public class Constants implements Serializable {
         return instance;
     }
 
-    //------------------------------------- Parameters -------------------------------------
+    //------------------------------------- Other ------------------------------------------
+
+    private Context context;
+
+    //=============================================================================================//
+    //=========================================== Game  ===========================================//
+    //=============================================================================================//
 
     private final int boardMoveCoins = 5;
 
@@ -46,70 +49,84 @@ public class Constants implements Serializable {
     private final int boardVicCoins5 = 500;
     private final int boardVicCoins6 = 600;
 
-    //------------------------------------- Locks -------------------------------------
+    //=============================================================================================//
+    //=========================================== Lock  ===========================================//
+    //=============================================================================================//
 
+    //------------------------------------- Lock Parameters ----------------------------------------
     private final Lock open = new Lock(LockStatus.OPEN, R.drawable.t000_open);
     private final Lock close = new Lock(LockStatus.CLOSE, R.drawable.t000_close);
 
-    //------------------------------------- Players -------------------------------------
+    //------------------------------------- Lock Getters ------------------------------------------
+    public Lock getOpen() {
+        return open;
+    }
+    public Lock getClose() {
+        return close;
+    }
+
+    //=============================================================================================//
+    //======================================== Players  ===========================================//
+    //=============================================================================================//
+
+    //----------------------------------- Player Parameters ----------------------------------------
+    private List<Player> allPlayers;
 
     private final Player player1 = new Player(1, "palm", 100, R.drawable.t001_palm, open);
-    private final Player player2 = new Player(2, "iced_tea", 100, R.drawable.t002_iced_tea, open);
-    private final Player player3 = new Player(3, "sunglasses", 100, R.drawable.t003_sunglasses, open);
-    private final Player player4 = new Player(4, "starfish", 100, R.drawable.t004_starfish, open);
-    private final Player player5 = new Player(5, "banana", 100, R.drawable.t005_banana, open);
+    private final Player player2 = new Player(2, "iced_tea", 120, R.drawable.t002_iced_tea, open);
+    private final Player player3 = new Player(3, "sunglasses", 150, R.drawable.t003_sunglasses, open);
+    private final Player player4 = new Player(4, "starfish", 160, R.drawable.t004_starfish, open);
+    private final Player player5 = new Player(5, "banana", 160, R.drawable.t005_banana, open);
     private final Player player6 = new Player(6, "beach_ball", 200, R.drawable.t006_beach_ball, close);
-    private final Player player7 = new Player(7, "ice_cream", 200, R.drawable.t007_ice_cream, close);
-    private final Player player8 = new Player(8, "tiki", 200, R.drawable.t008_tiki, close);
-    private final Player player9 = new Player(9, "dolphin", 200, R.drawable.t009_dolphin, close);
-    private final Player player10 = new Player(10, "lemon", 200, R.drawable.t010_lemon, close);
-    private final Player player11 = new Player(11, "flamingo", 300, R.drawable.t011_flamingo, close);
-    private final Player player12 = new Player(12, "shack", 300, R.drawable.t012_shack, close);
-    private final Player player13 = new Player(13, "sun_cream", 300, R.drawable.t013_sun_cream, close);
+    private final Player player7 = new Player(7, "ice_cream", 240, R.drawable.t007_ice_cream, close);
+    private final Player player8 = new Player(8, "tiki", 250, R.drawable.t008_tiki, close);
+    private final Player player9 = new Player(9, "dolphin", 260, R.drawable.t009_dolphin, close);
+    private final Player player10 = new Player(10, "lemon", 280, R.drawable.t010_lemon, close);
+    private final Player player11 = new Player(11, "flamingo", 320, R.drawable.t011_flamingo, close);
+    private final Player player12 = new Player(12, "shack", 350, R.drawable.t012_shack, close);
+    private final Player player13 = new Player(13, "sun_cream", 390, R.drawable.t013_sun_cream, close);
     private final Player player14 = new Player(14, "flower", 400, R.drawable.t014_flower, close);
-    private final Player player15 = new Player(15, "cactus", 400, R.drawable.t015_cactus, close);
-    private final Player player16 = new Player(16, "volcano", 400, R.drawable.t016_volcano, close);
-    private final Player player17 = new Player(17, "bucket", 400, R.drawable.t017_bucket, close);
-    private final Player player18 = new Player(18, "beach", 400, R.drawable.t018_beach, close);
-    private final Player player19 = new Player(19, "cherries", 400, R.drawable.t019_cherries, close);
+    private final Player player15 = new Player(15, "cactus", 420, R.drawable.t015_cactus, close);
+    private final Player player16 = new Player(16, "volcano", 470, R.drawable.t016_volcano, close);
+    private final Player player17 = new Player(17, "bucket", 480, R.drawable.t017_bucket, close);
+    private final Player player18 = new Player(18, "beach", 480, R.drawable.t018_beach, close);
+    private final Player player19 = new Player(19, "cherries", 490, R.drawable.t019_cherries, close);
     private final Player player20 = new Player(20, "sunset", 500, R.drawable.t020_sunset, close);
-    private final Player player21 = new Player(21, "yatch", 500, R.drawable.t021_yatch, close);
-    private final Player player22 = new Player(22, "pamela", 500, R.drawable.t022_pamela, close);
-    private final Player player23 = new Player(23, "flower", 500, R.drawable.t023_flower, close);
-    private final Player player24 = new Player(24, "hammock", 500, R.drawable.t024_hammock, close);
-    private final Player player25 = new Player(25, "slippers", 500, R.drawable.t025_slippers, close);
-    private final Player player26 = new Player(26, "palm_tree", 500, R.drawable.t026_palm_tree, close);
-    private final Player player27 = new Player(27, "coconut", 500, R.drawable.t027_coconut, close);
-    private final Player player28 = new Player(28, "sun", 500, R.drawable.t028_sun, close);
+    private final Player player21 = new Player(21, "yatch", 510, R.drawable.t021_yatch, close);
+    private final Player player22 = new Player(22, "pamela", 520, R.drawable.t022_pamela, close);
+    private final Player player23 = new Player(23, "flower", 520, R.drawable.t023_flower, close);
+    private final Player player24 = new Player(24, "hammock", 560, R.drawable.t024_hammock, close);
+    private final Player player25 = new Player(25, "slippers", 560, R.drawable.t025_slippers, close);
+    private final Player player26 = new Player(26, "palm_tree", 570, R.drawable.t026_palm_tree, close);
+    private final Player player27 = new Player(27, "coconut", 580, R.drawable.t027_coconut, close);
+    private final Player player28 = new Player(28, "sun", 580, R.drawable.t028_sun, close);
     private final Player player29 = new Player(29, "macaw", 600, R.drawable.t029_macaw, close);
-    private final Player player30 = new Player(30, "necklace", 600, R.drawable.t030_necklace, close);
-    private final Player player31 = new Player(31, "pineapple", 600, R.drawable.t031_pineapple, close);
-    private final Player player32 = new Player(32, "shell", 600, R.drawable.t032_shell, close);
-    private final Player player33 = new Player(33, "watermelon", 700, R.drawable.t033_watermelon, close);
-    private final Player player34 = new Player(34, "ice_cream", 700, R.drawable.t034_ice_cream, close);
-    private final Player player35 = new Player(35, "leaf", 700, R.drawable.t035_leaf, close);
-    private final Player player36 = new Player(36, "toucan", 700, R.drawable.t036_toucan, close);
-    private final Player player37 = new Player(37, "flower", 700, R.drawable.t037_flower, close);
-    private final Player player38 = new Player(38, "popsicle", 800, R.drawable.t038_popsicle, close);
-    private final Player player39 = new Player(39, "flower", 800, R.drawable.t039_flower, close);
+    private final Player player30 = new Player(30, "necklace", 640, R.drawable.t030_necklace, close);
+    private final Player player31 = new Player(31, "pineapple", 660, R.drawable.t031_pineapple, close);
+    private final Player player32 = new Player(32, "shell", 680, R.drawable.t032_shell, close);
+    private final Player player33 = new Player(33, "watermelon", 710, R.drawable.t033_watermelon, close);
+    private final Player player34 = new Player(34, "ice_cream", 720, R.drawable.t034_ice_cream, close);
+    private final Player player35 = new Player(35, "leaf", 720, R.drawable.t035_leaf, close);
+    private final Player player36 = new Player(36, "toucan", 750, R.drawable.t036_toucan, close);
+    private final Player player37 = new Player(37, "flower", 790, R.drawable.t037_flower, close);
+    private final Player player38 = new Player(38, "popsicle", 820, R.drawable.t038_popsicle, close);
+    private final Player player39 = new Player(39, "flower", 880, R.drawable.t039_flower, close);
     private final Player player40 = new Player(40, "mango", 900, R.drawable.t040_mango, close);
-    private final Player player41 = new Player(41, "cocktail", 900, R.drawable.t041_cocktail, close);
-    private final Player player42 = new Player(42, "surfboard", 900, R.drawable.t042_surfboard, close);
-    private final Player player43 = new Player(43, "shell", 900, R.drawable.t043_shell, close);
-    private final Player player44 = new Player(44, "jellyfish", 900, R.drawable.t044_jellyfish, close);
-    private final Player player45 = new Player(45, "wave", 900, R.drawable.t045_wave, close);
+    private final Player player41 = new Player(41, "cocktail", 920, R.drawable.t041_cocktail, close);
+    private final Player player42 = new Player(42, "surfboard", 960, R.drawable.t042_surfboard, close);
+    private final Player player43 = new Player(43, "shell", 970, R.drawable.t043_shell, close);
+    private final Player player44 = new Player(44, "jellyfish", 980, R.drawable.t044_jellyfish, close);
+    private final Player player45 = new Player(45, "wave", 990, R.drawable.t045_wave, close);
     private final Player player46 = new Player(46, "crab", 1000, R.drawable.t046_crab, close);
-    private final Player player47 = new Player(47, "clown_fish", 1000, R.drawable.t047_clown_fish, close);
-    private final Player player48 = new Player(48, "lifesaver", 1000, R.drawable.t048_lifesaver, close);
-    private final Player player49 = new Player(49, "shirt", 1000, R.drawable.t049_shirt, close);
-    private final Player player50 = new Player(50, "compass", 1000, R.drawable.t050_compass, close);
+    private final Player player47 = new Player(47, "clown_fish", 1010, R.drawable.t047_clown_fish, close);
+    private final Player player48 = new Player(48, "lifesaver", 1250, R.drawable.t048_lifesaver, close);
+    private final Player player49 = new Player(49, "shirt", 1440, R.drawable.t049_shirt, close);
+    private final Player player50 = new Player(50, "compass", 1500, R.drawable.t050_compass, close);
 
+    //------------------------------------ All Players Getter --------------------------------------
 
     public List<Player> getAllPlayers() {
-
         if (allPlayers.isEmpty()) {
-            Log.d("INSIDE if", "INSIDE if");
-
             allPlayers.add(player1);
             allPlayers.add(player2);
             allPlayers.add(player3);
@@ -160,37 +177,15 @@ public class Constants implements Serializable {
             allPlayers.add(player48);
             allPlayers.add(player49);
             allPlayers.add(player50);
-
         }
         return allPlayers;
     }
 
-/*
-    private void changeColor() {
+    //=============================================================================================//
+    //========================== Shared Preferences - All Players Status ==========================//
+    //=============================================================================================//
 
-        for (Player p : allPlayers) {
-
-            if (p.getIsLocked().getStatus() == LockStatus.CLOSE) {
-
-                //p.getPicture()
-
-                ImageView imageview = (ImageView) findViewById(R.id.btn_t001_palm);
-                ColorMatrix matrix = new ColorMatrix();
-                matrix.setSaturation(0);
-
-                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-                imageview.setColorFilter(filter);
-
-
-                // (ImageView)p.getPicture().setColorFilter(filter);
-            }
-
-
-        }
-    }
-    */
-
-    //------------------------------------- Shared Preferences Methods -------------------------------------
+    //--------------------------------- Write, Read & Edit file ------------------------------------
 
     /**
      * Write from SharedPreferences "allPlayersStatus" file.
@@ -211,10 +206,8 @@ public class Constants implements Serializable {
         String currentPlayerStatus = "";
 
         for (Player player : allPlayers) {
-
             currentPlayerId = Integer.toString(player.getId());
             currentPlayerStatus = player.getIsLocked().getStatus().toString();
-
             editor.putString(currentPlayerId, currentPlayerStatus);
         }
 
@@ -278,7 +271,6 @@ public class Constants implements Serializable {
         editor.apply();
     }
 
-
     /*
      * create String for file with all the players details - player id & player status.
      * separate each player with the char "#", and each player detail with the char ","
@@ -331,7 +323,6 @@ public class Constants implements Serializable {
 
             allPlayers.get(id - 1).setIslocked(playerLock);
         }
-
     }
     */
 
@@ -377,8 +368,6 @@ public class Constants implements Serializable {
             e.printStackTrace();
         }
     }
-
     */
-
 
 }

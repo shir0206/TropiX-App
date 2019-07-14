@@ -3,6 +3,7 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +11,13 @@ import android.widget.Button;
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.utils.Constants;
 
-
 public class MainActivity extends AppCompatActivity {
 
+    private Context context;
+    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+
     private Button btn_chooseBoard;
-    Context context;
+    private Button btn_store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,19 +26,26 @@ public class MainActivity extends AppCompatActivity {
 
         Constants instance = Constants.getInstance();
 
-
         instance.getAllPlayers();
 
-
-
         btn_chooseBoard = (Button) findViewById(R.id.btn_startGame);
+        btn_store = (Button) findViewById(R.id.btn_store);
 
         btn_chooseBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, ChooseBoard.class));
-                //launchActivity();
+                //vibrator.vibrate(50);
             }
         });
+
+        btn_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Store.class));
+                //vibrator.vibrate(50);
+            }
+        });
+
     }
 }

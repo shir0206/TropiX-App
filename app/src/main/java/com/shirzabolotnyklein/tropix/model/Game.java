@@ -6,6 +6,7 @@ public class Game {
      * In each game there are 2 players (the user and the computer).
      * The user should choose which of the players would represent his moves and which the computer moves.
      * The user should choose which of the boards he would like to use. Each board is awarded a different coins score.
+     *
      * @param user      The user player
      * @param rival     The rival player
      * @param board     The chosen board of the game
