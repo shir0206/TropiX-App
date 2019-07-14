@@ -42,7 +42,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindHolder: called ");
 
         Glide.with(mContext)
                 .asBitmap()
@@ -50,40 +49,61 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(holder.image);
 
         holder.status = mStatus.get(position);
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.d(TAG,"onClick: clicked on: " + mImageNames.get(position));
 
-                Toast.makeText(mContext, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();
+        // If Player status is "CLOSED", color in BW
+        if (mStatus.get(position).equals("CLOSE")) {
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
+
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+            holder.image.setColorFilter(filter);
+
+            if (position == 3) {
+                holder.image.setMinimumHeight(1);
+                holder.image.setMaxHeight(1);;
+
             }
-        });
+        }
+
+
+        // If Player status is "OPEN", color in RGB
+        else {
+            ColorMatrix matrix = new ColorMatrix();
+
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+            holder.image.setColorFilter(filter);
+
+            // User can choose to play with a Player in status "OPEN"
+            holder.layoutPlayer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
     }
 
+    /**
+     * @return How many items are in the list
+     */
     @Override
-    public int getItemCount() { //How many items are in the list
+    public int getItemCount() {
         return allPlayers.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
-        RelativeLayout parentLayout;
+        RelativeLayout layoutPlayer;
         String status;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            image = itemView.findViewById(R.id.img_player);
+            layoutPlayer = itemView.findViewById(R.id.rl_player);
 
-            if (status.equals("CLOSE")) {
-                ColorMatrix matrix = new ColorMatrix();
-                matrix.setSaturation(0);
-
-                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-                image.setColorFilter(filter);
-
-            }
         }
     }
 }
