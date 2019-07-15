@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.utils.GameControl;
 
-public class Game3x3 extends AppCompatActivity {
+public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView img_rival;
     private ImageView img_my;
@@ -27,7 +27,7 @@ public class Game3x3 extends AppCompatActivity {
     private ImageButton btn_board_3x3_cell_2x1;
     private ImageButton btn_board_3x3_cell_2x2;
 
-
+    private ImageButton buttons[][] = new ImageButton[3][3];
 
     private Context context;
     //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -37,77 +37,25 @@ public class Game3x3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_game_3x3);
 
-
         initPlayers();
-        initBoardButtons();
-        //vibrator.vibrate(50);
 
-        btn_board_3x3_cell_0x0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_0x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_0x1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_0x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_0x2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_0x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_1x0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_1x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_1x1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_1x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_1x2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_1x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_2x0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_2x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_2x1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_2x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
-        btn_board_3x3_cell_2x2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_board_3x3_cell_2x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
-                //vibrator.vibrate(50);
-            }
-        });
+        // Get board size
+        int size = GameControl.getGameControl().getGame().getBoard().getSize();
 
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
 
+                // Example: for button ID: btn_board_3x3_cell_0x0
+                String buttonID = "btn_board_" + size + "x" + size + "_cell_" + i + "x" + j;
 
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+
+                buttons[i][j] = findViewById(resID);
+                buttons[i][j].setOnClickListener(this);
+            }
+        }
+
+        //btn_board_3x3_cell_0x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
 
     }
 
@@ -135,6 +83,80 @@ public class Game3x3 extends AppCompatActivity {
 
         img_my = findViewById(R.id.img_my);
         img_my.setImageResource(GameControl.getGameControl().getGame().getMy().getPicture());
+    }
+
+
+    @Override
+    public void onClick(View view) {
 
     }
+
+//
+//        initBoardButtons();
+//        //vibrator.vibrate(50);
+//
+//        btn_board_3x3_cell_0x0.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_0x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_0x1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_0x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_0x2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_0x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_1x0.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_1x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_1x1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_1x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_1x2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_1x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_2x0.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_2x0.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_2x1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_2x1.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//        btn_board_3x3_cell_2x2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btn_board_3x3_cell_2x2.setImageResource(GameControl.getGameControl().getWhoseTurn().getPicture());
+//                //vibrator.vibrate(50);
+//            }
+//        });
+//
 }

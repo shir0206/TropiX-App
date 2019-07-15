@@ -49,6 +49,7 @@ public class Constants implements Serializable {
     //------------------------------------- Game Parameters ----------------------------------------
 
 
+
     private final int boardMoveCoins = 5;
 
     private final int boardVicCoins3 = 300;
@@ -63,6 +64,9 @@ public class Constants implements Serializable {
         return totalCoins;
     }
 
+    public int getBoardMoveCoins() {
+        return boardMoveCoins;
+    }
 
     //=============================================================================================//
     //=========================================== Board  ===========================================//

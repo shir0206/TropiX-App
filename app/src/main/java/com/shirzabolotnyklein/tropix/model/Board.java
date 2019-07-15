@@ -19,6 +19,8 @@ public class Board {
 
     //------------------------------------- Constructors -------------------------------------
 
+
+
     public Board(int size, int maxMoves, int maxVicCoins) {
         this.size = size;
         this.maxMoves = maxMoves;
@@ -42,5 +44,9 @@ public class Board {
 
     public void setMaxVicCoins(int maxVicCoins) {
         this.maxVicCoins = maxVicCoins;
+    }
+
+    public int getMaxMoves() {
+        return maxMoves;
     }
 }
