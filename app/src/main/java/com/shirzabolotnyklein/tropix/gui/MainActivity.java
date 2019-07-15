@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Constants instance = Constants.getInstance();
 
         instance.getAllPlayers();
+        instance.getAllBoards();
 
         btn_chooseBoard = (Button) findViewById(R.id.btn_startGame);
         btn_store = (Button) findViewById(R.id.btn_store);

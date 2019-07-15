@@ -14,14 +14,14 @@ public class Board {
     //------------------------------------- Parameters -------------------------------------
 
     private int size;
-    private String color;
+    private int maxMoves;
     private int maxVicCoins;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Board(int size, String color, int maxVicCoins) {
+    public Board(int size, int maxMoves, int maxVicCoins) {
         this.size = size;
-        this.color = color;
+        this.maxMoves = maxMoves;
         this.maxVicCoins = maxVicCoins;
     }
 
@@ -34,14 +34,6 @@ public class Board {
 
     public void setSize(int size) {
         this.size = size;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public int getMaxVicCoins() {

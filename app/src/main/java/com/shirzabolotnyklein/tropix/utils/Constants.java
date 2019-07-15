@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.shirzabolotnyklein.tropix.R;
+import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.model.LockStatus;
 import com.shirzabolotnyklein.tropix.model.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,7 @@ public class Constants implements Serializable {
 
     private Constants() {
         allPlayers = new ArrayList<>();
+        allBoards = new HashMap<Integer, Board>();
     }
 
     public static Constants getInstance() {
@@ -42,12 +46,55 @@ public class Constants implements Serializable {
     //=========================================== Game  ===========================================//
     //=============================================================================================//
 
+    //------------------------------------- Game Parameters ----------------------------------------
+
+
     private final int boardMoveCoins = 5;
 
     private final int boardVicCoins3 = 300;
     private final int boardVicCoins4 = 400;
     private final int boardVicCoins5 = 500;
     private final int boardVicCoins6 = 600;
+
+    private int totalCoins = 0;
+
+    //--------------------------------------- Game Getters ------------------------------------------
+    public int getTotalCoins() {
+        return totalCoins;
+    }
+
+
+    //=============================================================================================//
+    //=========================================== Board  ===========================================//
+    //=============================================================================================//
+
+    private final Board board3x3 = new Board(3, 9, boardVicCoins3);
+    private final Board board4x4 = new Board(4, 16, boardVicCoins4);
+    private final Board board5x5 = new Board(5, 25, boardVicCoins5);
+    private final Board board6x6 = new Board(6, 36, boardVicCoins6);
+
+    HashMap<Integer, Board> allBoards;
+
+    public HashMap<Integer, Board> getAllBoards() {
+        if (allBoards.isEmpty()) {
+            allBoards.put(3, board3x3);
+            allBoards.put(4, board4x4);
+            allBoards.put(5, board5x5);
+            allBoards.put(6, board6x6);
+        }
+        return allBoards;
+    }
+
+
+    /**
+     *
+     * @param id Receive Board ID
+     * @return Board according to the key in the HashMap allBoards
+     */
+    public Board getBoard(int id) {
+        Board board = allBoards.get(id);
+        return board;
+    }
 
     //=============================================================================================//
     //=========================================== Lock  ===========================================//
@@ -61,6 +108,7 @@ public class Constants implements Serializable {
     public Lock getOpen() {
         return open;
     }
+
     public Lock getClose() {
         return close;
     }
@@ -181,6 +229,17 @@ public class Constants implements Serializable {
         return allPlayers;
     }
 
+
+    /**
+     * @param id Receive Player ID
+     * @return Player according to the index in the ArrayList
+     */
+    public Player getPlayer(int id) {
+        Player player = allPlayers.get(id - 1);
+        return player;
+    }
+
+
     //=============================================================================================//
     //========================== Shared Preferences - All Players Status ==========================//
     //=============================================================================================//
@@ -271,103 +330,144 @@ public class Constants implements Serializable {
         editor.apply();
     }
 
-    /*
-     * create String for file with all the players details - player id & player status.
-     * separate each player with the char "#", and each player detail with the char ","
-     * As the following example: id1,status1#id2,status2#id3,status3#...
+//    /**
+//     * create String for file with all the players details - player id & player status.
+//     * separate each player with the char "#", and each player detail with the char ","
+//     * As the following example: id1,status1#id2,status2#id3,status3#...
+//     *
+//     * @return the allPlayersString to write in the file.
+//     */
+//    private String createStringToFile() {
+//
+//        String allPlayersStringToFile = "";
+//        String currentPlayerStringToFile = "";
+//
+//        for (Player player : allPlayers) {
+//
+//            currentPlayerStringToFile = Integer.toString(player.getId()) + "," +
+//                    player.getIsLocked().getStatus() + "#";
+//
+//            allPlayersStringToFile = allPlayersStringToFile.concat(currentPlayerStringToFile);
+//        }
+//        return allPlayersStringToFile;
+//    }
+//
+//
+//    /**
+//     * Read the text of all players status from the file and update them in the allPlayers array list.
+//     *
+//     * @param allPlayersString receive the string from file
+//     */
+//    private void SplitStringFromFile(String allPlayersString) {
+//
+//        // Every player is separated with the char "#", slip all the players into allPlayersFromFile String array
+//        String allPlayersFromFile[] = allPlayersString.split("#");
+//        ;
+//
+//        // Every player detail is separated with the char ",", slip all the player details into playerFromFile String array
+//        for (String p : allPlayersFromFile) {
+//
+//            String playerFromFile[] = p.split(",");
+//
+//            int id = Integer.parseInt(playerFromFile[0]); // Get the player id
+//
+//            String status = playerFromFile[1]; // Get the player status
+//            Lock playerLock;
+//
+//            if (status == "OPEN") {
+//                playerLock = open;
+//            } else {
+//                playerLock = close;
+//            }
+//
+//            allPlayers.get(id - 1).setIslocked(playerLock);
+//        }
+//    }
+//
+//
+//
+//
+//    private void writeAllPlayersListToFile(){
+//        FileOutputStream fileOutput = null;
+//        try {
+//            fileOutput = new FileOutputStream("allPlayers.tmp");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        ObjectOutputStream objectOutput = null;
+//        try {
+//            objectOutput = new ObjectOutputStream(fileOutput);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            objectOutput.writeObject(allPlayers);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            objectOutput.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void readAllPlayersListToFile() {
+//        Log.d("INSIDE READ", "INSIDE READ");
+//        try {
+//            FileInputStream fileInput = new FileInputStream("allPlayers.tmp");
+//            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+//            allPlayers = (List<Player>) objectInput.readObject();
+//            objectInput.close();
+//        } catch (FileNotFoundException ex) {
+//            ex.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+
+
+    //=============================================================================================//
+    //============================= Shared Preferences - User Coing  ==============================//
+    //=============================================================================================//
+
+    //--------------------------------- Write, Read & Edit file ------------------------------------
+
+    /**
+     * Write from SharedPreferences "allPlayersStatus" file.
+     * Get allPlayers status date from allPlayers ArrayList, update the data in the file.
      *
-     * @return the allPlayersString to write in the file.
-     *
-    private String createStringToFile() {
+     * @param view
+     */
+    private void writeToUserTotalCoinsFile(View view) {
 
-        String allPlayersStringToFile = "";
-        String currentPlayerStringToFile = "";
+        // Get the file named "userTotalCoins", private
+        SharedPreferences userTotalCoins = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);
 
-        for (Player player : allPlayers) {
+        // Get the editor to edit the file
+        SharedPreferences.Editor editor = userTotalCoins.edit();
 
-            currentPlayerStringToFile = Integer.toString(player.getId()) + "," +
-                    player.getIsLocked().getStatus() + "#";
+        editor.putString("totalCoins", Integer.toString(totalCoins));
 
-            allPlayersStringToFile = allPlayersStringToFile.concat(currentPlayerStringToFile);
-        }
-        return allPlayersStringToFile;
-    }
-    */
-
-    /*
-     * Read the text of all players status from the file and update them in the allPlayers array list.
-     *
-     * @param allPlayersString receive the string from file
-     *
-    private void SplitStringFromFile(String allPlayersString) {
-
-        // Every player is separated with the char "#", slip all the players into allPlayersFromFile String array
-        String allPlayersFromFile[] = allPlayersString.split("#");
-        ;
-
-        // Every player detail is separated with the char ",", slip all the player details into playerFromFile String array
-        for (String p : allPlayersFromFile) {
-
-            String playerFromFile[] = p.split(",");
-
-            int id = Integer.parseInt(playerFromFile[0]); // Get the player id
-
-            String status = playerFromFile[1]; // Get the player status
-            Lock playerLock;
-
-            if (status == "OPEN") {
-                playerLock = open;
-            } else {
-                playerLock = close;
-            }
-
-            allPlayers.get(id - 1).setIslocked(playerLock);
-        }
-    }
-    */
-
-
-    /*
-    private void writeAllPlayersListToFile(){
-        FileOutputStream fileOutput = null;
-        try {
-            fileOutput = new FileOutputStream("allPlayers.tmp");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        ObjectOutputStream objectOutput = null;
-        try {
-            objectOutput = new ObjectOutputStream(fileOutput);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            objectOutput.writeObject(allPlayers);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            objectOutput.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Save the changes
+        editor.apply();
     }
 
-    private void readAllPlayersListToFile() {
-        Log.d("INSIDE READ", "INSIDE READ");
-        try {
-            FileInputStream fileInput = new FileInputStream("allPlayers.tmp");
-            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-            allPlayers = (List<Player>) objectInput.readObject();
-            objectInput.close();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    */
+    /**
+     * Read from SharedPreferences "userTotalCoins" file.
+     * Get allPlayers status date, update the data in allPlayers ArrayList
+     */
+    private void readFromUserTotalCoinsFile() {
 
+        // Get the file named "userTotalCoins", private
+        SharedPreferences allPlayersStatus = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);
+
+        String totalCoinsString = allPlayersStatus.getString("userTotalCoins", Integer.toString(totalCoins));
+
+        totalCoins = Integer.parseInt(totalCoinsString);
+
+    }
 }

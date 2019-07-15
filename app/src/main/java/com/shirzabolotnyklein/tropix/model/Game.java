@@ -15,15 +15,15 @@ public class Game {
 
     //------------------------------------- Parameters -------------------------------------
 
-    private Player user;
+    private Player my;
     private Player rival;
     private Board board;
     private int gameCoins;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Game(Player user, Player rival, Board board, int gameCoins) {
-        this.user = user;
+    public Game(Player my, Player rival, Board board, int gameCoins) {
+        this.my = my;
         this.rival = rival;
         this.board = board;
         this.gameCoins = gameCoins;
@@ -32,12 +32,12 @@ public class Game {
     //------------------------------------- Getters & Setters --------------------------------
 
 
-    public Player getUser() {
-        return user;
+    public Player getMy() {
+        return my;
     }
 
-    public void setUser(Player user) {
-        this.user = user;
+    public void setMy(Player user) {
+        this.my = my;
     }
 
     public Player getRival() {
