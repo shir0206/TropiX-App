@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Lock;
+import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final StoreRecyclerViewAdapter.ViewHolder holder, final int position) {
 
         // Get the image of the Player item
         Glide.with(context)
@@ -76,13 +77,29 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
             holder.layoutStore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "תודה שקנית אותי :)", Toast.LENGTH_SHORT).show();
-                    //vibrator.vibrate(50);
+
+                    int price = Integer.valueOf(holder.playerPrice.getText().toString());
+                    boolean canPurchase = StoreLogic.getStoreLogic().canPurchase(price);
+
+                    if (canPurchase) {
+
+                        String purchaseSuccessfully = "תודה שקנית אותי :)";
+                        Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
+
+                        StoreLogic.getStoreLogic().initRecyclerView(true);
+
+                    }
+                    else {
+                        String purchaseFailed = "אין לך מספיק מטבעות :(";
+
+                        Toast.makeText(context, purchaseFailed, Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             });
         }
 
-        // If Player status is "CLOSED", get the open lock image of the item
+        // If Player status is "OPEN", get the open lock image of the item
         else {
             Glide.with(context)
                     .asBitmap()

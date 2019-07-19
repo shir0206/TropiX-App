@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
+import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 import java.util.ArrayList;
 
 public class Store extends AppCompatActivity {
 
+    TextView tv_coinsSum;
     Constants instance = Constants.getInstance();
 
     private Context context;
@@ -33,6 +36,9 @@ public class Store extends AppCompatActivity {
         setContentView(R.layout.lay_store);
 
         initImageBitmapsForAllPlayers();
+        initCoins();
+
+
     }
 
     /**
@@ -68,10 +74,21 @@ public class Store extends AppCompatActivity {
     /**
      * Get the players images (allPlayers ArrayList) and add them to the RecyclerView
      */
-    private void initRecyclerViewForAllPlayers() {
+    protected void initRecyclerViewForAllPlayers() {
         RecyclerView recyclerView = findViewById(R.id.rv_store);
         StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, open, close);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
+
+    }
+
+
+    private void initCoins() {
+
+        tv_coinsSum = findViewById(R.id.tv_coinsSum);
+
+        int totalCoins = Constants.getInstance().getTotalCoins();
+
+        tv_coinsSum.setText(Integer.toString(totalCoins));
     }
 }

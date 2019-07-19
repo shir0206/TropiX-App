@@ -80,18 +80,13 @@ public class Constants implements Serializable {
 
     //--------------------------------------- Game Getters ------------------------------------------
     public int getTotalCoins() {
-
-        if (totalCoins == 0){
-            writeToFileTotalCoins();
-            readFromFileTotalCoins();
-
-        }
+        readFromFileTotalCoins();
         return totalCoins;
     }
 
     public void setTotalCoins(int totalCoins) {
-        writeToFileTotalCoins();
         this.totalCoins = totalCoins;
+        writeToFileTotalCoins();
     }
 
     public int getBoardMoveCoins() {
@@ -364,105 +359,6 @@ public class Constants implements Serializable {
         editor.apply();
     }
 
-//    /**
-//     * create String for file with all the players details - player id & player status.
-//     * separate each player with the char "#", and each player detail with the char ","
-//     * As the following example: id1,status1#id2,status2#id3,status3#...
-//     *
-//     * @return the allPlayersString to write in the file.
-//     */
-//    private String createStringToFile() {
-//
-//        String allPlayersStringToFile = "";
-//        String currentPlayerStringToFile = "";
-//
-//        for (Player player : allPlayers) {
-//
-//            currentPlayerStringToFile = Integer.toString(player.getId()) + "," +
-//                    player.getIsLocked().getStatus() + "#";
-//
-//            allPlayersStringToFile = allPlayersStringToFile.concat(currentPlayerStringToFile);
-//        }
-//        return allPlayersStringToFile;
-//    }
-//
-//
-//    /**
-//     * Read the text of all players status from the file and update them in the allPlayers array list.
-//     *
-//     * @param allPlayersString receive the string from file
-//     */
-//    private void SplitStringFromFile(String allPlayersString) {
-//
-//        // Every player is separated with the char "#", slip all the players into allPlayersFromFile String array
-//        String allPlayersFromFile[] = allPlayersString.split("#");
-//        ;
-//
-//        // Every player detail is separated with the char ",", slip all the player details into playerFromFile String array
-//        for (String p : allPlayersFromFile) {
-//
-//            String playerFromFile[] = p.split(",");
-//
-//            int id = Integer.parseInt(playerFromFile[0]); // Get the player id
-//
-//            String status = playerFromFile[1]; // Get the player status
-//            Lock playerLock;
-//
-//            if (status == "OPEN") {
-//                playerLock = open;
-//            } else {
-//                playerLock = close;
-//            }
-//
-//            allPlayers.get(id - 1).setIslocked(playerLock);
-//        }
-//    }
-//
-//
-//
-//
-//    private void writeAllPlayersListToFile(){
-//        FileOutputStream fileOutput = null;
-//        try {
-//            fileOutput = new FileOutputStream("allPlayers.tmp");
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        ObjectOutputStream objectOutput = null;
-//        try {
-//            objectOutput = new ObjectOutputStream(fileOutput);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            objectOutput.writeObject(allPlayers);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            objectOutput.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void readAllPlayersListToFile() {
-//        Log.d("INSIDE READ", "INSIDE READ");
-//        try {
-//            FileInputStream fileInput = new FileInputStream("allPlayers.tmp");
-//            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-//            allPlayers = (List<Player>) objectInput.readObject();
-//            objectInput.close();
-//        } catch (FileNotFoundException ex) {
-//            ex.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-
 
     //=============================================================================================//
     //============================= Shared Preferences - User Coins  ==============================//
@@ -477,13 +373,15 @@ public class Constants implements Serializable {
      */
     private void writeToFileTotalCoins() {
 
+        String keyTotalCoins = "userTotalCoins";
+
         // Get the file named "userTotalCoins", private
-        SharedPreferences userTotalCoins = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);
+        SharedPreferences userTotalCoins = context.getSharedPreferences(keyTotalCoins, Context.MODE_PRIVATE);
 
         // Get the editor to edit the file
         SharedPreferences.Editor editor = userTotalCoins.edit();
 
-        editor.putString("totalCoins", Integer.toString(totalCoins));
+        editor.putInt(keyTotalCoins,totalCoins);
 
         // Save the changes
         editor.apply();
@@ -495,12 +393,20 @@ public class Constants implements Serializable {
      */
     private void readFromFileTotalCoins() {
 
+        String keyTotalCoins = "userTotalCoins";
+
         // Get the file named "userTotalCoins", private
-        SharedPreferences allPlayersStatus = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);
+        SharedPreferences userTotalCoins = context.getSharedPreferences(keyTotalCoins, Context.MODE_PRIVATE);
 
-        String totalCoinsString = allPlayersStatus.getString("userTotalCoins", Integer.toString(totalCoins));
+        int totalCoinsFromFile = userTotalCoins.getInt(keyTotalCoins, -1);
 
-        totalCoins = Integer.parseInt(totalCoinsString);
+        if (totalCoinsFromFile == -1){
+            writeToFileTotalCoins();
+        }
+
+        else {
+            totalCoins = totalCoinsFromFile;
+        }
 
     }
 }

@@ -49,20 +49,20 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
         tv_totalCoinsSum = findViewById(R.id.tv_totalCoinsSum);
 
         int gameCoins = GameLogic.getGameControl().getGameCoins();
-        int totalCoins = Constants.getInstance().getTotalCoins();
+        //int totalCoins = Constants.getInstance().getTotalCoins();
 
         tv_gameCoinsSum.setText(Integer.toString(gameCoins));
-        tv_totalCoinsSum.setText(Integer.toString(totalCoins));
+        //tv_totalCoinsSum.setText(Integer.toString(totalCoins));
     }
 
 
     private void updateCoins() {
 
         int gameCoins = GameLogic.getGameControl().getGameCoins();
-        int totalCoins = Constants.getInstance().getTotalCoins();
+        //int totalCoins = Constants.getInstance().getTotalCoins();
 
         tv_gameCoinsSum.setText(Integer.toString(gameCoins));
-        tv_totalCoinsSum.setText(Integer.toString(totalCoins));
+        //tv_totalCoinsSum.setText(Integer.toString(totalCoins));
     }
 
     /**

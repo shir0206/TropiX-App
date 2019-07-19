@@ -184,7 +184,7 @@ public class GameLogic {
         if (whoseTurn == -1) {
             whoseTurn = my.getId();
             movesCount = 1;
-            increaseCoins();
+            //increaseCoins();
             maxMoves = board.getMaxMoves();
         }
 
@@ -197,7 +197,7 @@ public class GameLogic {
         // If Rival Player was last, set the next turn to My Player, increase board coins for My Player, increase the moves count.
         else if (whoseTurn == rival.getId()) {
             whoseTurn = my.getId();
-            increaseCoins();
+            //increaseCoins();
             movesCount++;
         }
 
@@ -206,8 +206,8 @@ public class GameLogic {
 
     private void increaseCoins() {
 
-        increaseBoardCoins();
-        increaseTotalCoins();
+        //increaseBoardCoins();
+        //increaseTotalCoins();
     }
 
     private void increaseBoardCoins() {
@@ -216,10 +216,10 @@ public class GameLogic {
     }
 
     private void increaseTotalCoins() {
-        int moveCoins = Constants.getInstance().getBoardMoveCoins();
-        int moveTotalCoins = Constants.getInstance().getTotalCoins() + moveCoins;
+        //int moveCoins = Constants.getInstance().getBoardMoveCoins();
+       // int moveTotalCoins = Constants.getInstance().getTotalCoins() + moveCoins;
 
-        Constants.getInstance().setTotalCoins(moveTotalCoins);
+//        Constants.getInstance().setTotalCoins(moveTotalCoins);
     }
 
     public void increaseTotalCoinsWin() {
