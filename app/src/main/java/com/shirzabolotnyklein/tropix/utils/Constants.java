@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.shirzabolotnyklein.tropix.R;
+import com.shirzabolotnyklein.tropix.gui.ApplicationContextProvider;
 import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.model.LockStatus;
@@ -27,8 +28,10 @@ public class Constants implements Serializable {
     private static Constants instance = null;
 
     private Constants() {
-        allPlayers = new ArrayList<>();
-        allBoards = new HashMap<Integer, Board>();
+        this.allPlayers = new ArrayList<>();
+        this.allBoards = new HashMap<Integer, Board>();
+        this.allWinCoins = new HashMap<Integer, Integer>();
+        this.context = ApplicationContextProvider.getContext();
     }
 
     public static Constants getInstance() {
@@ -48,20 +51,47 @@ public class Constants implements Serializable {
 
     //------------------------------------- Game Parameters ----------------------------------------
 
-
-
-    private final int boardMoveCoins = 5;
-
-    private final int boardVicCoins3 = 300;
-    private final int boardVicCoins4 = 400;
-    private final int boardVicCoins5 = 500;
-    private final int boardVicCoins6 = 600;
-
     private int totalCoins = 0;
+
+    private final int boardMoveCoins = 1;
+
+    private final int boardVicCoins3 = 30;
+    private final int boardVicCoins4 = 40;
+    private final int boardVicCoins5 = 50;
+    private final int boardVicCoins6 = 60;
+
+    HashMap<Integer, Integer> allWinCoins = new HashMap<Integer, Integer>();
+
+    private HashMap<Integer, Integer> allWinCoins() {
+        if (allWinCoins.isEmpty()) {
+            allWinCoins.put(3, boardVicCoins3);
+            allWinCoins.put(4, boardVicCoins4);
+            allWinCoins.put(5, boardVicCoins5);
+            allWinCoins.put(6, boardVicCoins6);
+        }
+        return allWinCoins;
+    }
+
+    public int getBoardVicCoins(int size){
+        allWinCoins();
+        int vicCoins = allWinCoins.get(size);
+        return vicCoins;
+    }
 
     //--------------------------------------- Game Getters ------------------------------------------
     public int getTotalCoins() {
+
+        if (totalCoins == 0){
+            writeToFileTotalCoins();
+            readFromFileTotalCoins();
+
+        }
         return totalCoins;
+    }
+
+    public void setTotalCoins(int totalCoins) {
+        writeToFileTotalCoins();
+        this.totalCoins = totalCoins;
     }
 
     public int getBoardMoveCoins() {
@@ -435,7 +465,7 @@ public class Constants implements Serializable {
 
 
     //=============================================================================================//
-    //============================= Shared Preferences - User Coing  ==============================//
+    //============================= Shared Preferences - User Coins  ==============================//
     //=============================================================================================//
 
     //--------------------------------- Write, Read & Edit file ------------------------------------
@@ -444,9 +474,8 @@ public class Constants implements Serializable {
      * Write from SharedPreferences "allPlayersStatus" file.
      * Get allPlayers status date from allPlayers ArrayList, update the data in the file.
      *
-     * @param view
      */
-    private void writeToUserTotalCoinsFile(View view) {
+    private void writeToFileTotalCoins() {
 
         // Get the file named "userTotalCoins", private
         SharedPreferences userTotalCoins = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);
@@ -464,7 +493,7 @@ public class Constants implements Serializable {
      * Read from SharedPreferences "userTotalCoins" file.
      * Get allPlayers status date, update the data in allPlayers ArrayList
      */
-    private void readFromUserTotalCoinsFile() {
+    private void readFromFileTotalCoins() {
 
         // Get the file named "userTotalCoins", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("userTotalCoins", Context.MODE_PRIVATE);

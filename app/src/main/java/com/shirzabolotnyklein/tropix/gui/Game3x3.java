@@ -8,12 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
-import com.shirzabolotnyklein.tropix.utils.GameControl;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,10 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView img_rival;
     private ImageView img_my;
+
+    private TextView tv_gameCoinsSum;
+    private TextView tv_totalCoinsSum;
+
 
     private int size;
 
@@ -35,6 +40,29 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
 
         initPlayers();
         initBoard();
+        initCoins();
+    }
+
+    private void initCoins() {
+
+        tv_gameCoinsSum = findViewById(R.id.tv_gameCoinsSum);
+        tv_totalCoinsSum = findViewById(R.id.tv_totalCoinsSum);
+
+        int gameCoins = GameLogic.getGameControl().getGameCoins();
+        int totalCoins = Constants.getInstance().getTotalCoins();
+
+        tv_gameCoinsSum.setText(Integer.toString(gameCoins));
+        tv_totalCoinsSum.setText(Integer.toString(totalCoins));
+    }
+
+
+    private void updateCoins() {
+
+        int gameCoins = GameLogic.getGameControl().getGameCoins();
+        int totalCoins = Constants.getInstance().getTotalCoins();
+
+        tv_gameCoinsSum.setText(Integer.toString(gameCoins));
+        tv_totalCoinsSum.setText(Integer.toString(totalCoins));
     }
 
     /**
@@ -43,7 +71,7 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
     private void initBoard() {
 
         // Get board size
-        size = GameControl.getGameControl().getGame().getBoard().getSize();
+        size = GameLogic.getGameControl().getGame().getBoard().getSize();
 
         for (int i = 0; i < size; i++) {
             boardImageButtons.add(new ArrayList<ImageButton>(size));
@@ -74,10 +102,10 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
     private void initPlayers() {
 
         img_rival = findViewById(R.id.img_rival);
-        img_rival.setImageResource(GameControl.getGameControl().getGame().getRival().getPicture());
+        img_rival.setImageResource(GameLogic.getGameControl().getGame().getRival().getPicture());
 
         img_my = findViewById(R.id.img_my);
-        img_my.setImageResource(GameControl.getGameControl().getGame().getMy().getPicture());
+        img_my.setImageResource(GameLogic.getGameControl().getGame().getMy().getPicture());
     }
 
     /**
@@ -93,13 +121,15 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
 
         // Check which player is a winner
         checkPlayerWin(cellBtn);
+
+        updateCoins();
     }
 
     /**
      * Check if there is a next turn, if not refresh game
      */
     private void checkHasNext() {
-        boolean hasNext = GameControl.getGameControl().hasNextTurn();
+        boolean hasNext = GameLogic.getGameControl().hasNextTurn();
         if (!hasNext) {
             String noNext = "נגמר המשחקיX";
             Toast.makeText(Game3x3.this, noNext, Toast.LENGTH_LONG).show();
@@ -116,12 +146,13 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
     private void checkPlayerWin(ImageButton cellBtn) {
 
         // Check if there is a winner. If there is a winner return the winner ID, else return -1.
-        int win = GameControl.getGameControl().checkWinner();
+        int win = GameLogic.getGameControl().checkWinner();
 
         // If there is a winner, display a winner message & refresh game
         if (win != -1) {
             winnerAnimation(win);
             refreshGame();
+
         }
 
         // Else check if there is a next turn
@@ -135,6 +166,9 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
      * @param win
      */
     private void winnerAnimation(int win) {
+
+        GameLogic.getGameControl().increaseTotalCoinsWin();
+
         String winMsg = win + " ניצח!!! :)";
         Toast.makeText(Game3x3.this, winMsg, Toast.LENGTH_LONG).show();
     }
@@ -155,7 +189,7 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
         int j = Character.getNumericValue(cellName.charAt(cellName.length() - 1));
 
         // Update the Player ID position in the matrix of the game.
-        GameControl.getGameControl().updateMoveInTheBoardMatrix(i, j, nextPlayerTurnId);
+        GameLogic.getGameControl().updateMoveInTheBoardMatrix(i, j, nextPlayerTurnId);
     }
 
     /**
@@ -166,7 +200,7 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
     private void setPlayerInCellBtn(ImageButton cellBtn) {
 
         // If cell in the board is clicked, get who is the next (my player/ rival player)
-        nextPlayerTurnId = GameControl.getGameControl().getWhoseTurn();
+        nextPlayerTurnId = GameLogic.getGameControl().getWhoseTurn();
         nextPlayerTurn = Constants.getInstance().getPlayer(nextPlayerTurnId);
 
         // Set the next player image in the cell
@@ -185,7 +219,7 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
      * Refresh game, reset game control class and return to MainActivity
      */
     private void refreshGame(){
-        GameControl.getGameControl().resetGame();
+        GameLogic.getGameControl().resetGame();
         startActivity(new Intent(Game3x3.this, MainActivity.class));
 
         Game3x3.this.finish();

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
-import com.shirzabolotnyklein.tropix.utils.GameControl;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 import java.util.ArrayList;
 
@@ -53,13 +53,13 @@ public class ChoosePlayer extends AppCompatActivity {
                 //vibrator.vibrate(50);
 
                 // Set all user choices game details (board, user player and user rival)
-                GameControl.getGameControl().setGame();
+                GameLogic.getGameControl().setGame();
 
                 // If Players are valid
                 if (isValid()) {
 
                     // Switch case which board should be opened
-                    switch (GameControl.getGameControl().getGame().getBoard().getSize()) {
+                    switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
                         case 3:
                             startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
                             ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
@@ -78,8 +78,8 @@ public class ChoosePlayer extends AppCompatActivity {
 
     private boolean isValid() {
 
-        int my = GameControl.getGameControl().getMy();
-        int rival = GameControl.getGameControl().getRival();
+        int my = GameLogic.getGameControl().getMy();
+        int rival = GameLogic.getGameControl().getRival();
 
         if (my <= 0 || rival <= 0) {
             String noPlayer = "לא בחרת טרופיXים!";

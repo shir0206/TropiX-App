@@ -3,9 +3,7 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.os.Vibrator;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shirzabolotnyklein.tropix.R;
-import com.shirzabolotnyklein.tropix.utils.GameControl;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 import java.util.ArrayList;
 
@@ -88,7 +86,7 @@ public class ChooseMyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choo
                 public void onClick(View view) {
 
                     // Set the user choice of "My Player" of the game
-                    GameControl.getGameControl().setMy(holder.playerId);
+                    GameLogic.getGameControl().setMy(holder.playerId);
 
                     //vibrator.vibrate(50);
                     Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();

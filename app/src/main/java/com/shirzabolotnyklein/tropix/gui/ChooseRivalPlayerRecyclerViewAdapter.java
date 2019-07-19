@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shirzabolotnyklein.tropix.R;
-import com.shirzabolotnyklein.tropix.utils.GameControl;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 import java.util.ArrayList;
 
@@ -85,7 +85,7 @@ public class ChooseRivalPlayerRecyclerViewAdapter extends RecyclerView.Adapter<C
                 public void onClick(View view) {
 
                     // Set the user choice of "Rival Player" of the game
-                    GameControl.getGameControl().setRival(holder.playerId);
+                    GameLogic.getGameControl().setRival(holder.playerId);
 
                     //vibrator.vibrate(50);
                     Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();

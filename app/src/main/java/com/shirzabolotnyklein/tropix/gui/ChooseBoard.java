@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.shirzabolotnyklein.tropix.R;
-import com.shirzabolotnyklein.tropix.utils.GameControl;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 public class ChooseBoard extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class ChooseBoard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-                GameControl.getGameControl().setBoard(3);
+                GameLogic.getGameControl().setBoard(3);
 
                 startActivity(new Intent(ChooseBoard.this, ChoosePlayer.class));
                 //launchActivity();
