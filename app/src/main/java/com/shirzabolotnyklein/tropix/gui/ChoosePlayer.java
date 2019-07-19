@@ -3,12 +3,14 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Player;
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 
 public class ChoosePlayer extends AppCompatActivity {
 
-    private Context context;
     //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     private Button btn_choosePlayer;
@@ -54,19 +55,50 @@ public class ChoosePlayer extends AppCompatActivity {
                 // Set all user choices game details (board, user player and user rival)
                 GameControl.getGameControl().setGame();
 
-                // Switch case which board should be opened
-                switch (GameControl.getGameControl().getGame().getBoard().getSize()) {
-                    case 3:
-                        startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
-                    case 4:
-                        //startActivity(new Intent(ChoosePlayer.this, Game4x4.class));
-                    case 5:
-                        //startActivity(new Intent(ChoosePlayer.this, Game5x5.class));
-                    case 6:
-                        //startActivity(new Intent(ChoosePlayer.this, Game6x6.class));
+                // If Players are valid
+                if (isValid()) {
+
+                    // Switch case which board should be opened
+                    switch (GameControl.getGameControl().getGame().getBoard().getSize()) {
+                        case 3:
+                            startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
+                            ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+                            finish();
+                        case 4:
+                            //startActivity(new Intent(ChoosePlayer.this, Game4x4.class));
+                        case 5:
+                            //startActivity(new Intent(ChoosePlayer.this, Game5x5.class));
+                        case 6:
+                            //startActivity(new Intent(ChoosePlayer.this, Game6x6.class));
+                    }
                 }
             }
         });
+    }
+
+    private boolean isValid() {
+
+        int my = GameControl.getGameControl().getMy();
+        int rival = GameControl.getGameControl().getRival();
+
+        if (my <= 0 || rival <= 0) {
+            String noPlayer = "לא בחרת טרופיXים!";
+            Toast.makeText(ChoosePlayer.this, noPlayer, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        else if (my == rival) {
+            String samePlayer = "בחרת שני טרופיXים זהים!";
+            Toast.makeText(ChoosePlayer.this, samePlayer, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        else if (my > 0 && rival > 0) {
+            String choosePlayer = "נבחרו הטרופיXים :)";
+            Toast.makeText(ChoosePlayer.this, choosePlayer, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     /**

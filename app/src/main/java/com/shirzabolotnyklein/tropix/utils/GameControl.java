@@ -25,6 +25,8 @@ public class GameControl {
 
     //-------------------------------- Current Game Parameters -------------------------------------
 
+
+
     /**
      * The user choice of My Player
      */
@@ -62,10 +64,15 @@ public class GameControl {
     private int movesCount;
 
     /**
+     * The max moves of the board of the game
+     */
+    private int maxMoves;
+
+    /**
      * The matrix board represents in each cell:
-     *   -1               If the cell is empty
-     *   My Player ID     If the user put "My Player" in that cell
-     *   Rival Player ID  If the rival put "Rival Player" in that cell
+     * -1               If the cell is empty
+     * My Player ID     If the user put "My Player" in that cell
+     * Rival Player ID  If the rival put "Rival Player" in that cell
      */
     private ArrayList<ArrayList<Integer>> boardMatrix;
 
@@ -73,52 +80,99 @@ public class GameControl {
 
     /**
      * The matrix board represents in each cell:
-     *   -1               If the cell is empty
-     *   My Player ID     If the user put "My Player" in that cell
-     *   Rival Player ID  If the rival put "Rival Player" in that cell
+     * 0                If the cell is empty
+     * My Player ID     If the user put "My Player" in that cell
+     * Rival Player ID  If the rival put "Rival Player" in that cell
      * -
-     * To check if there is a winner and who is the winner,
-     * calculate the sum of each player ID, from i = 0 to i = board size (sum = ID * board size)
-     * If the sum of a row / col / diagonal equals to one of the sums, there is a win.
+     * To check if there is a winner and who is the winner, for each player calculate the sum for win.
+     * The sum for win would be the player ID (from i = 0 to i = board size), sumWin = ID * boardSize.
+     * If the sum in a certain row / col / diagonal equals to the sum for win, there is a winner.
      *
      * @return if there is a winner, return the winner ID, else return -1.
      */
     public int checkWinner() {
 
-        int sumNoWin = -1 * board.getSize();
+        int size = board.getSize();
+
+        int myId = my.getId();
+        int rivalId = rival.getId();
+        int currCell = 0;
+
         int sumMyPlayerWin = my.getId() * board.getSize();
         int sumRivalPlayerWin = rival.getId() * board.getSize();
 
-        int sumRow = 0;
-        int sumCol = 0;
-        int sumDiagonalLeft = 0;
-        int sumDiagonalRight = 0;
+        int sumMyRow = 0;
+        int sumMyCol = 0;
+        int sumMyDiagonalLeft = 0;
+        int sumMyDiagonalRight = 0;
 
-        // Check all rows
-        for (int i = 0; i < board.getSize(); i++) {
-            for (int j = 0; j < board.getSize(); j++) {
-                sumRow += boardMatrix.get(i).get(j);
-                sumCol += boardMatrix.get(j).get(i);
-                sumDiagonalLeft += boardMatrix.get(i).get(i);
-                sumDiagonalRight += boardMatrix.get(j).get(j);
+        int sumRivalRow = 0;
+        int sumRivalCol = 0;
+        int sumRivalDiagonalLeft = 0;
+        int sumRivalDiagonalRight = 0;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+
+                // Calculate row sum
+                currCell = boardMatrix.get(i).get(j);
+                if (currCell == myId) {
+                    sumMyRow += currCell;
+                }
+                else if (currCell == rivalId) {
+                    sumRivalRow += currCell;
+                }
+
+                // Calculate col sum
+                currCell = boardMatrix.get(j).get(i);
+                if (currCell == myId) {
+                    sumMyCol += currCell;
+                }
+                else if (currCell == rivalId) {
+                    sumRivalCol += currCell;
+                }
             }
 
-            // At the end of each row, check row sum
+            // Calculate diagonal-left sum (\)
+            currCell = boardMatrix.get(i).get(i);
+            if (currCell == myId) {
+                sumMyDiagonalLeft += currCell;
+            }
+            else if (currCell == rivalId) {
+                sumRivalDiagonalLeft += currCell;
+            }
+
+            // Calculate diagonal-right sum (/)
+            currCell = boardMatrix.get(i).get(size - 1 - i);
+            if (currCell == myId) {
+                sumMyDiagonalRight += currCell;
+            }
+            else if (currCell == rivalId) {
+                sumRivalDiagonalRight += currCell;
+            }
+
+            // At the end of each row / col, check row / col sum
             // If the sum of the row / col / diagonals equal to the sum of my player ID, return my player ID
-            if ((sumRow == sumMyPlayerWin)
-                    || (sumCol == sumMyPlayerWin)
-                    || (sumDiagonalLeft == sumMyPlayerWin)
-                    || (sumDiagonalRight == sumMyPlayerWin)) {
+            if ((sumMyRow == sumMyPlayerWin)
+                    || (sumMyCol == sumMyPlayerWin)
+                    || (sumMyDiagonalLeft == sumMyPlayerWin)
+                    || (sumMyDiagonalRight == sumMyPlayerWin)) {
                 return my.getId();
             }
 
             // If the sum of the row / col / diagonals equal to the sum of rival player ID, return rival player ID
-            else if ((sumRow == sumRivalPlayerWin)
-                    || (sumCol == sumRivalPlayerWin)
-                    || (sumDiagonalLeft == sumRivalPlayerWin)
-                    || (sumDiagonalRight == sumRivalPlayerWin)) {
+            else if ((sumRivalRow == sumRivalPlayerWin)
+                    || (sumRivalCol == sumRivalPlayerWin)
+                    || (sumRivalDiagonalLeft == sumRivalPlayerWin)
+                    || (sumRivalDiagonalRight == sumRivalPlayerWin)) {
                 return rival.getId();
             }
+
+            // Init to check the next row/col
+            sumMyRow = 0;
+            sumMyCol = 0;
+            sumRivalRow = 0;
+            sumRivalCol = 0;
         }
 
         // If there is no winner, return -1
@@ -136,7 +190,8 @@ public class GameControl {
         // If this is the first turn, start with My Player and Initiate the moves count to 0.
         if (whoseTurn == -1) {
             whoseTurn = my.getId();
-            movesCount = 0;
+            movesCount = 1;
+            maxMoves = board.getMaxMoves();
         }
 
         // If My Player was last, set the next turn to Rival Player, increase board coins for My Player, increase the moves count.
@@ -161,13 +216,12 @@ public class GameControl {
      * @return false if there is not next move
      */
     public boolean hasNextTurn() {
-        if (movesCount > board.getMaxMoves())
+        if (movesCount >= maxMoves)
             return false;
         return true;
     }
 
     //-------------------------------- Getters & Setters -------------------------------------
-
 
     /**
      * Update "My Player" parameter of the game according to the user choice.
@@ -221,15 +275,40 @@ public class GameControl {
             boardMatrix.add(new ArrayList<Integer>(board.getSize()));
 
             for (int j = 0; j < board.getSize(); j++) {
-                boardMatrix.get(i).add(j, -1);
+                boardMatrix.get(i).add(j, 0);
             }
         }
     }
 
+    /**
+     * Set a new game according to the user chosen players & board
+     */
+    public void updateMoveInTheBoardMatrix(int i, int j, int playerId) {
+
+        //boardMatrix.get(i).add(j, playerId);
+        boardMatrix.get(i).set(j, playerId);
+    }
 
     public Game getGame() {
         return game;
     }
 
+
+    public void resetGame(){
+        instance = null;
+    }
+
+
+    public int getMy() {
+        if (my == null)
+            return 0;
+        return my.getId();
+    }
+
+    public int getRival() {
+        if (rival == null)
+            return 0;
+        return rival.getId();
+    }
 
 }

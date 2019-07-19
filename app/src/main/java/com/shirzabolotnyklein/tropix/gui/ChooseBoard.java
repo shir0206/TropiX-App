@@ -3,6 +3,7 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,6 @@ public class ChooseBoard extends AppCompatActivity {
     private Button btn_chooseBoard5x5;
     private Button btn_chooseBoard6x6;
     private Context context;
-    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,13 @@ public class ChooseBoard extends AppCompatActivity {
         btn_chooseBoard3x3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //vibrator.vibrate(50);
+                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                 GameControl.getGameControl().setBoard(3);
 
                 startActivity(new Intent(ChooseBoard.this, ChoosePlayer.class));
                 //launchActivity();
+                finish();
+
             }
         });
 

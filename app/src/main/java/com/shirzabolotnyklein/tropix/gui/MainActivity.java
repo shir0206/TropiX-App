@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, ChooseBoard.class));
-                //vibrator.vibrate(50);
+                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
             }
         });
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Store.class));
-                //vibrator.vibrate(50);
+                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
             }
         });
 
