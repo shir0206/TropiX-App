@@ -120,7 +120,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_totalCoins"
+                    android:id="@+id/tv_totalCoinsNew"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -129,7 +129,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/tv_totalCoinsSum"
+                    android:id="@+id/tv_totalCoinsNewSum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

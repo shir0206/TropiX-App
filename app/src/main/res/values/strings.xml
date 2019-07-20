@@ -21,11 +21,20 @@
     <string name="tv_price">מחיריX</string>
     <string name="tv_lock">מנעוליX</string>
 
-    <string name="tv_gameCoins">ניקוד למשחק</string>
+    <string name="tv_gameCoins">מטבעות לנצחון</string>
     <string name="tv_gameCoinsSum">XX</string>
 
-    <string name="tv_totalCoins">ניקוד מצטבר</string>
+    <string name="tv_totalCoins">סך מטבעות</string>
     <string name="tv_totalCoinsSum">YY</string>
+
+    <string name="btn_approve">אישור</string>
+    <string name="tv_cancel">ביטול</string>
+
+    <string name="tv_purchase">בחרת לרכוש את</string>
+    <string name="tv_totalCoinsNew">יתרת המטבעות החדשה שלך תהיה</string>
+    <string name="tv_totalCoinsNewSum">ZZ</string>
+
+
 
 
 </resources>

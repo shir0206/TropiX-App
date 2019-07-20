@@ -289,7 +289,7 @@ public class GameLogic {
     public void setGame() {
 
         // Init game coins to 0.
-        setGameCoins(0);
+        //setGameCoins(0);
 
         // Init new Game with the user chosen players & board
         this.game = new Game(my, rival, board, gameCoins);

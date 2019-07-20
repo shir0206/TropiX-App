@@ -1,6 +1,7 @@
 package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,10 @@ import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.Intent.getIntent;
+import static android.support.v4.content.ContextCompat.startActivity;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.ViewHolder> {
 
@@ -26,18 +31,20 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     private ArrayList<Integer> allPlayers; // ArrayList of all players image addresses
     private ArrayList<Integer> allPrices; // ArrayList of all players prices
     private ArrayList<String> allStatus; // ArrayList of all players status
+    private ArrayList<Integer> allId; // ArrayList of all players id
 
     Lock open;
     Lock close;
 
     public StoreRecyclerViewAdapter(Context context, ArrayList<Integer> allPlayers,
                                     ArrayList<Integer> allPrices, ArrayList<String> allStatus,
-                                    Lock open, Lock close) {
+                                    ArrayList<Integer> allId, Lock open, Lock close) {
         this.context = context;
 
         this.allPlayers = allPlayers;
         this.allPrices = allPrices;
         this.allStatus = allStatus;
+        this.allId = allId;
 
         this.open = open;
         this.close = close;
@@ -66,6 +73,10 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         // Get the status of the Player of the item
         holder.status = allStatus.get(position);
 
+        // Get the ID of the Player of the item
+        holder.playerId = allId.get(position);
+
+
         // If Player status is "CLOSED", get the closed lock image of the item
         if (allStatus.get(position).equals("CLOSE")) {
             Glide.with(context)
@@ -83,13 +94,22 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
                     if (canPurchase) {
 
-                        String purchaseSuccessfully = "תודה שקנית אותי :)";
-                        Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
+                        // Update player ID for purchase in Store Logic
+                        int purchasePlayer = holder.playerId;
+                        StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
 
-                        StoreLogic.getStoreLogic().initRecyclerView(true);
+                        //Intent i = new Intent(context, StorePopUpPurchase.class);
+                        //context.startActivity(i);
 
-                    }
-                    else {
+                        StoreLogic.getStoreLogic().purchase();
+
+                        // Update RecyclerView
+                        //startActivity(StoreRecyclerViewAdapter.this, Store.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        Store.updateStore.UpdateScreen();
+
+
+
+                    } else {
                         String purchaseFailed = "אין לך מספיק מטבעות :(";
 
                         Toast.makeText(context, purchaseFailed, Toast.LENGTH_SHORT).show();
@@ -118,6 +138,13 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         }
     }
 
+
+
+    public void updateReceiptsList(ArrayList<String> newlist) {
+        allStatus = newlist;
+        this.notifyDataSetChanged();
+    }
+
     /**
      * @return How many items are in the list
      */
@@ -134,6 +161,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
         RelativeLayout layoutStore;
         String status; //The status of the Player
+        int playerId;
 
         public ViewHolder(View itemView) {
             super(itemView);

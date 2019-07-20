@@ -15,6 +15,7 @@ import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.model.LockStatus;
 import com.shirzabolotnyklein.tropix.model.Player;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +56,7 @@ public class Constants implements Serializable {
 
     private final int boardMoveCoins = 1;
 
-    private final int boardVicCoins3 = 30;
+    private final int boardVicCoins3 = 3000;
     private final int boardVicCoins4 = 40;
     private final int boardVicCoins5 = 50;
     private final int boardVicCoins6 = 60;
@@ -203,58 +204,67 @@ public class Constants implements Serializable {
     //------------------------------------ All Players Getter --------------------------------------
 
     public List<Player> getAllPlayers() {
-        if (allPlayers.isEmpty()) {
-            allPlayers.add(player1);
-            allPlayers.add(player2);
-            allPlayers.add(player3);
-            allPlayers.add(player4);
-            allPlayers.add(player5);
-            allPlayers.add(player6);
-            allPlayers.add(player7);
-            allPlayers.add(player8);
-            allPlayers.add(player9);
-            allPlayers.add(player10);
-            allPlayers.add(player11);
-            allPlayers.add(player12);
-            allPlayers.add(player13);
-            allPlayers.add(player14);
-            allPlayers.add(player15);
-            allPlayers.add(player16);
-            allPlayers.add(player17);
-            allPlayers.add(player18);
-            allPlayers.add(player19);
-            allPlayers.add(player20);
-            allPlayers.add(player21);
-            allPlayers.add(player22);
-            allPlayers.add(player23);
-            allPlayers.add(player24);
-            allPlayers.add(player25);
-            allPlayers.add(player26);
-            allPlayers.add(player27);
-            allPlayers.add(player28);
-            allPlayers.add(player29);
-            allPlayers.add(player30);
-            allPlayers.add(player31);
-            allPlayers.add(player32);
-            allPlayers.add(player33);
-            allPlayers.add(player34);
-            allPlayers.add(player35);
-            allPlayers.add(player36);
-            allPlayers.add(player37);
-            allPlayers.add(player38);
-            allPlayers.add(player39);
-            allPlayers.add(player40);
-            allPlayers.add(player41);
-            allPlayers.add(player42);
-            allPlayers.add(player43);
-            allPlayers.add(player44);
-            allPlayers.add(player45);
-            allPlayers.add(player46);
-            allPlayers.add(player47);
-            allPlayers.add(player48);
-            allPlayers.add(player49);
-            allPlayers.add(player50);
-        }
+        //
+
+            if(allPlayers.isEmpty()) {
+                allPlayers.add(player1);
+                allPlayers.add(player2);
+                allPlayers.add(player3);
+                allPlayers.add(player4);
+                allPlayers.add(player5);
+                allPlayers.add(player6);
+                allPlayers.add(player7);
+                allPlayers.add(player8);
+                allPlayers.add(player9);
+                allPlayers.add(player10);
+                allPlayers.add(player11);
+                allPlayers.add(player12);
+                allPlayers.add(player13);
+                allPlayers.add(player14);
+                allPlayers.add(player15);
+                allPlayers.add(player16);
+                allPlayers.add(player17);
+                allPlayers.add(player18);
+                allPlayers.add(player19);
+                allPlayers.add(player20);
+                allPlayers.add(player21);
+                allPlayers.add(player22);
+                allPlayers.add(player23);
+                allPlayers.add(player24);
+                allPlayers.add(player25);
+                allPlayers.add(player26);
+                allPlayers.add(player27);
+                allPlayers.add(player28);
+                allPlayers.add(player29);
+                allPlayers.add(player30);
+                allPlayers.add(player31);
+                allPlayers.add(player32);
+                allPlayers.add(player33);
+                allPlayers.add(player34);
+                allPlayers.add(player35);
+                allPlayers.add(player36);
+                allPlayers.add(player37);
+                allPlayers.add(player38);
+                allPlayers.add(player39);
+                allPlayers.add(player40);
+                allPlayers.add(player41);
+                allPlayers.add(player42);
+                allPlayers.add(player43);
+                allPlayers.add(player44);
+                allPlayers.add(player45);
+                allPlayers.add(player46);
+                allPlayers.add(player47);
+                allPlayers.add(player48);
+                allPlayers.add(player49);
+                allPlayers.add(player50);
+                if (!preferenceFileExist("allPlayersStatus")) {
+                    writeToFile();
+                }
+            }
+
+            else {readFromFile();}
+
+
         return allPlayers;
     }
 
@@ -279,9 +289,8 @@ public class Constants implements Serializable {
      * Write from SharedPreferences "allPlayersStatus" file.
      * Get allPlayers status date from allPlayers ArrayList, update the data in the file.
      *
-     * @param view
      */
-    private void writeToFile(View view) {
+    private void writeToFile() {
 
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);
@@ -297,10 +306,12 @@ public class Constants implements Serializable {
             currentPlayerId = Integer.toString(player.getId());
             currentPlayerStatus = player.getIsLocked().getStatus().toString();
             editor.putString(currentPlayerId, currentPlayerStatus);
+
+            // Save the changes
+            editor.apply();
+
         }
 
-        // Save the changes
-        editor.apply();
     }
 
     /**
@@ -312,33 +323,29 @@ public class Constants implements Serializable {
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);
 
-        Map<String, ?> allPlayersMap = allPlayersStatus.getAll();
-
-        int id;
-        String status;
         Lock playerLock;
 
-        for (Map.Entry<String, ?> entry : allPlayersMap.entrySet()) {
-            id = Integer.parseInt(entry.getKey());
-            status = entry.getValue().toString();
+        for (Player p : allPlayers) {
+            String keyPlayerId = String.valueOf(p.getId());
 
-            if (status == "OPEN") {
+            String statusFromFile = allPlayersStatus.getString(keyPlayerId, "CLOSED");
+
+            if (statusFromFile.equals("OPEN")) {
                 playerLock = open;
             } else {
                 playerLock = close;
             }
-
-            allPlayers.get(id - 1).setIslocked(playerLock);
+            allPlayers.get(p.getId() - 1).setIslocked(playerLock);
         }
+
     }
 
     /**
      * Edit SharedPreferences "allPlayersStatus" file, update player status.
      *
-     * @param view
-     * @param player the player to update
+     * @param playerId the player to update
      */
-    private void editFile(View view, Player player) {
+    protected void editFile(int playerId) {
 
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);
@@ -347,11 +354,8 @@ public class Constants implements Serializable {
         SharedPreferences.Editor editor = allPlayersStatus.edit();
 
         // Put key+value to the file
-        String currentPlayerId = "";
-        String currentPlayerStatus = "";
-
-        currentPlayerId = Integer.toString(player.getId());
-        currentPlayerStatus = player.getIsLocked().getStatus().toString();
+        String currentPlayerId = String.valueOf(playerId);
+        String currentPlayerStatus = getPlayer(playerId).getIsLocked().getStatus().toString();
 
         editor.putString(currentPlayerId, currentPlayerStatus);
 
@@ -359,6 +363,12 @@ public class Constants implements Serializable {
         editor.apply();
     }
 
+
+    public boolean preferenceFileExist(String fileName) {
+        File f = new File(context.getApplicationInfo().dataDir + "/shared_prefs/"
+                + fileName + ".xml");
+        return f.exists();
+    }
 
     //=============================================================================================//
     //============================= Shared Preferences - User Coins  ==============================//

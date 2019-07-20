@@ -3,6 +3,7 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -89,6 +90,8 @@ public class ChooseRivalPlayerRecyclerViewAdapter extends RecyclerView.Adapter<C
 
                     //vibrator.vibrate(50);
                     Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();
+                    ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+
                 }
             });
         }

@@ -14,9 +14,11 @@ import com.shirzabolotnyklein.tropix.utils.Constants;
 import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Store extends AppCompatActivity {
-
+    RecyclerView recyclerView;
     TextView tv_coinsSum;
     Constants instance = Constants.getInstance();
 
@@ -26,9 +28,11 @@ public class Store extends AppCompatActivity {
     private ArrayList<Integer> allPlayers = new ArrayList<>(); // ArrayList of all players image addresses
     private ArrayList<Integer> allPrices = new ArrayList<>();  // ArrayList of all players prices
     private ArrayList<String> allStatus = new ArrayList<>(); // ArrayList of all players status
+    private ArrayList<Integer> allId = new ArrayList<>(); // ArrayList of all players ID
 
     Lock open;
     Lock close;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,6 @@ public class Store extends AppCompatActivity {
 
         initImageBitmapsForAllPlayers();
         initCoins();
-
 
     }
 
@@ -57,6 +60,9 @@ public class Store extends AppCompatActivity {
 
             // Add for each element in allStatus ArrayList the player lock status
             allStatus.add(p.getIsLocked().getStatus().toString());
+
+            // Add for each element in allId ArrayList the player ID
+            allId.add(p.getId());
         }
 
         initImageBitmapsForLocks();
@@ -75,13 +81,34 @@ public class Store extends AppCompatActivity {
      * Get the players images (allPlayers ArrayList) and add them to the RecyclerView
      */
     protected void initRecyclerViewForAllPlayers() {
-        RecyclerView recyclerView = findViewById(R.id.rv_store);
-        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, open, close);
+        recyclerView = findViewById(R.id.rv_store);
+        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, allId, open, close);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
+        if (recyclerView.getAdapter() != null) {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+        updateStore.setPointer(recyclerView);
+    }
+
+    static class updateStore {
+        static RecyclerView recyclerView;
+
+
+        public static void setPointer(RecyclerView recyclerViewFromOut) {
+            recyclerView = recyclerViewFromOut;
+
+        }
+
+        public static void UpdateScreen() {
+            recyclerView.getAdapter().notifyDataSetChanged();
+
+        }
+
 
     }
 
+    ;
 
     private void initCoins() {
 
