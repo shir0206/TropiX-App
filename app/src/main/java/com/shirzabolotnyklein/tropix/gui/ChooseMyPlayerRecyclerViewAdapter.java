@@ -64,16 +64,23 @@ public class ChooseMyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choo
         // If Player status is "CLOSED", color the Player in B&W
         if (allStatus.get(position).equals("CLOSE")) {
 
+            // Set item disable (not clickable)
+            holder.layoutPlayer.setEnabled(false);
+
             // Get the color matrix and set it to 0=B&W
             ColorMatrix matrix = new ColorMatrix();
             matrix.setSaturation(0);
 
             ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
             holder.playerToChoose.setColorFilter(filter);
+
         }
 
         // If Player status is "OPEN", color the Player in RGB
-        else {
+        else if (allStatus.get(position).equals("OPEN")) {
+
+            // Set item enable (clickable)
+            holder.layoutPlayer.setEnabled(true);
 
             // Get the color matrix and don't change the color
             ColorMatrix matrix = new ColorMatrix();
@@ -88,6 +95,11 @@ public class ChooseMyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choo
 
                     // Set the user choice of "My Player" of the game
                     GameLogic.getGameControl().setMy(holder.playerId);
+
+                    // Update chosen picture
+                    if (context instanceof ChoosePlayer) {
+                        ((ChoosePlayer)context).updateMyPlayersPic();
+                    }
 
                     //vibrator.vibrate(50);
                     Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();

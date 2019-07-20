@@ -8,93 +8,99 @@
     tools:context=".gui.ChoosePlayer">
 
 
-    <LinearLayout
-        android:layout_width="360dp"
-        android:layout_height="500dp"
+    <TextView
+        android:id="@+id/tv_rival"
+        android:layout_width="150dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorRedMedium"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/tv_rival"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_rivalChoice"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:background="@drawable/drw_fill_white_border_red"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rival" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_chooseRival"
+        android:layout_width="150dp"
+        android:layout_height="370dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/drw_fill_white_border_red"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choose_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_rivalChoice"
+        app:layout_constraintVertical_bias="0.026">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_me"
+        android:layout_width="150dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorRedMedium"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/tv_me"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toEndOf="@+id/tv_rival"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_myChoice"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/drw_fill_white_border_red"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toEndOf="@+id/img_rivalChoice"
+        app:layout_constraintTop_toBottomOf="@+id/tv_me" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_chooseMy"
+        android:layout_width="150dp"
+        android:layout_height="370dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
+        android:background="@drawable/drw_fill_white_border_red"
         app:layout_constraintBottom_toTopOf="@+id/btn_choose_player"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/ll_rival"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_rival"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:background="@color/colorRedMedium"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/tv_rival"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_chooseRival"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/drw_fill_white_border_red">
-
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_me"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_me"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:background="@color/colorRedMedium"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/tv_me"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_chooseMy"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/drw_fill_white_border_red" />
-        </LinearLayout>
-
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toEndOf="@+id/rv_chooseRival"
+        app:layout_constraintTop_toBottomOf="@+id/img_myChoice"
+        app:layout_constraintVertical_bias="0.028" />
 
 
     <Button
@@ -106,14 +112,20 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/drw_fill_red_border_white"
+        android:background="@color/colorRedMedium"
         android:text="@string/tv_choosePlayer"
-        android:textColor="@color/colorWhiteBright"
+        android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
 
 </android.support.constraint.ConstraintLayout>

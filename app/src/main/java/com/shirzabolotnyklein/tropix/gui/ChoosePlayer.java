@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
@@ -33,7 +34,8 @@ public class ChoosePlayer extends AppCompatActivity {
     private ArrayList<Integer> allMyPlayers = new ArrayList<>();
     private ArrayList<Integer> allMyId = new ArrayList<>();
     private ArrayList<String> allMyStatus = new ArrayList<>();
-
+    ImageView img_myChoice;
+    ImageView img_rivalChoice;
 
     Constants instance = Constants.getInstance();
 
@@ -42,8 +44,15 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_choose_player);
 
+        img_myChoice = findViewById(R.id.img_myChoice);
+        img_rivalChoice = findViewById(R.id.img_rivalChoice);
+
         initImageBitmapsForRivalPlayers();
         initImageBitmapsForMyPlayers();
+
+
+
+
 
         btn_choosePlayer = (Button) findViewById(R.id.btn_choose_player);
 
@@ -85,15 +94,11 @@ public class ChoosePlayer extends AppCompatActivity {
             String noPlayer = "לא בחרת טרופיXים!";
             Toast.makeText(ChoosePlayer.this, noPlayer, Toast.LENGTH_SHORT).show();
             return false;
-        }
-
-        else if (my == rival) {
+        } else if (my == rival) {
             String samePlayer = "בחרת שני טרופיXים זהים!";
             Toast.makeText(ChoosePlayer.this, samePlayer, Toast.LENGTH_SHORT).show();
             return false;
-        }
-
-        else if (my > 0 && rival > 0) {
+        } else if (my > 0 && rival > 0) {
             String choosePlayer = "נבחרו הטרופיXים :)";
             Toast.makeText(ChoosePlayer.this, choosePlayer, Toast.LENGTH_SHORT).show();
             return true;
@@ -151,6 +156,26 @@ public class ChoosePlayer extends AppCompatActivity {
                 new ChooseMyPlayerRecyclerViewAdapter(this, allMyId, allMyPlayers, allMyStatus);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
+    }
+
+    /**
+     * Update My Player picture
+     */
+    protected void updateMyPlayersPic(){
+
+        int myId = GameLogic.getGameControl().getMy();
+
+        img_myChoice.setImageResource(Constants.getInstance().getPlayer(myId).getPicture());
+    }
+
+    /**
+     * Update Rival Player picture
+     */
+    protected void updateRivalPlayersPic(){
+
+        int rivalId =  GameLogic.getGameControl().getRival();
+
+        img_rivalChoice.setImageResource(Constants.getInstance().getPlayer(rivalId).getPicture());
     }
 
 }

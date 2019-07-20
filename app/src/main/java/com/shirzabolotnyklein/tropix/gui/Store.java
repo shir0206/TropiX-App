@@ -11,11 +11,8 @@ import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Lock;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
-import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Store extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -23,7 +20,6 @@ public class Store extends AppCompatActivity {
     Constants instance = Constants.getInstance();
 
     private Context context;
-    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     private ArrayList<Integer> allPlayers = new ArrayList<>(); // ArrayList of all players image addresses
     private ArrayList<Integer> allPrices = new ArrayList<>();  // ArrayList of all players prices
@@ -47,22 +43,22 @@ public class Store extends AppCompatActivity {
     /**
      * Initialize images of players (allPlayers ArrayList) from DB (allPlayers List in the DB)
      */
-    private void initImageBitmapsForAllPlayers() {
+    protected void initImageBitmapsForAllPlayers() {
 
         // Add picture of all players from DB to all Players
         for (Player p : instance.getAllPlayers()) {
 
             // Add for each element in allPlayers ArrayList the player image addresse
-            allPlayers.add(p.getPicture());
+            allPlayers.add(p.getId()-1 , p.getPicture());
 
             // Add for each element in allPrices ArrayList the player price
-            allPrices.add(p.getPrice());
+            allPrices.add(p.getId()-1 , p.getPrice());
 
             // Add for each element in allStatus ArrayList the player lock status
-            allStatus.add(p.getIsLocked().getStatus().toString());
+            allStatus.add(p.getId()-1 , p.getIsLocked().getStatus().toString());
 
             // Add for each element in allId ArrayList the player ID
-            allId.add(p.getId());
+            allId.add(p.getId()-1 , p.getId());
         }
 
         initImageBitmapsForLocks();
@@ -85,32 +81,9 @@ public class Store extends AppCompatActivity {
         StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, allId, open, close);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
-        if (recyclerView.getAdapter() != null) {
-            recyclerView.getAdapter().notifyDataSetChanged();
-        }
-        updateStore.setPointer(recyclerView);
     }
 
-    static class updateStore {
-        static RecyclerView recyclerView;
-
-
-        public static void setPointer(RecyclerView recyclerViewFromOut) {
-            recyclerView = recyclerViewFromOut;
-
-        }
-
-        public static void UpdateScreen() {
-            recyclerView.getAdapter().notifyDataSetChanged();
-
-        }
-
-
-    }
-
-    ;
-
-    private void initCoins() {
+    protected void initCoins() {
 
         tv_coinsSum = findViewById(R.id.tv_coinsSum);
 

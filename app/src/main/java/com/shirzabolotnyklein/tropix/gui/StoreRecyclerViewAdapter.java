@@ -2,6 +2,7 @@ package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,28 +93,35 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                     int price = Integer.valueOf(holder.playerPrice.getText().toString());
                     boolean canPurchase = StoreLogic.getStoreLogic().canPurchase(price);
 
+                    // If can purchase (have enough coins), purchase and update list
                     if (canPurchase) {
 
                         // Update player ID for purchase in Store Logic
                         int purchasePlayer = holder.playerId;
                         StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
 
-                        //Intent i = new Intent(context, StorePopUpPurchase.class);
-                        //context.startActivity(i);
-
                         StoreLogic.getStoreLogic().purchase();
 
-                        // Update RecyclerView
-                        //startActivity(StoreRecyclerViewAdapter.this, Store.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        Store.updateStore.UpdateScreen();
+                        // Update purchased Player
+                        if (context instanceof Store) {
+                            notifyItemChanged(position);
+                            ((Store) context).initImageBitmapsForAllPlayers();
+                            ((Store) context).initCoins();
+                        }
 
+                        String purchaseSuccess = "קנית אותי, יש :)";
+                        Toast.makeText(context, purchaseSuccess, Toast.LENGTH_SHORT).show();
 
+                        ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
-                    } else {
+                    }
+
+                    // If cannot purchase (not have enough coins), return message
+                    else {
                         String purchaseFailed = "אין לך מספיק מטבעות :(";
-
                         Toast.makeText(context, purchaseFailed, Toast.LENGTH_SHORT).show();
 
+                        ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                     }
                 }
             });
@@ -130,14 +138,15 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
             holder.layoutStore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "אני כבר פעיל :)", Toast.LENGTH_SHORT).show();
-                    //vibrator.vibrate(50);
 
+                    String alreadyAvailable = "אני כבר פעיל :)";
+                    Toast.makeText(context, alreadyAvailable, Toast.LENGTH_SHORT).show();
+
+                    ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                 }
             });
         }
     }
-
 
 
     public void updateReceiptsList(ArrayList<String> newlist) {
