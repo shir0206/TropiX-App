@@ -22,22 +22,18 @@ import java.util.ArrayList;
 
 public class ChoosePlayer extends AppCompatActivity {
 
-    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-
     private Button btn_choosePlayer;
     private static final String TAG = "ChoosePlayerActivity";
 
-    private ArrayList<Integer> allRivalPlayers = new ArrayList<>();
-    private ArrayList<Integer> allRivalId = new ArrayList<>();
-    private ArrayList<String> allRivalStatus = new ArrayList<>();
+    private ArrayList<Integer> allPlayers = new ArrayList<>();
+    private ArrayList<Integer> allId = new ArrayList<>();
+    private ArrayList<String> allStatus = new ArrayList<>();
 
-    private ArrayList<Integer> allMyPlayers = new ArrayList<>();
-    private ArrayList<Integer> allMyId = new ArrayList<>();
-    private ArrayList<String> allMyStatus = new ArrayList<>();
-    ImageView img_myChoice;
-    ImageView img_rivalChoice;
+    private ImageView img_myChoice;
+    private ImageView img_rivalChoice;
 
-    Constants instance = Constants.getInstance();
+
+    private Constants instance = Constants.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +43,13 @@ public class ChoosePlayer extends AppCompatActivity {
         img_myChoice = findViewById(R.id.img_myChoice);
         img_rivalChoice = findViewById(R.id.img_rivalChoice);
 
-        initImageBitmapsForRivalPlayers();
-        initImageBitmapsForMyPlayers();
-
-
-
-
+        initImageBitmapsForAllPlayers();
 
         btn_choosePlayer = (Button) findViewById(R.id.btn_choose_player);
 
         btn_choosePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //vibrator.vibrate(50);
 
                 // Set all user choices game details (board, user player and user rival)
                 GameLogic.getGameControl().setGame();
@@ -71,8 +61,7 @@ public class ChoosePlayer extends AppCompatActivity {
                     switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
                         case 3:
                             startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
-                            ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-                            finish();
+
                         case 4:
                             //startActivity(new Intent(ChoosePlayer.this, Game4x4.class));
                         case 5:
@@ -80,80 +69,88 @@ public class ChoosePlayer extends AppCompatActivity {
                         case 6:
                             //startActivity(new Intent(ChoosePlayer.this, Game6x6.class));
                     }
+
+                    ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+                    finish();
                 }
             }
         });
     }
 
+    /**
+     * Check if the user choicce of Rival & My Players is valid
+     * @return True if valid
+     */
     private boolean isValid() {
 
+        // Get the chosen players ID
         int my = GameLogic.getGameControl().getMy();
         int rival = GameLogic.getGameControl().getRival();
 
+        // If no Players were chosen, return false
         if (my <= 0 || rival <= 0) {
             String noPlayer = "לא בחרת טרופיXים!";
             Toast.makeText(ChoosePlayer.this, noPlayer, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (my == rival) {
+        }
+
+        // If same Players were chosen, return false
+        else if (my == rival) {
             String samePlayer = "בחרת שני טרופיXים זהים!";
             Toast.makeText(ChoosePlayer.this, samePlayer, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (my > 0 && rival > 0) {
+        }
+
+        // If valid Players were chosen, return true
+        else if (my > 0 && rival > 0) {
             String choosePlayer = "נבחרו הטרופיXים :)";
             Toast.makeText(ChoosePlayer.this, choosePlayer, Toast.LENGTH_SHORT).show();
             return true;
         }
+
         return false;
     }
+
 
     /**
      * Initialize images of players (allRivalPlayers ArrayList) from DB (allPlayers List in the DB)
      */
-    private void initImageBitmapsForRivalPlayers() {
+    private void initImageBitmapsForAllPlayers() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps for rival players.");
 
         // Add picture of all players from DB to all rival Players
         for (Player p : instance.getAllPlayers()) {
-            allRivalId.add(p.getId());
-            allRivalPlayers.add(p.getPicture());
-            allRivalStatus.add(p.getIsLocked().getStatus().toString());
+            allId.add(p.getId());
+            allPlayers.add(p.getPicture());
+            allStatus.add(p.getIsLocked().getStatus().toString());
         }
 
-        initRecyclerViewForRivalPlayers();
+        initRecyclerViewForAllRivalPlayers();
+        initRecyclerViewForAllMyPlayers();
     }
 
     /**
-     * Get the players images (allRivalPlayers ArrayList) and add them to the RecyclerView
+     * Get Rival Players images and add them to the RecyclerView
      */
-    private void initRecyclerViewForRivalPlayers() {
+    private void initRecyclerViewForAllRivalPlayers() {
+
+        String playerType = "RIVAL";
         RecyclerView recyclerView = findViewById(R.id.rv_chooseRival);
-        ChooseRivalPlayerRecyclerViewAdapter adapter =
-                new ChooseRivalPlayerRecyclerViewAdapter(this, allRivalId, allRivalPlayers, allRivalStatus);
+        ChoosePlayerRecyclerViewAdapter adapter =
+                new ChoosePlayerRecyclerViewAdapter(this, playerType, allId, allPlayers, allStatus);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
     }
 
     /**
-     * Initialize images of players (allMyPlayers ArrayList) from DB (allPlayers List in the DB)
+     * Get My Players images and add them to the RecyclerView
      */
-    private void initImageBitmapsForMyPlayers() {
-        // Add picture of all players from DB to all rival Players
-        for (Player p : instance.getAllPlayers()) {
-            allMyId.add(p.getId());
-            allMyPlayers.add(p.getPicture());
-            allMyStatus.add(p.getIsLocked().getStatus().toString());
-        }
+    private void initRecyclerViewForAllMyPlayers() {
 
-        initRecyclerViewForMyPlayers();
-    }
-
-    /**
-     * Get the players images (allMyPlayers ArrayList) and add them to the RecyclerView
-     */
-    private void initRecyclerViewForMyPlayers() {
+        String playerType = "MY";
         RecyclerView recyclerView = findViewById(R.id.rv_chooseMy);
-        ChooseMyPlayerRecyclerViewAdapter adapter =
-                new ChooseMyPlayerRecyclerViewAdapter(this, allMyId, allMyPlayers, allMyStatus);
+        ChoosePlayerRecyclerViewAdapter adapter =
+                new ChoosePlayerRecyclerViewAdapter(this, playerType, allId, allPlayers, allStatus);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
     }

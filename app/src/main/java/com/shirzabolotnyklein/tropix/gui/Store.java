@@ -15,9 +15,9 @@ import com.shirzabolotnyklein.tropix.utils.Constants;
 import java.util.ArrayList;
 
 public class Store extends AppCompatActivity {
-    RecyclerView recyclerView;
-    TextView tv_coinsSum;
-    Constants instance = Constants.getInstance();
+    private RecyclerView recyclerView;
+    private TextView tv_coinsSum;
+    private Constants instance = Constants.getInstance();
 
     private Context context;
 
@@ -26,8 +26,8 @@ public class Store extends AppCompatActivity {
     private ArrayList<String> allStatus = new ArrayList<>(); // ArrayList of all players status
     private ArrayList<Integer> allId = new ArrayList<>(); // ArrayList of all players ID
 
-    Lock open;
-    Lock close;
+    private Lock open;
+    private Lock close;
 
 
     @Override
@@ -49,16 +49,17 @@ public class Store extends AppCompatActivity {
         for (Player p : instance.getAllPlayers()) {
 
             // Add for each element in allPlayers ArrayList the player image addresse
-            allPlayers.add(p.getId()-1 , p.getPicture());
+            allPlayers.add(p.getId() - 1, p.getPicture());
 
             // Add for each element in allPrices ArrayList the player price
-            allPrices.add(p.getId()-1 , p.getPrice());
+            allPrices.add(p.getId() - 1, p.getPrice());
 
             // Add for each element in allStatus ArrayList the player lock status
-            allStatus.add(p.getId()-1 , p.getIsLocked().getStatus().toString());
+            allStatus.add(p.getId() - 1, p.getIsLocked().getStatus().toString());
 
             // Add for each element in allId ArrayList the player ID
-            allId.add(p.getId()-1 , p.getId());
+            allId.add(p.getId() - 1, p.getId());
+
         }
 
         initImageBitmapsForLocks();
@@ -91,4 +92,30 @@ public class Store extends AppCompatActivity {
 
         tv_coinsSum.setText(Integer.toString(totalCoins));
     }
+
+
+    /**
+     * Initialize images of purchased player (allPlayers ArrayList) from DB (allPlayers List in the DB)
+     */
+    protected void initImageBitmapsForPurchasedPlayer(int purchasePlayer) {
+
+        // Add picture of all players from DB to all Players
+        Player p = Constants.getInstance().getPlayer(purchasePlayer);
+
+        // Add for each element in allPlayers ArrayList the player image addresse
+        allPlayers.set(p.getId() - 1, p.getPicture());
+
+        // Add for each element in allPrices ArrayList the player price
+        allPrices.set(p.getId() - 1, p.getPrice());
+
+        // Add for each element in allStatus ArrayList the player lock status
+        allStatus.set(p.getId() - 1, p.getIsLocked().getStatus().toString());
+
+        // Add for each element in allId ArrayList the player ID
+        allId.set(p.getId() - 1, p.getId());
+
+        initImageBitmapsForLocks();
+        initRecyclerViewForAllPlayers();
+    }
+
 }

@@ -204,7 +204,6 @@ public class Constants implements Serializable {
     //------------------------------------ All Players Getter --------------------------------------
 
     public List<Player> getAllPlayers() {
-        //
 
             if(allPlayers.isEmpty()) {
                 allPlayers.add(player1);
@@ -258,12 +257,10 @@ public class Constants implements Serializable {
                 allPlayers.add(player49);
                 allPlayers.add(player50);
                 if (!preferenceFileExist("allPlayersStatus")) {
-                    writeToFile();
+                    writeToFilePlayerStatus();
                 }
             }
-
-            else {readFromFile();}
-
+            else {readFromFilePlayerStatus();}
 
         return allPlayers;
     }
@@ -290,7 +287,7 @@ public class Constants implements Serializable {
      * Get allPlayers status date from allPlayers ArrayList, update the data in the file.
      *
      */
-    private void writeToFile() {
+    private void writeToFilePlayerStatus() {
 
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);
@@ -309,22 +306,21 @@ public class Constants implements Serializable {
 
             // Save the changes
             editor.apply();
-
         }
-
     }
 
     /**
      * Read from SharedPreferences "allPlayersStatus" file.
      * Get allPlayers status date, update the data in allPlayers ArrayList
      */
-    private void readFromFile() {
+    private void readFromFilePlayerStatus() {
 
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);
 
         Lock playerLock;
 
+        //Init the status of allPlayers ArrayList, by iterating through the file, and reading the status for each player
         for (Player p : allPlayers) {
             String keyPlayerId = String.valueOf(p.getId());
 
@@ -335,9 +331,10 @@ public class Constants implements Serializable {
             } else {
                 playerLock = close;
             }
+
+            // Set the status
             allPlayers.get(p.getId() - 1).setIslocked(playerLock);
         }
-
     }
 
     /**
@@ -345,7 +342,7 @@ public class Constants implements Serializable {
      *
      * @param playerId the player to update
      */
-    protected void editFile(int playerId) {
+    protected void editFilePlayerStatus(int playerId) {
 
         // Get the file named "allPlayersStatus", private
         SharedPreferences allPlayersStatus = context.getSharedPreferences("allPlayersStatus", Context.MODE_PRIVATE);

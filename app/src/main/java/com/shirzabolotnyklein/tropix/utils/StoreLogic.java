@@ -53,7 +53,6 @@ public class StoreLogic {
 
     /**
      * When the player is purchased, decrease the total coins of the user.
-     *
      */
     public void decreaseCoinsWhenPurchase() {
 
@@ -70,6 +69,9 @@ public class StoreLogic {
     }
 
 
+    /**
+     *
+     */
     public void purchase(){
 
         // Update player status to be open
@@ -77,16 +79,13 @@ public class StoreLogic {
         Constants.getInstance().getPlayer(purchasePlayer).setIslocked(open);
 
         // Update file
-        Constants.getInstance().editFile(purchasePlayer);
+        Constants.getInstance().editFilePlayerStatus(purchasePlayer);
 
         // Decrease points
         decreaseCoinsWhenPurchase();
 
+        // Init purchasePlayer
         setPurchasePlayer(-1);
-
-       // String purchaseSuccess = "נרכש:)";
-        //Toast.makeText(context, purchaseSuccess, Toast.LENGTH_SHORT).show();
-
 
     }
 }

@@ -15,21 +15,26 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shirzabolotnyklein.tropix.R;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
 import java.util.ArrayList;
 
 public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<ChoosePlayerRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
+    private ArrayList<Integer> allId; // ArrayList of all players IDs
     private ArrayList<Integer> allPlayers; // ArrayList of all players image addresses
     private ArrayList<String> allStatus;  // ArrayList of all players status
+private String playerType;
 
-    public ChoosePlayerRecyclerViewAdapter(Context context, ArrayList<Integer> allPlayers, ArrayList<String> allStatus) {
+    public ChoosePlayerRecyclerViewAdapter(Context context, String playerType, ArrayList<Integer> allId,
+                                             ArrayList<Integer> allPlayers, ArrayList<String> allStatus) {
         this.context = context;
+        this.allId = allId;
         this.allPlayers = allPlayers;
         this.allStatus = allStatus;
+        this.playerType = playerType;
     }
 
     @NonNull
@@ -41,7 +46,7 @@ public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choose
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         // Get the image of the Player item
         Glide.with(context)
@@ -52,8 +57,16 @@ public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choose
         // Get the status of the Player of the item
         holder.status = allStatus.get(position);
 
+
+        // Get the ID of the Player of the item
+        holder.playerId = allId.get(position);
+
+
         // If Player status is "CLOSED", color the Player in B&W
         if (allStatus.get(position).equals("CLOSE")) {
+
+            // Set item disable (not clickable)
+            holder.layoutPlayer.setEnabled(false);
 
             // Get the color matrix and set it to 0=B&W
             ColorMatrix matrix = new ColorMatrix();
@@ -61,10 +74,14 @@ public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choose
 
             ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
             holder.playerToChoose.setColorFilter(filter);
+
         }
 
         // If Player status is "OPEN", color the Player in RGB
-        else {
+        else if (allStatus.get(position).equals("OPEN")) {
+
+            // Set item enable (clickable)
+            holder.layoutPlayer.setEnabled(true);
 
             // Get the color matrix and don't change the color
             ColorMatrix matrix = new ColorMatrix();
@@ -76,8 +93,36 @@ public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choose
             holder.layoutPlayer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //vibrator.vibrate(50);
+
+                    if(playerType.equals("MY")) {
+
+                        // Set the user choice of "My Player" of the game
+                        GameLogic.getGameControl().setMy(holder.playerId);
+
+                        // Update chosen picture
+                        if (context instanceof ChoosePlayer) {
+                            ((ChoosePlayer) context).updateMyPlayersPic();
+                        }
+
+                    }
+
+                    else if(playerType.equals("RIVAL")) {
+
+                        // Set the user choice of "My Player" of the game
+                        GameLogic.getGameControl().setRival(holder.playerId);
+
+                        // Update chosen picture
+                        if (context instanceof ChoosePlayer) {
+                            ((ChoosePlayer) context).updateRivalPlayersPic();
+                        }
+
+                    }
+
                     Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();
+
+                    ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+
+
                 }
             });
         }
@@ -93,6 +138,7 @@ public class ChoosePlayerRecyclerViewAdapter extends RecyclerView.Adapter<Choose
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        int playerId; //ID of the Player
         ImageView playerToChoose; //Image of the Player
 
         RelativeLayout layoutPlayer;

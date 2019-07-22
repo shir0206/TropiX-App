@@ -105,7 +105,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                         // Update purchased Player
                         if (context instanceof Store) {
                             notifyItemChanged(position);
-                            ((Store) context).initImageBitmapsForAllPlayers();
+                            ((Store) context).initImageBitmapsForPurchasedPlayer(purchasePlayer);
                             ((Store) context).initCoins();
                         }
 

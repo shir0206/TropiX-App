@@ -82,8 +82,9 @@ public class GameLogic {
      * Rival Player ID  If the rival put "Rival Player" in that cell
      * -
      * To check if there is a winner and who is the winner, for each player calculate the sum for win.
-     * The sum for win would be the player ID (from i = 0 to i = board size), sumWin = ID * boardSize.
-     * If the sum in a certain row / col / diagonal equals to the sum for win, there is a winner.
+     * The sum for win would be the player ID from i = 0 to i = board size >> sumWin = ID * boardSize.
+     * If the sum in a certain row / col / diagonal equals to the sum for win of a certain player,
+     * there is a winner.
      *
      * @return if there is a winner, return the winner ID, else return -1.
      */
@@ -244,10 +245,6 @@ public class GameLogic {
         return true;
     }
 
-
-    //-------------------------------- Game Coins Methods -------------------------------------
-
-
     //-------------------------------- Getters & Setters -------------------------------------
 
     /**
@@ -312,7 +309,6 @@ public class GameLogic {
      */
     public void updateMoveInTheBoardMatrix(int i, int j, int playerId) {
 
-        //boardMatrix.get(i).add(j, playerId);
         boardMatrix.get(i).set(j, playerId);
     }
 

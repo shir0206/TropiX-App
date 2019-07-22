@@ -62,7 +62,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="62" />
+                                                <entry key="scalingPercent" value="57" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -74,7 +74,7 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="facedc" />
-                                      <entry key="foregroundImage" value="C:\Users\Shir\Documents\GitHub\TropiX\logo.png" />
+                                      <entry key="foregroundImage" value="C:\Users\Shir\Documents\GitHub\TropiX\TropiXApp\app\src\main\res\drawable\t000_icon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
