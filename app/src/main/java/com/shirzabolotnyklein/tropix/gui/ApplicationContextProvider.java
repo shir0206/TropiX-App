@@ -5,6 +5,10 @@ import android.content.Context;
 
 public class ApplicationContextProvider extends Application {
 
+    public static void setContext(Context context) {
+        ApplicationContextProvider.context = context;
+    }
+
     /**
      * Keeps a reference of the application context
      */

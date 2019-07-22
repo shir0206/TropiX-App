@@ -29,11 +29,9 @@ public class StoreLogic {
     //-------------------------------- Store Logic Methods -------------------------------------
 
 
+    boolean wantPurchase;
     int purchasePlayer;
 
-    public void setPurchasePlayer(int purchasePlayer) {
-        this.purchasePlayer = purchasePlayer;
-    }
 
     /**
      * Check is the Player can be purchased, by comparing the current total points and the player price.
@@ -56,36 +54,59 @@ public class StoreLogic {
      */
     public void decreaseCoinsWhenPurchase() {
 
-        if (purchasePlayer > 0) {
-            int playerPrice = Constants.getInstance().getPlayer(purchasePlayer).getPrice();
+        int decTotalCoins = calcTotalCoinsWhenPurchase();
+        Constants.getInstance().setTotalCoins(decTotalCoins);
+    }
 
-            int totalCoins = Constants.getInstance().getTotalCoins();
 
-            int decTotalCoins = totalCoins - playerPrice;
+    public int calcTotalCoinsWhenPurchase() {
 
-            Constants.getInstance().setTotalCoins(decTotalCoins);
-        }
+        int playerPrice = Constants.getInstance().getPlayer(purchasePlayer).getPrice();
 
+        int totalCoins = Constants.getInstance().getTotalCoins();
+
+        int decTotalCoins = totalCoins - playerPrice;
+
+        return decTotalCoins;
     }
 
 
     /**
      *
      */
-    public void purchase(){
+    public void purchase() {
 
-        // Update player status to be open
-        Lock open = Constants.getInstance().getOpen();
-        Constants.getInstance().getPlayer(purchasePlayer).setIslocked(open);
+        if ((purchasePlayer > 0) && wantPurchase) {
 
-        // Update file
-        Constants.getInstance().editFilePlayerStatus(purchasePlayer);
+            // Update player status to be open
+            Lock open = Constants.getInstance().getOpen();
+            Constants.getInstance().getPlayer(purchasePlayer).setIslocked(open);
 
-        // Decrease points
-        decreaseCoinsWhenPurchase();
+            // Update file
+            Constants.getInstance().editFilePlayerStatus(purchasePlayer);
 
-        // Init purchasePlayer
-        setPurchasePlayer(-1);
+            // Decrease points
+            decreaseCoinsWhenPurchase();
+        }
 
+    }
+
+    //-------------------------------- Getters & Setters -------------------------------------
+
+
+    public void setWantPurchase(boolean wantPurchase) {
+        this.wantPurchase = wantPurchase;
+    }
+
+    public void setPurchasePlayer(int purchasePlayer) {
+        this.purchasePlayer = purchasePlayer;
+    }
+
+    public boolean isWantPurchase() {
+        return wantPurchase;
+    }
+
+    public int getPurchasePlayer() {
+        return purchasePlayer;
     }
 }

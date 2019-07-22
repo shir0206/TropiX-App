@@ -2,33 +2,43 @@ package com.shirzabolotnyklein.tropix.gui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
+import com.shirzabolotnyklein.tropix.utils.Constants;
+import com.shirzabolotnyklein.tropix.utils.GameLogic;
 import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
-public class StorePopUpPurchase extends Activity {
+public class StorePopUpPurchase extends AppCompatActivity {
 
+    private static final String TAG = "StorePopUpPurchase";
     private Context context;
 
-    Button btn_approve;
-    Button btn_cancel;
+    private Button btn_approve;
+    private Button btn_cancel;
+
+    private ImageView img_purchase;
+    private TextView tv_totalCoinsNewSum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_store_popup_purchase);
-
         context = ApplicationContextProvider.getContext();
 
-        btn_approve = findViewById(R.id.btn_approve);
-        btn_cancel = findViewById(R.id.btn_cancel);
+        initUI();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -36,7 +46,7 @@ public class StorePopUpPurchase extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .6), (int) (height * .5));
+        getWindow().setLayout((int) (width * .8), (int) (height * .65));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -44,18 +54,18 @@ public class StorePopUpPurchase extends Activity {
         params.y = -20;
         getWindow().setAttributes(params);
 
-
-
-
-        /*btn_cancel.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String purchaseSuccessfully = "חבל שלא קנית אותי :(";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
-
 
                 int purchasePlayer = -1;
+
                 StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
+                StoreLogic.getStoreLogic().setWantPurchase(false);
+
+                String purchaseSuccessfully = "חבל שלא קנית אותי :(";
+                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
+                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 finish();
             }
@@ -66,21 +76,41 @@ public class StorePopUpPurchase extends Activity {
             @Override
             public void onClick(View view) {
 
-                //Decrease Coins
-                StoreLogic.getStoreLogic().decreaseCoinsWhenPurchase();
+                int purchasePlayer = StoreLogic.getStoreLogic().getPurchasePlayer();
 
-                // Update item for purchase
-                int purchasePlayer = -1;
-                StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
+                StoreLogic.getStoreLogic().setWantPurchase(true);
 
-                String purchaseSuccessfully = "תודה שקנית אותי :)";
+                StoreLogic.getStoreLogic().purchase();
+
+                ((Store) context).initImageBitmapsForPurchasedPlayer(purchasePlayer);
+                ((Store) context).initCoins();
+
+                String purchaseSuccessfully = "קנית אותי, יש :)";
                 Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
-
+                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 finish();
             }
         });
-*/
+
+
+    }
+
+    private void initUI() {
+
+        img_purchase = findViewById(R.id.img_purchase);
+        tv_totalCoinsNewSum = findViewById(R.id.tv_totalCoinsNewSum);
+
+        // Init image of Player for purchase
+        int purchaseImg = Constants.getInstance().getPlayer(StoreLogic.getStoreLogic().getPurchasePlayer()).getPicture();
+        img_purchase.setImageResource(purchaseImg);
+
+        // Init total sum of user if would purchase
+        int newTotal = StoreLogic.getStoreLogic().calcTotalCoinsWhenPurchase();
+        tv_totalCoinsNewSum.setText(String.valueOf(newTotal));
+
+        btn_approve = findViewById(R.id.btn_approve);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
     }
 

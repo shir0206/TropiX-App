@@ -37,7 +37,6 @@ public class Store extends AppCompatActivity {
 
         initImageBitmapsForAllPlayers();
         initCoins();
-
     }
 
     /**
@@ -79,9 +78,10 @@ public class Store extends AppCompatActivity {
      */
     protected void initRecyclerViewForAllPlayers() {
         recyclerView = findViewById(R.id.rv_store);
-        StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, allId, open, close);
+        final StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, allId, open, close);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
+
     }
 
     protected void initCoins() {

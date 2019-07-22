@@ -2,9 +2,11 @@ package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +64,9 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull final StoreRecyclerViewAdapter.ViewHolder holder, final int position) {
 
+        //notifyDataSetChanged();
+
+
         // Get the image of the Player item
         Glide.with(context)
                 .asBitmap()
@@ -100,20 +105,18 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                         int purchasePlayer = holder.playerId;
                         StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
 
-                        StoreLogic.getStoreLogic().purchase();
+                        ApplicationContextProvider.setContext(context);
 
-                        // Update purchased Player
+                        Intent intent = new Intent(context, StorePopUpPurchase.class);
+
+                        context.startActivity(intent);
+
+                        // Update list
                         if (context instanceof Store) {
                             notifyItemChanged(position);
                             ((Store) context).initImageBitmapsForPurchasedPlayer(purchasePlayer);
                             ((Store) context).initCoins();
                         }
-
-                        String purchaseSuccess = "קנית אותי, יש :)";
-                        Toast.makeText(context, purchaseSuccess, Toast.LENGTH_SHORT).show();
-
-                        ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-
                     }
 
                     // If cannot purchase (not have enough coins), return message
@@ -124,6 +127,8 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                         ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                     }
                 }
+
+
             });
         }
 
@@ -148,12 +153,6 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         }
     }
 
-
-    public void updateReceiptsList(ArrayList<String> newlist) {
-        allStatus = newlist;
-        this.notifyDataSetChanged();
-    }
-
     /**
      * @return How many items are in the list
      */
@@ -164,13 +163,13 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView playerInStore; //Image of the Player
-        TextView playerPrice; //Price of the Player
-        ImageView playerLock; //Image of the lock status of the Player
+        ImageView playerInStore; // Image of the Player
+        TextView playerPrice; // Price of the Player
+        ImageView playerLock; // Image of the lock status of the Player
 
         RelativeLayout layoutStore;
-        String status; //The status of the Player
-        int playerId;
+        String status; // The status of the Player
+        int playerId; // The Player ID
 
         public ViewHolder(View itemView) {
             super(itemView);

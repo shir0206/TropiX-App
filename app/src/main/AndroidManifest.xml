@@ -20,8 +20,7 @@
 
 
         <activity android:name=".gui.StorePopUpPurchase"
-            android:theme="@style/AppTheme.StorePurchase"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme.StorePopUp"/>
 
 
         <activity android:name=".gui.ChooseBoard"
