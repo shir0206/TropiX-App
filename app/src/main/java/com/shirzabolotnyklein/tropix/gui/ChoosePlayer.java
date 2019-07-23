@@ -60,7 +60,10 @@ public class ChoosePlayer extends AppCompatActivity {
                     // Switch case which board should be opened
                     switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
                         case 3:
-                            startActivity(new Intent(ChoosePlayer.this, Game3x3.class));
+
+                            Intent intent = new Intent(ChoosePlayer.this, Game3x3.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                            startActivity(intent);
 
                         case 4:
                             //startActivity(new Intent(ChoosePlayer.this, Game4x4.class));

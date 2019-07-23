@@ -220,7 +220,10 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
      */
     private void refreshGame(){
         GameLogic.getGameControl().resetGame();
-        startActivity(new Intent(Game3x3.this, MainActivity.class));
+
+        Intent intent = new Intent(Game3x3.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
 
         Game3x3.this.finish();
     }

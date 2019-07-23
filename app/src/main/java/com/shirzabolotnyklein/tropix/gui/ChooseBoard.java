@@ -1,6 +1,7 @@
 package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -35,12 +36,16 @@ public class ChooseBoard extends AppCompatActivity {
                 ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                 GameLogic.getGameControl().setBoard(3);
 
-                startActivity(new Intent(ChooseBoard.this, ChoosePlayer.class));
-                //launchActivity();
-                finish();
+                Intent intent = new Intent(ChooseBoard.this, ChoosePlayer.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
 
+                finish();
             }
         });
 
+
     }
+
+
 }
