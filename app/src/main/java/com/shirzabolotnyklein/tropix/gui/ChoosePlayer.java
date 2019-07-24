@@ -57,6 +57,12 @@ public class ChoosePlayer extends AppCompatActivity {
                 // If Players are valid
                 if (isValid()) {
 
+                    Intent intent = new Intent(ChoosePlayer.this, Game3x3.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+
+                    /*
+
                     // Switch case which board should be opened
                     switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
                         case 3:
@@ -71,7 +77,7 @@ public class ChoosePlayer extends AppCompatActivity {
                             //startActivity(new Intent(ChoosePlayer.this, Game5x5.class));
                         case 6:
                             //startActivity(new Intent(ChoosePlayer.this, Game6x6.class));
-                    }
+                    }*/
 
                     ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
                     finish();

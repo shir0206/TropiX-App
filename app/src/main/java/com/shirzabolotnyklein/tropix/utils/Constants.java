@@ -118,11 +118,11 @@ public class Constants implements Serializable {
 
     /**
      *
-     * @param id Receive Board ID
+     * @param size Receive Board ID
      * @return Board according to the key in the HashMap allBoards
      */
-    public Board getBoard(int id) {
-        Board board = allBoards.get(id);
+    public Board getBoard(int size) {
+        Board board = allBoards.get(size);
         return board;
     }
 

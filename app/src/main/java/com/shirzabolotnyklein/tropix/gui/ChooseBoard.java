@@ -19,6 +19,7 @@ public class ChooseBoard extends AppCompatActivity {
     private Button btn_chooseBoard5x5;
     private Button btn_chooseBoard6x6;
     private Context context;
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +34,51 @@ public class ChooseBoard extends AppCompatActivity {
         btn_chooseBoard3x3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-                GameLogic.getGameControl().setBoard(3);
-
-                Intent intent = new Intent(ChooseBoard.this, ChoosePlayer.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-
-                finish();
+                size = 3;
+                setChosenBoardAndInitScreen(size);
             }
         });
 
+        btn_chooseBoard4x4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size = 4;
+                setChosenBoardAndInitScreen(size);
+            }
+        });
+
+        btn_chooseBoard5x5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size = 5;
+                setChosenBoardAndInitScreen(size);
+            }
+        });
+
+        btn_chooseBoard6x6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size = 6;
+                setChosenBoardAndInitScreen(size);
+            }
+        });
 
     }
 
+    /**
+     * Set the size of the chosen board and init the next screen
+     */
+    private void setChosenBoardAndInitScreen(int size) {
+        GameLogic.getGameControl().setBoard(size);
+
+        ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+
+        Intent intent = new Intent(ChooseBoard.this, ChoosePlayer.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+
+        finish();
+
+    }
 
 }

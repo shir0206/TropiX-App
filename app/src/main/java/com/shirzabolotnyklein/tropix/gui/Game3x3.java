@@ -36,7 +36,24 @@ public class Game3x3 extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lay_game_3x3);
+
+        // Switch case which board layout should be opened
+        switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
+            case 3:
+                setContentView(R.layout.lay_game_3x3);
+                break;
+            case 4:
+                setContentView(R.layout.lay_game_4x4);
+                break;
+            case 5:
+                setContentView(R.layout.lay_game_5x5);
+                break;
+            case 6:
+                setContentView(R.layout.lay_game_6x6);
+                break;
+
+        }
+
 
         initPlayers();
         initBoard();
