@@ -2,11 +2,6 @@ package com.shirzabolotnyklein.tropix.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.gui.ApplicationContextProvider;
@@ -19,9 +14,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class Constants implements Serializable {
 
@@ -56,19 +49,19 @@ public class Constants implements Serializable {
 
     private final int boardMoveCoins = 1;
 
-    private final int boardVicCoins3 = 3000;
-    private final int boardVicCoins4 = 40;
-    private final int boardVicCoins5 = 50;
-    private final int boardVicCoins6 = 60;
+    private final int boardWinCoins3 = 25;
+    private final int boardWinCoins4 = 50;
+    private final int boardWinCoins5 = 100;
+    private final int boardWinCoins6 = 200;
 
     HashMap<Integer, Integer> allWinCoins = new HashMap<Integer, Integer>();
 
     private HashMap<Integer, Integer> allWinCoins() {
         if (allWinCoins.isEmpty()) {
-            allWinCoins.put(3, boardVicCoins3);
-            allWinCoins.put(4, boardVicCoins4);
-            allWinCoins.put(5, boardVicCoins5);
-            allWinCoins.put(6, boardVicCoins6);
+            allWinCoins.put(3, boardWinCoins3);
+            allWinCoins.put(4, boardWinCoins4);
+            allWinCoins.put(5, boardWinCoins5);
+            allWinCoins.put(6, boardWinCoins6);
         }
         return allWinCoins;
     }
@@ -98,10 +91,10 @@ public class Constants implements Serializable {
     //=========================================== Board  ===========================================//
     //=============================================================================================//
 
-    private final Board board3x3 = new Board(3, 9, boardVicCoins3);
-    private final Board board4x4 = new Board(4, 16, boardVicCoins4);
-    private final Board board5x5 = new Board(5, 25, boardVicCoins5);
-    private final Board board6x6 = new Board(6, 36, boardVicCoins6);
+    private final Board board3x3 = new Board(3, 9, boardWinCoins3);
+    private final Board board4x4 = new Board(4, 16, boardWinCoins4);
+    private final Board board5x5 = new Board(5, 25, boardWinCoins5);
+    private final Board board6x6 = new Board(6, 36, boardWinCoins6);
 
     HashMap<Integer, Board> allBoards;
 

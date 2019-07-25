@@ -34,7 +34,9 @@
     <string name="tv_totalCoinsNew">יתרת המטבעות החדשה שלך תהיה</string>
     <string name="tv_totalCoinsNewSum">ZZ</string>
 
-
+    <string name="tv_win"> (: ישששש, ניצחת </string>
+    <string name="btn_win_store">רכישת טרופיXים</string>
+    <string name="btn_win_main"> למשחק חוזר </string>
 
 
 </resources>

@@ -22,7 +22,11 @@
 
         <activity
             android:name=".gui.StorePopUpPurchase"
-            android:theme="@style/AppTheme.StorePopUp" />
+            android:theme="@style/AppTheme.PopUp" />
+
+        <activity
+            android:name=".gui.GamePopUp"
+            android:theme="@style/AppTheme.PopUp" />
 
 
         <activity
@@ -37,7 +41,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".gui.Game3x3"
+            android:name=".gui.GameActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 

@@ -3,6 +3,7 @@ package com.shirzabolotnyklein.tropix.utils;
 import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Game;
 import com.shirzabolotnyklein.tropix.model.Player;
+import com.shirzabolotnyklein.tropix.model.Winner;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class GameLogic {
     private GameLogic() {
     }
 
-    public static GameLogic getGameControl() {
+    public static GameLogic getGameLogic() {
         if (instance == null) {
             instance = new GameLogic();
         }
@@ -151,6 +152,7 @@ public class GameLogic {
                     || (sumMyCol == sumMyPlayerWin)
                     || (sumMyDiagonalLeft == sumMyPlayerWin)
                     || (sumMyDiagonalRight == sumMyPlayerWin)) {
+                game.setWinner(Winner.MY_PLAYER);
                 return my.getId();
             }
 
@@ -159,6 +161,7 @@ public class GameLogic {
                     || (sumRivalCol == sumRivalPlayerWin)
                     || (sumRivalDiagonalLeft == sumRivalPlayerWin)
                     || (sumRivalDiagonalRight == sumRivalPlayerWin)) {
+                game.setWinner(Winner.RIVAL_PLAYER);
                 return rival.getId();
             }
 
@@ -170,6 +173,7 @@ public class GameLogic {
         }
 
         // If there is no winner, return -1
+        game.setWinner(Winner.NONE_PLAYER);
         return -1;
     }
 
@@ -185,7 +189,6 @@ public class GameLogic {
         if (whoseTurn == -1) {
             whoseTurn = my.getId();
             movesCount = 1;
-            //increaseCoins();
             maxMoves = board.getMaxMoves();
         }
 
@@ -198,30 +201,12 @@ public class GameLogic {
         // If Rival Player was last, set the next turn to My Player, increase board coins for My Player, increase the moves count.
         else if (whoseTurn == rival.getId()) {
             whoseTurn = my.getId();
-            //increaseCoins();
             movesCount++;
         }
 
         return whoseTurn;
     }
 
-    private void increaseCoins() {
-
-        //increaseBoardCoins();
-        //increaseTotalCoins();
-    }
-
-    private void increaseBoardCoins() {
-        int moveCoins = Constants.getInstance().getBoardMoveCoins();
-        gameCoins += moveCoins;
-    }
-
-    private void increaseTotalCoins() {
-        //int moveCoins = Constants.getInstance().getBoardMoveCoins();
-       // int moveTotalCoins = Constants.getInstance().getTotalCoins() + moveCoins;
-
-//        Constants.getInstance().setTotalCoins(moveTotalCoins);
-    }
 
     public void increaseTotalCoinsWin() {
 
@@ -240,8 +225,10 @@ public class GameLogic {
      * @return false if there is not next move
      */
     public boolean hasNextTurn() {
-        if (movesCount >= maxMoves)
+        if (movesCount >= maxMoves) {
+            game.setWinner(Winner.DRAW);
             return false;
+        }
         return true;
     }
 
@@ -284,9 +271,6 @@ public class GameLogic {
      * Set a new game according to the user chosen players & board
      */
     public void setGame() {
-
-        // Init game coins to 0.
-        //setGameCoins(0);
 
         // Init new Game with the user chosen players & board
         this.game = new Game(my, rival, board, gameCoins);
@@ -334,9 +318,5 @@ public class GameLogic {
         return rival.getId();
     }
 
-
-    public int getGameCoins() {
-        return gameCoins;
-    }
 
 }

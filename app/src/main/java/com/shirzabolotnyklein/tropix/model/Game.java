@@ -18,6 +18,7 @@ public class Game {
     private Player my;
     private Player rival;
     private Board board;
+    private Winner winner;
     private int gameCoins;
 
     //------------------------------------- Constructors -------------------------------------
@@ -62,5 +63,14 @@ public class Game {
 
     public void setGameCoins(int gameCoins) {
         this.gameCoins = gameCoins;
+    }
+
+
+    public Winner getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Winner winner) {
+        this.winner = winner;
     }
 }

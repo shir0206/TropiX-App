@@ -52,12 +52,12 @@ public class ChoosePlayer extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Set all user choices game details (board, user player and user rival)
-                GameLogic.getGameControl().setGame();
+                GameLogic.getGameLogic().setGame();
 
                 // If Players are valid
                 if (isValid()) {
 
-                    Intent intent = new Intent(ChoosePlayer.this, Game3x3.class);
+                    Intent intent = new Intent(ChoosePlayer.this, GameActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
 
@@ -67,7 +67,7 @@ public class ChoosePlayer extends AppCompatActivity {
                     switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
                         case 3:
 
-                            Intent intent = new Intent(ChoosePlayer.this, Game3x3.class);
+                            Intent intent = new Intent(ChoosePlayer.this, GameActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                             startActivity(intent);
 
@@ -93,8 +93,8 @@ public class ChoosePlayer extends AppCompatActivity {
     private boolean isValid() {
 
         // Get the chosen players ID
-        int my = GameLogic.getGameControl().getMy();
-        int rival = GameLogic.getGameControl().getRival();
+        int my = GameLogic.getGameLogic().getMy();
+        int rival = GameLogic.getGameLogic().getRival();
 
         // If no Players were chosen, return false
         if (my <= 0 || rival <= 0) {
@@ -169,7 +169,7 @@ public class ChoosePlayer extends AppCompatActivity {
      */
     protected void updateMyPlayersPic(){
 
-        int myId = GameLogic.getGameControl().getMy();
+        int myId = GameLogic.getGameLogic().getMy();
 
         img_myChoice.setImageResource(Constants.getInstance().getPlayer(myId).getPicture());
     }
@@ -179,7 +179,7 @@ public class ChoosePlayer extends AppCompatActivity {
      */
     protected void updateRivalPlayersPic(){
 
-        int rivalId =  GameLogic.getGameControl().getRival();
+        int rivalId =  GameLogic.getGameLogic().getRival();
 
         img_rivalChoice.setImageResource(Constants.getInstance().getPlayer(rivalId).getPicture());
     }

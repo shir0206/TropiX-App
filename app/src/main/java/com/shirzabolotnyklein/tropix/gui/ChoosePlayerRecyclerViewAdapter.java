@@ -97,7 +97,7 @@ private String playerType;
                     if(playerType.equals("MY")) {
 
                         // Set the user choice of "My Player" of the game
-                        GameLogic.getGameControl().setMy(holder.playerId);
+                        GameLogic.getGameLogic().setMy(holder.playerId);
 
                         // Update chosen picture
                         if (context instanceof ChoosePlayer) {
@@ -109,7 +109,7 @@ private String playerType;
                     else if(playerType.equals("RIVAL")) {
 
                         // Set the user choice of "My Player" of the game
-                        GameLogic.getGameControl().setRival(holder.playerId);
+                        GameLogic.getGameLogic().setRival(holder.playerId);
 
                         // Update chosen picture
                         if (context instanceof ChoosePlayer) {

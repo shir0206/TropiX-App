@@ -1,13 +1,10 @@
 package com.shirzabolotnyklein.tropix.gui;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,12 +15,10 @@ import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.utils.Constants;
-import com.shirzabolotnyklein.tropix.utils.GameLogic;
 import com.shirzabolotnyklein.tropix.utils.StoreLogic;
 
 public class StorePopUpPurchase extends AppCompatActivity {
 
-    private static final String TAG = "StorePopUpPurchase";
     private Context context;
 
     private Button btn_approve;
@@ -98,7 +93,7 @@ public class StorePopUpPurchase extends AppCompatActivity {
 
     private void initUI() {
 
-        img_purchase = findViewById(R.id.img_purchase);
+        img_purchase = findViewById(R.id.img_winner);
         tv_totalCoinsNewSum = findViewById(R.id.tv_totalCoinsNewSum);
 
         // Init image of Player for purchase
@@ -109,8 +104,8 @@ public class StorePopUpPurchase extends AppCompatActivity {
         int newTotal = StoreLogic.getStoreLogic().calcTotalCoinsWhenPurchase();
         tv_totalCoinsNewSum.setText(String.valueOf(newTotal));
 
-        btn_approve = findViewById(R.id.btn_approve);
-        btn_cancel = findViewById(R.id.btn_cancel);
+        btn_approve = findViewById(R.id.btn_popup_store);
+        btn_cancel = findViewById(R.id.btn_popup_choose_board);
 
     }
 

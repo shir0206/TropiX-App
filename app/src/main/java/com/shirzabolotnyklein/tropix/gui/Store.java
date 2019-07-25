@@ -19,8 +19,6 @@ public class Store extends AppCompatActivity {
     private TextView tv_coinsSum;
     private Constants instance = Constants.getInstance();
 
-    private Context context;
-
     private ArrayList<Integer> allPlayers = new ArrayList<>(); // ArrayList of all players image addresses
     private ArrayList<Integer> allPrices = new ArrayList<>();  // ArrayList of all players prices
     private ArrayList<String> allStatus = new ArrayList<>(); // ArrayList of all players status

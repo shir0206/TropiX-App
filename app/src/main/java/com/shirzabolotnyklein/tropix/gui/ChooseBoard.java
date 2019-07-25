@@ -69,7 +69,7 @@ public class ChooseBoard extends AppCompatActivity {
      * Set the size of the chosen board and init the next screen
      */
     private void setChosenBoardAndInitScreen(int size) {
-        GameLogic.getGameControl().setBoard(size);
+        GameLogic.getGameLogic().setBoard(size);
 
         ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
@@ -78,6 +78,16 @@ public class ChooseBoard extends AppCompatActivity {
         startActivity(intent);
 
         finish();
+
+    }
+
+    /**
+     * Reset game on resume main activity
+     */
+    @Override
+    public void onResume(){
+        super.onResume();
+        GameLogic.getGameLogic().resetGame();
 
     }
 

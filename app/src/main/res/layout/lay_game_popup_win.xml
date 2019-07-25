@@ -6,7 +6,7 @@
     android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
     android:elevation="5dp"
-    android:background="@drawable/drw_fill_white_border_yellow">
+    android:background="@drawable/drw_fill_white_border_blue">
 
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/tv_purchase"
+        android:text="@string/tv_win"
         android:textAlignment="center"
         android:textColor="@color/colorBlack" />
 
@@ -67,21 +67,22 @@
             android:layout_marginVertical="5dp"
             android:layout_marginStart="25dp"
             android:layout_marginLeft="25dp"
-            android:background="@drawable/drw_fill_white_border_yellow"
-            android:text="@string/tv_cancel" />
-
+            android:background="@drawable/drw_fill_white_border_blue"
+            android:text="@string/btn_win_main" />
 
         <Button
             android:id="@+id/btn_popup_store"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/drw_fill_yellow_border_yellow"
-            android:text="@string/btn_approve" />
+            android:background="@drawable/drw_fill_blue_border_blue"
+            android:text="@string/btn_win_store" />
+
+
     </LinearLayout>
 
 
