@@ -208,15 +208,17 @@ public class GameLogic {
     }
 
 
-    public void increaseTotalCoinsWin() {
+    public void increaseTotalCoinsWin(int winnerId) {
 
-        int size = board.getSize();
+        if (winnerId == my.getId()) {
+            int size = board.getSize();
 
-        int boardVicCoins = Constants.getInstance().getBoardVicCoins(size);
+            int boardVicCoins = Constants.getInstance().getBoardVicCoins(size);
 
-        int winTotalCoins = Constants.getInstance().getTotalCoins() + boardVicCoins;
+            int winTotalCoins = Constants.getInstance().getTotalCoins() + boardVicCoins;
 
-        Constants.getInstance().setTotalCoins(winTotalCoins);
+            Constants.getInstance().setTotalCoins(winTotalCoins);
+        }
     }
 
     /**

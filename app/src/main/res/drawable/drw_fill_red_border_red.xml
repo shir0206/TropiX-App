@@ -4,12 +4,11 @@
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <gradient android:startColor="@color/colorBlueDark"
-                android:endColor="@color/colorBlueDark"
+            <gradient android:startColor="@color/colorRedMedium"
+                android:endColor="@color/colorRedMedium"
                 android:angle="270" />
             <corners android:radius="3dp" />
-            <stroke android:width="12px" android:color="@color/colorBlueDark" />
+            <stroke android:width="12px" android:color="@color/colorRedMedium" />
         </shape>
     </item>
-
 </selector>

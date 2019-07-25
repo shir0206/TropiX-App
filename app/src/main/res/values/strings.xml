@@ -28,15 +28,23 @@
     <string name="tv_totalCoinsSum">YY</string>
 
     <string name="btn_approve">אישור</string>
-    <string name="tv_cancel">ביטול</string>
+    <string name="btn_cancel">ביטול</string>
 
     <string name="tv_purchase">בחרת לרכוש את</string>
     <string name="tv_totalCoinsNew">יתרת המטבעות החדשה שלך תהיה</string>
     <string name="tv_totalCoinsNewSum">ZZ</string>
 
     <string name="tv_win"> (: ישששש, ניצחת </string>
-    <string name="btn_win_store">רכישת טרופיXים</string>
-    <string name="btn_win_main"> למשחק חוזר </string>
+    <string name="tv_totalCoinsWin">יתרת המטבעות החדשה שלך היא</string>
+
+    <string name="tv_lose"> אולי בפעם הבאה </string>
+    <string name="tv_totalCoinsLose">יתרת המטבעות החדשה שלך נשארה</string>
+
+    <string name="tv_draw"> נגמר המשחקיX </string>
+    <string name="tv_totalCoinsDraw">יתרת המטבעות החדשה שלך נשארה</string>
+
+    <string name="btn_popup_store">רכישת טרופיXים</string>
+    <string name="btn_popup_main"> למשחק חוזר </string>
 
 
 </resources>

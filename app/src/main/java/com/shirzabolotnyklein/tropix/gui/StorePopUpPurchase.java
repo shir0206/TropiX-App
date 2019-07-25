@@ -93,7 +93,7 @@ public class StorePopUpPurchase extends AppCompatActivity {
 
     private void initUI() {
 
-        img_purchase = findViewById(R.id.img_winner);
+        img_purchase = findViewById(R.id.img_purchase);
         tv_totalCoinsNewSum = findViewById(R.id.tv_totalCoinsNewSum);
 
         // Init image of Player for purchase

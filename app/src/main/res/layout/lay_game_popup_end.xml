@@ -1,52 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
-    android:elevation="5dp"
-    android:background="@drawable/drw_fill_white_border_blue">
+    android:layout_marginVertical="10dp"
+    android:background="@drawable/drw_fill_blue_dark_border_blue"
+    android:elevation="5dp">
 
-
-    <TextView
-        android:id="@+id/tv_winMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:text="@string/tv_win"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
 
     <ImageView
-        android:id="@+id/img_my"
+        android:id="@+id/img_end"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:srcCompat="@drawable/t006_beach_ball" />
+        android:layout_height="230dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/t000_win" />
 
     <TextView
         android:id="@+id/tv_coinsMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="260dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_totalCoinsNew"
         android:textAlignment="center"
         android:textColor="@color/colorBlack" />
 
-
     <TextView
         android:id="@+id/tv_gameTotalCoinsNewSum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="280dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_totalCoinsNewSum"
@@ -58,7 +44,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="320dp">
 
         <Button
             android:id="@+id/btn_popup_choose_board"
@@ -67,7 +53,7 @@
             android:layout_marginVertical="5dp"
             android:layout_marginStart="25dp"
             android:layout_marginLeft="25dp"
-            android:background="@drawable/drw_fill_white_border_blue"
+            android:background="@drawable/drw_fill_blue_dark_border_blue"
             android:text="@string/btn_popup_main" />
 
         <Button

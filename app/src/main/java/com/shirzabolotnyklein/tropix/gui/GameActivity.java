@@ -183,6 +183,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         // Else check if there is a next turn
         else {
+            //if chaeckHasNext == false -> draw animation else ... do the check player
             checkHasNext();
         }
     }
@@ -194,7 +195,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void winnerAnimation(int win) {
 
-        GameLogic.getGameLogic().increaseTotalCoinsWin();
+        GameLogic.getGameLogic().increaseTotalCoinsWin(win);
 
         String winMsg = win + " ניצח!!! :)";
         Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
