@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
         <activity
             android:name=".gui.StorePopUpPurchase"
             android:theme="@style/AppTheme.PopUp" />
@@ -28,17 +27,17 @@
             android:name=".gui.GamePopUp"
             android:theme="@style/AppTheme.PopUp" />
 
-
         <activity
             android:name=".gui.ChooseBoard"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteTheme" />
 
         <activity
             android:name=".gui.ChoosePlayer"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/RedTheme" />
 
         <activity
             android:name=".gui.GameActivity"
@@ -49,11 +48,12 @@
         <activity
             android:name=".gui.Store"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/BlueTheme" />
 
         <activity
-            android:name=".gui.MainActivity">
+            android:name=".gui.MainActivity"
+            android:theme="@style/PinkTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

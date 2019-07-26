@@ -2,10 +2,46 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorWhiteBright</item>
+        <item name="colorPrimaryDark">@color/colorWhiteMedium</item>
+        <item name="colorAccent">@color/colorWhiteDark</item>
+    </style>
+
+    <style name="PinkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPinkBright</item>
+        <item name="colorPrimaryDark">@color/colorPinkMedium</item>
+        <item name="colorAccent">@color/colorPinkDark</item>
+    </style>
+
+    <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorRedBright</item>
+        <item name="colorPrimaryDark">@color/colorRedMedium</item>
+        <item name="colorAccent">@color/colorRedDark</item>
+    </style>
+
+    <style name="YellowTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorYellowBright</item>
+        <item name="colorPrimaryDark">@color/colorYellowMedium</item>
+        <item name="colorAccent">@color/colorYellowDark</item>
+    </style>
+
+    <style name="GreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorGreenBright</item>
+        <item name="colorPrimaryDark">@color/colorGreenMedium</item>
+        <item name="colorAccent">@color/colorGreenDark</item>
+    </style>
+
+    <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorBlueBright</item>
+        <item name="colorPrimaryDark">@color/colorBlueMedium</item>
+        <item name="colorAccent">@color/colorBlueDark</item>
     </style>
 
     <style name="AppTheme.PopUp" >

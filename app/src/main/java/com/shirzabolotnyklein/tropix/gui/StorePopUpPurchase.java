@@ -104,8 +104,8 @@ public class StorePopUpPurchase extends AppCompatActivity {
         int newTotal = StoreLogic.getStoreLogic().calcTotalCoinsWhenPurchase();
         tv_totalCoinsNewSum.setText(String.valueOf(newTotal));
 
-        btn_approve = findViewById(R.id.btn_popup_store);
-        btn_cancel = findViewById(R.id.btn_popup_choose_board);
+        btn_approve = findViewById(R.id.btn_approve);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
     }
 

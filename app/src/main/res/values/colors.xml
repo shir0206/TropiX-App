@@ -27,9 +27,9 @@
     <color name="colorGreyDark">#D9D9D9</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="colorBlueDark">#57D0E6</color>
-    <color name="colorBlueMedium">#C3F3FF</color>
-    <color name="colorBlueBright">#E2F9FF</color>
+    <color name="colorBlueDark">#ADD8E6</color>
+    <color name="colorBlueMedium">#AEDBEE</color>
+    <color name="colorBlueBright">#D6E9F8</color>
 
     E2F9FF
     <color name="transparent">#80000000</color>

@@ -3,6 +3,7 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -44,18 +45,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameActivity = this;
         context = ApplicationContextProvider.getContext();
 
+        Resources.Theme theme = super.getTheme();
+
         // Switch case which board layout should be opened
         switch (GameLogic.getGameLogic().getGame().getBoard().getSize()) {
             case 3:
+                theme.applyStyle(R.style.YellowTheme, true);
                 setContentView(R.layout.lay_game_3x3);
                 break;
             case 4:
+                theme.applyStyle(R.style.PinkTheme, true);
                 setContentView(R.layout.lay_game_4x4);
                 break;
             case 5:
+                theme.applyStyle(R.style.RedTheme, true);
                 setContentView(R.layout.lay_game_5x5);
                 break;
             case 6:
+                theme.applyStyle(R.style.GreenTheme, true);
                 setContentView(R.layout.lay_game_6x6);
                 break;
 
@@ -172,18 +179,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // Check if there is a winner. If there is a winner return the winner ID, else return -1.
         int win = GameLogic.getGameLogic().checkWinner();
 
-        // If there is a winner, display a winner message & refresh game
+        // Check if there is a next turn. If there is next turn return true, else return false.
+        boolean hasNext = GameLogic.getGameLogic().hasNextTurn();
+
+
+        // If there is a winner, display a winner popup & refresh game
         if (win != -1) {
-            winnerAnimation(win);
+            endGamePopup(win);
+        }
+
+        // Else check if there is a next turn
+        else if (!hasNext) {
+            endGamePopup(-1);
+        }
+    }
 
 
-            //refreshGame();
+    private void checkPlayerWin0(ImageButton cellBtn) {
 
+        // Check if there is a winner. If there is a winner return the winner ID, else return -1.
+        int win = GameLogic.getGameLogic().checkWinner();
+
+        // If there is a winner, display a winner popup
+        if (win != -1) {
+            endGamePopup(win);
         }
 
         // Else check if there is a next turn
         else {
-            //if chaeckHasNext == false -> draw animation else ... do the check player
             checkHasNext();
         }
     }
@@ -193,12 +216,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param win
      */
-    private void winnerAnimation(int win) {
+    private void endGamePopup(int win) {
 
-        GameLogic.getGameLogic().increaseTotalCoinsWin(win);
+        if (win != -1) {
+            GameLogic.getGameLogic().increaseTotalCoinsWin(win);
+            String winMsg = win + " ניצח!!! :)";
+            Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
 
-        String winMsg = win + " ניצח!!! :)";
-        Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
+        }
+
+        else {
+            String drawMsg = "נגמר המשחק";
+            Toast.makeText(GameActivity.this, drawMsg, Toast.LENGTH_LONG).show();
+        }
+
 
         disableBoard();
 

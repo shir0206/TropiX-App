@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
-    android:elevation="5dp"
-    android:background="@drawable/drw_fill_white_border_yellow">
+    android:layout_marginVertical="10dp"
+    android:background="@drawable/drw_fill_white_border_blue"
+    android:elevation="5dp">
 
 
     <TextView
@@ -67,7 +67,7 @@
             android:layout_marginVertical="5dp"
             android:layout_marginStart="25dp"
             android:layout_marginLeft="25dp"
-            android:background="@drawable/drw_fill_white_border_yellow"
+            android:background="@drawable/drw_fill_white_border_blue"
             android:text="@string/btn_cancel" />
 
 
@@ -80,7 +80,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/drw_fill_yellow_border_yellow"
+            android:background="@drawable/drw_fill_blue_border_blue"
             android:text="@string/btn_approve" />
     </LinearLayout>
 

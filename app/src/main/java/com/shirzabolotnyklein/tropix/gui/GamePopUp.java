@@ -154,12 +154,12 @@ public class GamePopUp extends AppCompatActivity {
                 img_end.setImageResource(R.drawable.t000_draw);
 
 
-                tv_winMessage.setText(getString(R.string.tv_draw));
-                tv_coinsMessage.setText(getString(R.string.tv_totalCoinsDraw));
-                //tv_totalCoinsNewSum.setText("");
+                tv_coinsMessage.setText(getString(R.string.tv_lose));
 
+                // Don't present total sum
+                tv_gameTotalCoinsNewSum.setText("");
+                tv_gameTotalCoinsNewSum.setTextSize(0);
                 break;
-
         }
     }
 
