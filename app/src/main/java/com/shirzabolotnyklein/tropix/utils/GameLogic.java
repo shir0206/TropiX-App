@@ -1,11 +1,15 @@
 package com.shirzabolotnyklein.tropix.utils;
 
+import android.graphics.Point;
+
 import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Game;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.model.Winner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class GameLogic {
 
@@ -73,6 +77,10 @@ public class GameLogic {
      * Rival Player ID  If the rival put "Rival Player" in that cell
      */
     private ArrayList<ArrayList<Integer>> boardMatrix;
+
+    private boolean againstAI = true;
+
+    private ArrayList<Point> availableMoves = new ArrayList<Point>();
 
     //-------------------------------- Game Logic Methods -------------------------------------
 
@@ -152,6 +160,7 @@ public class GameLogic {
                     || (sumMyCol == sumMyPlayerWin)
                     || (sumMyDiagonalLeft == sumMyPlayerWin)
                     || (sumMyDiagonalRight == sumMyPlayerWin)) {
+                game.setGameOver(true);
                 game.setWinner(Winner.MY_PLAYER);
                 return my.getId();
             }
@@ -161,6 +170,7 @@ public class GameLogic {
                     || (sumRivalCol == sumRivalPlayerWin)
                     || (sumRivalDiagonalLeft == sumRivalPlayerWin)
                     || (sumRivalDiagonalRight == sumRivalPlayerWin)) {
+                game.setGameOver(true);
                 game.setWinner(Winner.RIVAL_PLAYER);
                 return rival.getId();
             }
@@ -234,6 +244,76 @@ public class GameLogic {
         return true;
     }
 
+
+    /**
+     * Get a deep copy of the Tic Tac Toe board.
+     *
+     * @return an identical copy of the board
+     */
+    public void getDeepCopy() {
+
+        // Init new matrix board
+        ArrayList<ArrayList<Integer>> boardMatrixCopy = new ArrayList<ArrayList<Integer>>(board.getSize());
+
+        // Init the matrix board with -1
+        for (int i = 0; i < board.getSize(); i++) {
+            boardMatrixCopy.add(new ArrayList<Integer>(board.getSize()));
+
+            for (int j = 0; j < board.getSize(); j++) {
+                boardMatrixCopy.get(i).add(i, boardMatrix.get(j).get(i));
+            }
+        }
+    }
+
+//        for (int i = 0; i < board.board.length; i++) {
+//            board.board[i] = this.board[i].clone();
+//        }
+//
+//
+//        for (int i = 0; i < size; i++) {
+//            for (int j = 0; j < size; j++) {
+//
+//                boardCopy.playersTurn       = this.playersTurn;
+//                boardCopy.winner            = this.winner;
+//                boardCopy.movesAvailable    = new HashSet<>();
+//                boardCopy.movesAvailable.addAll(this.movesAvailable);
+//                boardCopy.moveCount         = this.moveCount;
+//                boardCopy.gameOver          = this.gameOver;
+//        return boardCopy;
+//    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //-------------------------------- Alpha Beta Algorithm -------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Point random() {
+
+        Random randomGenerator = new Random();
+
+        int randomMove = randomGenerator.nextInt(availableMoves.size());
+
+        return availableMoves.get(randomMove);
+    }
+
+//    /**
+//     * Execute the algorithm.
+//     * @param board     the Tic Tac Toe board to play on
+//     */
+//    static void run (Board board) {
+//        int[] moves = new int[board.getAvailableMoves().size()];
+//        int index = 0;
+//
+//        for (Integer item : board.getAvailableMoves()) {
+//            moves[index++] = item;
+//        }
+//
+//        int randomMove = moves[new java.util.Random().nextInt(moves.length)];
+//        board.move(randomMove);
+//    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
     //-------------------------------- Getters & Setters -------------------------------------
 
     /**
@@ -275,7 +355,7 @@ public class GameLogic {
     public void setGame() {
 
         // Init new Game with the user chosen players & board
-        this.game = new Game(my, rival, board, gameCoins);
+        this.game = new Game(my, rival, board, false, gameCoins);
 
         // Init new matrix board
         boardMatrix = new ArrayList<ArrayList<Integer>>(board.getSize());
@@ -286,6 +366,8 @@ public class GameLogic {
 
             for (int j = 0; j < board.getSize(); j++) {
                 boardMatrix.get(i).add(j, 0);
+
+                availableMoves.add(new Point(i, j));
             }
         }
     }
@@ -296,6 +378,7 @@ public class GameLogic {
     public void updateMoveInTheBoardMatrix(int i, int j, int playerId) {
 
         boardMatrix.get(i).set(j, playerId);
+        availableMoves.remove(new Point(i, j));
     }
 
     public Game getGame() {
@@ -320,5 +403,11 @@ public class GameLogic {
         return rival.getId();
     }
 
+    public boolean isGetAgainstAI() {
+        return againstAI;
+    }
 
+    public void setGetAgainstAI(boolean getAgainstAI) {
+        this.againstAI = getAgainstAI;
+    }
 }

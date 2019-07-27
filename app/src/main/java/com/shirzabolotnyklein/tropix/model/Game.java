@@ -19,14 +19,16 @@ public class Game {
     private Player rival;
     private Board board;
     private Winner winner;
+    private boolean gameOver;
     private int gameCoins;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Game(Player my, Player rival, Board board, int gameCoins) {
+    public Game(Player my, Player rival, Board board, boolean gameOver, int gameCoins) {
         this.my = my;
         this.rival = rival;
         this.board = board;
+        this.gameOver = gameOver;
         this.gameCoins = gameCoins;
     }
 
@@ -65,7 +67,13 @@ public class Game {
         this.gameCoins = gameCoins;
     }
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
     public Winner getWinner() {
         return winner;
     }

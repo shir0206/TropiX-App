@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private Context context;
 
+    private boolean againstAI;
     private int size;
 
     protected static Activity gameActivity;
@@ -44,6 +46,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         gameActivity = this;
         context = ApplicationContextProvider.getContext();
+        againstAI = GameLogic.getGameLogic().isGetAgainstAI();
 
         Resources.Theme theme = super.getTheme();
 
@@ -68,7 +71,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-
         initPlayers();
         initBoard();
         initCoins();
@@ -84,16 +86,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         tv_gameCoinsSum.setText(Integer.toString(gameCoins));
         tv_totalCoinsSum.setText(Integer.toString(totalCoins));
-    }
-
-
-    private void updateCoins() {
-
-        //int gameCoins = GameLogic.getGameControl().getGameCoins();
-        //int totalCoins = Constants.getInstance().getTotalCoins();
-
-        //.setText(Integer.toString(gameCoins));
-        //tv_totalCoinsSum.setText(Integer.toString(totalCoins));
     }
 
     /**
@@ -147,14 +139,51 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         ImageButton cellBtn = ((ImageButton) view);
 
+
         // Put the image of the Player in the clicked cell of the game board
-        setPlayerInCellBtn(cellBtn);
+        setPlayerInCellBtnVsRival(cellBtn);
 
         // Check which player is a winner
-        checkPlayerWin(cellBtn);
+        boolean endGame = checkEndGame(cellBtn);
 
-        updateCoins();
+        if (againstAI) {
+
+            // If the game is not over yet, create AI move
+            if (!endGame) {
+
+                cellBtn = createAIRandomMove();
+
+                // Put the image of the Player in the clicked cell of the game board
+                setPlayerInCellBtnVsRival(cellBtn);
+
+                // Check which player is a winner
+                checkEndGame(cellBtn);
+            }
+        }
     }
+
+
+    public ImageButton createAIRandomMove() {
+
+        // Get random available cell in the board
+        Point cell = GameLogic.getGameLogic().random();
+
+        int i = cell.x;
+        int j = cell.y;
+
+        // Create String for the ID of each Image Button in the board (For example: btn_board_3x3_cell_0x0)
+        String cellStringID = "btn_board_" + size + "x" + size + "_cell_" + i + "x" + j;
+
+        // Get the address of the ID of the Image Button
+        int cellID = getResources().getIdentifier(cellStringID, "id", getPackageName());
+
+        // Init new Image Button
+        ImageButton cellBtn = findViewById(cellID);
+
+        return cellBtn;
+
+    }
+
 
     /**
      * Check if there is a next turn, if not refresh game
@@ -174,7 +203,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param cellBtn The clicked ImageButton cell in the board game
      */
-    private void checkPlayerWin(ImageButton cellBtn) {
+    private boolean checkEndGame(ImageButton cellBtn) {
 
         // Check if there is a winner. If there is a winner return the winner ID, else return -1.
         int win = GameLogic.getGameLogic().checkWinner();
@@ -186,29 +215,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // If there is a winner, display a winner popup & refresh game
         if (win != -1) {
             endGamePopup(win);
+            return true;
+
         }
 
         // Else check if there is a next turn
         else if (!hasNext) {
             endGamePopup(-1);
-        }
-    }
-
-
-    private void checkPlayerWin0(ImageButton cellBtn) {
-
-        // Check if there is a winner. If there is a winner return the winner ID, else return -1.
-        int win = GameLogic.getGameLogic().checkWinner();
-
-        // If there is a winner, display a winner popup
-        if (win != -1) {
-            endGamePopup(win);
-        }
-
-        // Else check if there is a next turn
-        else {
-            checkHasNext();
-        }
+            return true;
+        } else return false;
     }
 
     /**
@@ -223,9 +238,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             String winMsg = win + " ניצח!!! :)";
             Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
 
-        }
-
-        else {
+        } else {
             String drawMsg = "נגמר המשחק";
             Toast.makeText(GameActivity.this, drawMsg, Toast.LENGTH_LONG).show();
         }
@@ -279,7 +292,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param cellBtn The clicked ImageButton cell in the board game
      */
-    private void setPlayerInCellBtn(ImageButton cellBtn) {
+    private void setPlayerInCellBtnVsRival(ImageButton cellBtn) {
 
         // If cell in the board is clicked, get who is the next (my player/ rival player)
         nextPlayerTurnId = GameLogic.getGameLogic().getWhoseTurn();
