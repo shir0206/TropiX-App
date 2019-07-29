@@ -34,20 +34,7 @@ public class StorePopUpPurchase extends AppCompatActivity {
         context = ApplicationContextProvider.getContext();
 
         initUI();
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int) (width * .8), (int) (height * .65));
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.CENTER;
-        params.x = 0;
-        params.y = -20;
-        getWindow().setAttributes(params);
+        initWindow();
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +45,6 @@ public class StorePopUpPurchase extends AppCompatActivity {
                 StoreLogic.getStoreLogic().setPurchasePlayer(purchasePlayer);
                 StoreLogic.getStoreLogic().setWantPurchase(false);
 
-                String purchaseSuccessfully = "חבל שלא קנית אותי :(";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 finish();
@@ -80,8 +65,6 @@ public class StorePopUpPurchase extends AppCompatActivity {
                 ((Store) context).initImageBitmapsForPurchasedPlayer(purchasePlayer);
                 ((Store) context).initCoins();
 
-                String purchaseSuccessfully = "קנית אותי, יש :)";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 finish();
@@ -91,6 +74,9 @@ public class StorePopUpPurchase extends AppCompatActivity {
 
     }
 
+    /**
+     * Init UI
+     */
     private void initUI() {
 
         img_purchase = findViewById(R.id.img_purchase);
@@ -109,5 +95,23 @@ public class StorePopUpPurchase extends AppCompatActivity {
 
     }
 
+    /**
+     * Init pop-up window properties
+     */
+    private void initWindow() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        getWindow().setLayout((int) (width * .8), (int) (height * .65));
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x = 0;
+        params.y = -20;
+        getWindow().setAttributes(params);
+    }
 
 }

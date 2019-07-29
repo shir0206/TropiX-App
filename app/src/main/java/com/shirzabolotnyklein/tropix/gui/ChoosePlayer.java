@@ -60,9 +60,8 @@ public class ChoosePlayer extends AppCompatActivity {
                 // Set all user choices game details (board, user player and user rival)
                 GameLogic.getGameLogic().setGame();
 
-                // If Players are valid
+                // If Players are valid continue
                 if (isValid()) {
-
 
                     Intent intent = new Intent(context, ChoosePlayerPopUpAgainstRival.class);
 
@@ -71,7 +70,6 @@ public class ChoosePlayer extends AppCompatActivity {
                     startActivity(intent);
 
                     ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-                    //finish();
                 }
             }
         });

@@ -1,8 +1,6 @@
 package com.shirzabolotnyklein.tropix.utils;
 
 import android.graphics.Point;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Game;
@@ -10,9 +8,6 @@ import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.model.Winner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 public class GameLogic {
@@ -75,6 +70,11 @@ public class GameLogic {
     private int maxMoves;
 
     /**
+     * The user choice of first Player
+     */
+    private int first;
+
+    /**
      * The matrix board represents in each cell:
      * -1               If the cell is empty
      * My Player ID     If the user put "My Player" in that cell
@@ -82,8 +82,14 @@ public class GameLogic {
      */
     private ArrayList<ArrayList<Integer>> boardMatrix;
 
+    /**
+     * Is the user plays against the computer
+     */
     private boolean againstComputer;
 
+    /**
+     * The current available moves on the board
+     */
     private ArrayList<Point> availableMoves = new ArrayList<Point>();
 
     //-------------------------------- Game Logic Methods -------------------------------------
@@ -201,7 +207,7 @@ public class GameLogic {
 
         // If this is the first turn, start with My Player and Initiate the moves count to 0, increase board coins for My Player,.
         if (whoseTurn == -1) {
-            whoseTurn = my.getId();
+            whoseTurn = first;
             movesCount = 1;
             maxMoves = board.getMaxMoves();
         }
@@ -221,7 +227,10 @@ public class GameLogic {
         return whoseTurn;
     }
 
-
+    /**
+     * Increase the total coins for the user, if he wins (using My Player)
+     * @param winnerId
+     */
     public void increaseTotalCoinsWin(int winnerId) {
 
         if (winnerId == my.getId()) {
@@ -339,14 +348,29 @@ public class GameLogic {
 
         // If there are no any closer available cells besides My Player last move cell position (rivalAttackPoints is empty)
         else {
-            randomMove = randomGenerator.nextInt(availableMoves.size());
-            randomPoint = availableMoves.get(randomMove);
+            randomPoint = rivalRandomMove();
         }
         return randomPoint;
     }
 
-    //-------------------------------- Getters & Setters -------------------------------------
+    /**
+     * Create a random move on the board out of all the available cells
+     * @return  The point where the rial should move to
+     */
+    public Point rivalRandomMove() {
 
+        Random randomGenerator = new Random();
+        int randomMove;
+        Point randomPoint;
+
+        randomMove = randomGenerator.nextInt(availableMoves.size());
+        randomPoint = availableMoves.get(randomMove);
+
+        return randomPoint;
+
+    }
+
+        //-------------------------------- Getters & Setters -------------------------------------
 
     /**
      * Update "My Player" parameter of the game according to the user choice.
@@ -442,4 +466,13 @@ public class GameLogic {
     public void setAgainstComputer(boolean againstComputer) {
         this.againstComputer = againstComputer;
     }
+
+    public int getFirst() {
+        return first;
+    }
+
+    public void setFirst(int first) {
+        this.first = first;
+    }
+
 }

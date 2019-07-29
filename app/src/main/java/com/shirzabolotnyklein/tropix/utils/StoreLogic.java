@@ -1,9 +1,7 @@
 package com.shirzabolotnyklein.tropix.utils;
 
 import android.content.Context;
-import android.widget.Toast;
 
-import com.shirzabolotnyklein.tropix.gui.ApplicationContextProvider;
 import com.shirzabolotnyklein.tropix.model.Lock;
 
 public class StoreLogic {
@@ -20,17 +18,24 @@ public class StoreLogic {
     public static StoreLogic getStoreLogic() {
         if (instance == null) {
             instance = new StoreLogic();
-            //this.context = ApplicationContextProvider.getContext();
 
         }
         return instance;
     }
 
-    //-------------------------------- Store Logic Methods -------------------------------------
+    //-------------------------------- Store Parameters -------------------------------------
 
-
+    /**
+     * Is the user want to purchase the Player
+     */
     boolean wantPurchase;
+
+    /**
+     * ID of the Player that the user want to purchased
+     */
     int purchasePlayer;
+
+    //-------------------------------- Store Logic Methods -------------------------------------
 
 
     /**
@@ -58,7 +63,10 @@ public class StoreLogic {
         Constants.getInstance().setTotalCoins(decTotalCoins);
     }
 
-
+    /**
+     * Calculate the total sum of coins if that Player would be purchased
+     * @return
+     */
     public int calcTotalCoinsWhenPurchase() {
 
         int playerPrice = Constants.getInstance().getPlayer(purchasePlayer).getPrice();
@@ -70,9 +78,8 @@ public class StoreLogic {
         return decTotalCoins;
     }
 
-
     /**
-     *
+     * Purchase the player, decrease the coins  and update in the file
      */
     public void purchase() {
 
@@ -88,7 +95,6 @@ public class StoreLogic {
             // Decrease points
             decreaseCoinsWhenPurchase();
         }
-
     }
 
     //-------------------------------- Getters & Setters -------------------------------------
@@ -100,10 +106,6 @@ public class StoreLogic {
 
     public void setPurchasePlayer(int purchasePlayer) {
         this.purchasePlayer = purchasePlayer;
-    }
-
-    public boolean isWantPurchase() {
-        return wantPurchase;
     }
 
     public int getPurchasePlayer() {

@@ -48,4 +48,12 @@
 
     <string name="tv_rivalType"> איזה סוג היריב שלך? </string>
 
+
+    <string name="tv_who_first"> מי ראשון? </string>
+    <string name="tv_fist"> 1 </string>
+    <string name="tv_second"> 2 </string>
+    <string name="btn_switch"> החלף </string>
+    <string name="btn_start"> התחל </string>
+
+
 </resources>

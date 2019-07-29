@@ -31,7 +31,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private Context context;
 
-    private boolean againstAI;
+    private boolean againstComputer;
     private int size;
 
     protected static Activity gameActivity;
@@ -39,6 +39,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<ArrayList<ImageButton>> boardImageButtons = new ArrayList<ArrayList<ImageButton>>();
     int nextPlayerTurnId;
     Player nextPlayerTurn;
+    int my;
+    int rival;
+    int first;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         gameActivity = this;
         context = ApplicationContextProvider.getContext();
-        againstAI = GameLogic.getGameLogic().isAgainstComputer();
+        againstComputer = GameLogic.getGameLogic().isAgainstComputer();
+
+        my = GameLogic.getGameLogic().getMy();
+        rival = GameLogic.getGameLogic().getRival();
+        first = GameLogic.getGameLogic().getFirst();
 
         Resources.Theme theme = super.getTheme();
 
@@ -74,6 +81,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         initPlayers();
         initBoard();
         initCoins();
+
+        // Place Rival Player move
+        if (againstComputer && first == rival) {
+
+            // Get the rival move in the board
+            Point cell = GameLogic.getGameLogic().rivalRandomMove();
+            ImageButton cellBtn = createImageButtonOnBoard(cell);
+
+            // Put the image of the Player in the clicked cell of the game board
+            setPlayerInCellBtnVsRival(cellBtn);
+
+        }
     }
 
     private void initCoins() {
@@ -145,12 +164,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // Check which player is a winner
         boolean endGame = checkEndGame(cellBtn);
 
-        if (againstAI) {
+        if (againstComputer) {
 
             // If the game is not over yet, create AI move
             if (!endGame) {
 
-                cellBtn = createAIRandomMove(cellBtn);
+                cellBtn = createRivalRandomMoveByMyPlayerMove(cellBtn);
 
                 // Put the image of the Player in the clicked cell of the game board
                 setPlayerInCellBtnVsRival(cellBtn);
@@ -161,7 +180,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public ImageButton createAIRandomMove(ImageButton myCellBtn) {
+    public ImageButton createRivalRandomMoveByMyPlayerMove(ImageButton myCellBtn) {
 
         // Get the cell ID&name (For example "btn_board_3x3_cell_0x0")
         int cellId = myCellBtn.getId();
@@ -171,10 +190,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int myi = Character.getNumericValue(cellName.charAt(cellName.length() - 3));
         int myj = Character.getNumericValue(cellName.charAt(cellName.length() - 1));
 
-        Point myPlayer = new Point (myi,myj);
+        Point myPlayer = new Point(myi, myj);
 
         // Get the rival available cell in the board
         Point cell = GameLogic.getGameLogic().rivalMove(myPlayer);
+        ImageButton cellBtn = createImageButtonOnBoard(cell);
+
+        return cellBtn;
+    }
+
+    public ImageButton createImageButtonOnBoard(Point cell) {
 
         int i = cell.x;
         int j = cell.y;
@@ -190,7 +215,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         return cellBtn;
     }
-
 
     /**
      * Check if there is a next turn, if not refresh game

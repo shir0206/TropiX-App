@@ -12,7 +12,6 @@ import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.utils.Constants;
 import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_chooseBoard;

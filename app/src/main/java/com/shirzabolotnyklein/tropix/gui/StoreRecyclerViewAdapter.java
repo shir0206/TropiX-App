@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-    //Vibrator vibrator =  (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     private ArrayList<Integer> allPlayers; // ArrayList of all players image addresses
     private ArrayList<Integer> allPrices; // ArrayList of all players prices
@@ -58,9 +57,6 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull final StoreRecyclerViewAdapter.ViewHolder holder, final int position) {
 
-        //notifyDataSetChanged();
-
-
         // Get the image of the Player item
         Glide.with(context)
                 .asBitmap()
@@ -75,7 +71,6 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
         // Get the ID of the Player of the item
         holder.playerId = allId.get(position);
-
 
         // If Player status is "CLOSED", get the closed lock image of the item
         if (allStatus.get(position).equals("CLOSE")) {

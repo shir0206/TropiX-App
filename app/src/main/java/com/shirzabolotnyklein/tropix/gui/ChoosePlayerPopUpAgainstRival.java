@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
@@ -30,10 +29,45 @@ public class ChoosePlayerPopUpAgainstRival extends AppCompatActivity {
         btn_friend = findViewById(R.id.btn_friend);
         btn_computer = findViewById(R.id.btn_computer);
 
-
         context = ApplicationContextProvider.getContext();
 
+        initWindow();
 
+        btn_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GameLogic.getGameLogic().setAgainstComputer(false);
+
+                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+
+                Intent intent = new Intent(context, ChoosePlayerPopUpFirst.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
+
+        btn_computer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GameLogic.getGameLogic().setAgainstComputer(true);
+
+                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
+
+                Intent intent = new Intent(context, ChoosePlayerPopUpFirst.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
+    }
+
+    /**
+     * Init pop-up window properties
+     */
+    private void initWindow() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -47,47 +81,5 @@ public class ChoosePlayerPopUpAgainstRival extends AppCompatActivity {
         params.x = 0;
         params.y = -20;
         getWindow().setAttributes(params);
-
-        btn_friend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                GameLogic.getGameLogic().setAgainstComputer(false);
-
-                String purchaseSuccessfully = "נבחר החבר";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
-                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-
-                Intent intent = new Intent(context, GameActivity.class);
-                startActivity(intent);
-
-                ChoosePlayer.choosePlayerActivity.finish();
-
-                finish();
-            }
-        });
-
-        btn_computer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                GameLogic.getGameLogic().setAgainstComputer(true);
-
-                String purchaseSuccessfully = "נבחר המחשב";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
-                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-
-
-
-                Intent intent = new Intent(context, GameActivity.class);
-                startActivity(intent);
-
-                ChoosePlayer.choosePlayerActivity.finish();
-
-                finish();
-            }
-        });
     }
 }

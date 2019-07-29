@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Player;
@@ -22,7 +21,6 @@ import com.shirzabolotnyklein.tropix.utils.GameLogic;
 import java.util.Random;
 
 public class ChoosePlayerPopUpFirst extends AppCompatActivity {
-
 
     Context context;
 
@@ -34,7 +32,6 @@ public class ChoosePlayerPopUpFirst extends AppCompatActivity {
     private TextView tv_second_player;
     private Player my;
     private Player rival;
-    private int first;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +42,10 @@ public class ChoosePlayerPopUpFirst extends AppCompatActivity {
         btn_switch = findViewById(R.id.btn_switch);
         btn_start = findViewById(R.id.btn_start);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int) (width * .8), (int) (height * .65));
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.CENTER;
-        params.x = 0;
-        params.y = -20;
-        getWindow().setAttributes(params);
-
+        initWindow();
 
         my = Constants.getInstance().getPlayer(GameLogic.getGameLogic().getMy());
         rival = Constants.getInstance().getPlayer(GameLogic.getGameLogic().getRival());
-        //first = GameLogic.getGameLogic().getFirst();
 
         initUI();
 
@@ -70,11 +53,13 @@ public class ChoosePlayerPopUpFirst extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // Switch first player
                 if (GameLogic.getGameLogic().getFirst() == my.getId()) {
                     setRivalPlayerFirst();
                 } else {
                     setMyPlayerFirst();
                 }
+                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
             }
         });
@@ -83,8 +68,6 @@ public class ChoosePlayerPopUpFirst extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String purchaseSuccessfully = "מתחיל המשחק";
-                Toast.makeText(context, purchaseSuccessfully, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 Intent intent = new Intent(context, GameActivity.class);
@@ -139,5 +122,25 @@ public class ChoosePlayerPopUpFirst extends AppCompatActivity {
         tv_second_player.setText(R.string.tv_me);
 
         GameLogic.getGameLogic().setFirst(rival.getId());
+    }
+
+
+    /**
+     * Init pop-up window properties
+     */
+    private void initWindow() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        getWindow().setLayout((int) (width * .8), (int) (height * .65));
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x = 0;
+        params.y = -20;
+        getWindow().setAttributes(params);
     }
 }

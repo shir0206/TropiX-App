@@ -2,12 +2,9 @@ package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -17,27 +14,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Winner;
 import com.shirzabolotnyklein.tropix.utils.Constants;
 import com.shirzabolotnyklein.tropix.utils.GameLogic;
 
-import static com.shirzabolotnyklein.tropix.model.Winner.DRAW;
-import static com.shirzabolotnyklein.tropix.model.Winner.MY_PLAYER;
-import static com.shirzabolotnyklein.tropix.model.Winner.RIVAL_PLAYER;
-
 public class GamePopUp extends AppCompatActivity {
 
-    private static final String TAG = "GamePopUp";
     private Context context;
 
     private Button btn_popup_store;
     private Button btn_popup_choose_board;
 
     private ImageView img_end;
-    private TextView tv_winMessage;
     private TextView tv_coinsMessage;
     private TextView tv_gameTotalCoinsNewSum;
 
@@ -59,28 +49,12 @@ public class GamePopUp extends AppCompatActivity {
         winnerId = this.getIntent().getIntExtra("WINNER", -1);
         initUI();
         initColors(GameLogic.getGameLogic().getGame().getBoard().getSize());
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int) (width * .8), (int) (height * .65));
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.CENTER;
-        params.x = 0;
-        params.y = -20;
-        getWindow().setAttributes(params);
-
+        initWindow();
 
         btn_popup_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String store = "מעניין איזה טרופיXים כיפיים אפשר עוד לקנות ;)";
-                Toast.makeText(context, store, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 Intent intent = new Intent(context, Store.class);
@@ -93,13 +67,10 @@ public class GamePopUp extends AppCompatActivity {
             }
         });
 
-
         btn_popup_choose_board.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String chooseBoard = "יש, עוד משחקיX!";
-                Toast.makeText(context, chooseBoard, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 Intent intent = new Intent(context, ChooseBoard.class);
@@ -110,8 +81,6 @@ public class GamePopUp extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
     private void initUI() {
@@ -172,14 +141,15 @@ public class GamePopUp extends AppCompatActivity {
         GamePopUp.this.finish();
     }
 
-
+    /**
+     * Color the window according to the board palette
+     * @param size
+     */
     private void initColors(int size) {
 
         int sdk = android.os.Build.VERSION.SDK_INT;
 
         RelativeLayout rl_popup = (RelativeLayout) findViewById(R.id.rl_popup);
-
-
 
         switch (size) {
 
@@ -241,6 +211,26 @@ public class GamePopUp extends AppCompatActivity {
 
                 break;
         }
+    }
+
+
+    /**
+     * Init pop-up window properties
+     */
+    private void initWindow() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        getWindow().setLayout((int) (width * .8), (int) (height * .65));
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x = 0;
+        params.y = -20;
+        getWindow().setAttributes(params);
     }
 
 }

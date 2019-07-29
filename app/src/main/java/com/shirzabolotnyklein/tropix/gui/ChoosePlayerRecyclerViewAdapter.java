@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shirzabolotnyklein.tropix.R;
@@ -117,8 +116,6 @@ private String playerType;
                         }
 
                     }
-
-                    Toast.makeText(context, "תודה שבחרת בי (:", Toast.LENGTH_SHORT).show();
 
                     ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 

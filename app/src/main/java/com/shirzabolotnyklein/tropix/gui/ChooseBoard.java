@@ -62,7 +62,6 @@ public class ChooseBoard extends AppCompatActivity {
                 setChosenBoardAndInitScreen(size);
             }
         });
-
     }
 
     /**
@@ -78,7 +77,6 @@ public class ChooseBoard extends AppCompatActivity {
         startActivity(intent);
 
         finish();
-
     }
 
     /**
@@ -88,7 +86,6 @@ public class ChooseBoard extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         GameLogic.getGameLogic().resetGame();
-
     }
 
 }
