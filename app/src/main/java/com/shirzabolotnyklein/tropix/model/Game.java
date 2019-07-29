@@ -21,15 +21,17 @@ public class Game {
     private Winner winner;
     private boolean gameOver;
     private int gameCoins;
+    private boolean againstComputer;
 
     //------------------------------------- Constructors -------------------------------------
 
-    public Game(Player my, Player rival, Board board, boolean gameOver, int gameCoins) {
+    public Game(Player my, Player rival, Board board, boolean gameOver, int gameCoins, boolean againstComputer) {
         this.my = my;
         this.rival = rival;
         this.board = board;
         this.gameOver = gameOver;
         this.gameCoins = gameCoins;
+        this.againstComputer = againstComputer;
     }
 
     //------------------------------------- Getters & Setters --------------------------------

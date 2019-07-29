@@ -51,8 +51,8 @@ public class Constants implements Serializable {
 
     private final int boardWinCoins3 = 25;
     private final int boardWinCoins4 = 50;
-    private final int boardWinCoins5 = 100;
-    private final int boardWinCoins6 = 200;
+    private final int boardWinCoins5 = 75;
+    private final int boardWinCoins6 = 100;
 
     HashMap<Integer, Integer> allWinCoins = new HashMap<Integer, Integer>();
 

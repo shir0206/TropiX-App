@@ -1,5 +1,6 @@
 package com.shirzabolotnyklein.tropix.gui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class ChoosePlayer extends AppCompatActivity {
     private ImageView img_myChoice;
     private ImageView img_rivalChoice;
 
+    private Context context;
+    protected static Activity choosePlayerActivity;
 
     private Constants instance = Constants.getInstance();
 
@@ -39,6 +42,9 @@ public class ChoosePlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_choose_player);
+
+        context= ApplicationContextProvider.getContext();
+        choosePlayerActivity = this;
 
         img_myChoice = findViewById(R.id.img_myChoice);
         img_rivalChoice = findViewById(R.id.img_rivalChoice);
@@ -57,30 +63,15 @@ public class ChoosePlayer extends AppCompatActivity {
                 // If Players are valid
                 if (isValid()) {
 
-                    Intent intent = new Intent(ChoosePlayer.this, GameActivity.class);
+
+                    Intent intent = new Intent(context, ChoosePlayerPopUpAgainstRival.class);
+
+                    //Intent intent = new Intent(ChoosePlayer.this, ChoosePlayerPopUpAgainstRival.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
 
-                    /*
-
-                    // Switch case which board should be opened
-                    switch (GameLogic.getGameControl().getGame().getBoard().getSize()) {
-                        case 3:
-
-                            Intent intent = new Intent(ChoosePlayer.this, GameActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            startActivity(intent);
-
-                        case 4:
-                            //startActivity(new Intent(ChoosePlayer.this, Game4x4.class));
-                        case 5:
-                            //startActivity(new Intent(ChoosePlayer.this, Game5x5.class));
-                        case 6:
-                            //startActivity(new Intent(ChoosePlayer.this, Game6x6.class));
-                    }*/
-
                     ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
-                    finish();
+                    //finish();
                 }
             }
         });

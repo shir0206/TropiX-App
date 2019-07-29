@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         gameActivity = this;
         context = ApplicationContextProvider.getContext();
-        againstAI = GameLogic.getGameLogic().isGetAgainstAI();
+        againstAI = GameLogic.getGameLogic().isAgainstComputer();
 
         Resources.Theme theme = super.getTheme();
 

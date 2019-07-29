@@ -79,7 +79,6 @@ public class GamePopUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 String store = "מעניין איזה טרופיXים כיפיים אפשר עוד לקנות ;)";
                 Toast.makeText(context, store, Toast.LENGTH_SHORT).show();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
@@ -117,7 +116,6 @@ public class GamePopUp extends AppCompatActivity {
 
     private void initUI() {
 
-
         img_end = findViewById(R.id.img_end);
         tv_gameTotalCoinsNewSum = findViewById(R.id.tv_gameTotalCoinsNewSum);
 
@@ -127,6 +125,7 @@ public class GamePopUp extends AppCompatActivity {
 
         tv_coinsMessage = findViewById(R.id.tv_coinsMessage);
 
+        // Update popup message & game over image according to end game status - win / lose / draw
         switch (winnerStatus) {
 
             case MY_PLAYER:
@@ -150,7 +149,6 @@ public class GamePopUp extends AppCompatActivity {
 
             case DRAW:
                 img_end.setImageResource(R.drawable.t000_draw);
-
 
                 tv_coinsMessage.setText(getString(R.string.tv_lose));
 

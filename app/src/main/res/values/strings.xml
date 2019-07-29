@@ -46,5 +46,6 @@
     <string name="btn_popup_store">רכישת טרופיXים</string>
     <string name="btn_popup_main"> למשחק חוזר </string>
 
+    <string name="tv_rivalType"> איזה סוג היריב שלך? </string>
 
 </resources>

@@ -82,7 +82,7 @@ public class GameLogic {
      */
     private ArrayList<ArrayList<Integer>> boardMatrix;
 
-    private boolean againstAI = true;
+    private boolean againstComputer;
 
     private ArrayList<Point> availableMoves = new ArrayList<Point>();
 
@@ -242,7 +242,9 @@ public class GameLogic {
      */
     public boolean hasNextTurn() {
         if (movesCount >= maxMoves) {
-            game.setWinner(Winner.DRAW);
+            if (game.getWinner() == Winner.NONE_PLAYER) {
+                game.setWinner(Winner.DRAW);
+            }
             return false;
         }
         return true;
@@ -385,7 +387,7 @@ public class GameLogic {
     public void setGame() {
 
         // Init new Game with the user chosen players & board
-        this.game = new Game(my, rival, board, false, gameCoins);
+        this.game = new Game(my, rival, board, false, gameCoins, againstComputer);
 
         // Init new matrix board
         boardMatrix = new ArrayList<ArrayList<Integer>>(board.getSize());
@@ -433,11 +435,11 @@ public class GameLogic {
         return rival.getId();
     }
 
-    public boolean isGetAgainstAI() {
-        return againstAI;
+    public boolean isAgainstComputer() {
+        return againstComputer;
     }
 
-    public void setGetAgainstAI(boolean getAgainstAI) {
-        this.againstAI = getAgainstAI;
+    public void setAgainstComputer(boolean againstComputer) {
+        this.againstComputer = againstComputer;
     }
 }
