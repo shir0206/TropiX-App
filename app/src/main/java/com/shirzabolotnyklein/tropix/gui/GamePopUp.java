@@ -58,6 +58,7 @@ public class GamePopUp extends AppCompatActivity {
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 Intent intent = new Intent(context, Store.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
                 GameActivity.gameActivity.finish();
@@ -74,6 +75,7 @@ public class GamePopUp extends AppCompatActivity {
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
 
                 Intent intent = new Intent(context, ChooseBoard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
                 GameActivity.gameActivity.finish();
@@ -136,6 +138,7 @@ public class GamePopUp extends AppCompatActivity {
 
         Intent intent = new Intent(GamePopUp.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
         GamePopUp.this.finish();

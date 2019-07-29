@@ -279,6 +279,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = new Intent(context, GamePopUp.class);
         intent.putExtra("WINNER", win);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 
     }
