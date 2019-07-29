@@ -52,9 +52,7 @@ public class GamePopUp extends AppCompatActivity {
 
         setContentView(R.layout.lay_game_popup_end);
 
-
         winnerStatus = GameLogic.getGameLogic().getGame().getWinner();
-
 
         context = ApplicationContextProvider.getContext();
 

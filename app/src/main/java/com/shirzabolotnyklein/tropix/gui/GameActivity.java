@@ -139,7 +139,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         ImageButton cellBtn = ((ImageButton) view);
 
-
         // Put the image of the Player in the clicked cell of the game board
         setPlayerInCellBtnVsRival(cellBtn);
 
@@ -151,7 +150,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             // If the game is not over yet, create AI move
             if (!endGame) {
 
-                cellBtn = createAIRandomMove();
+                cellBtn = createAIRandomMove(cellBtn);
 
                 // Put the image of the Player in the clicked cell of the game board
                 setPlayerInCellBtnVsRival(cellBtn);
@@ -162,11 +161,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public ImageButton createAIRandomMove(ImageButton myCellBtn) {
 
-    public ImageButton createAIRandomMove() {
+        // Get the cell ID&name (For example "btn_board_3x3_cell_0x0")
+        int cellId = myCellBtn.getId();
+        String cellName = myCellBtn.getResources().getResourceName(cellId);
 
-        // Get random available cell in the board
-        Point cell = GameLogic.getGameLogic().random();
+        // Get the position of the cell out of its name (For example "btn_board_3x3_cell_0{=i}x0{=j}")
+        int myi = Character.getNumericValue(cellName.charAt(cellName.length() - 3));
+        int myj = Character.getNumericValue(cellName.charAt(cellName.length() - 1));
+
+        Point myPlayer = new Point (myi,myj);
+
+        // Get the rival available cell in the board
+        Point cell = GameLogic.getGameLogic().rivalMove(myPlayer);
 
         int i = cell.x;
         int j = cell.y;
@@ -181,7 +189,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton cellBtn = findViewById(cellID);
 
         return cellBtn;
-
     }
 
 

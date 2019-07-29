@@ -1,6 +1,8 @@
 package com.shirzabolotnyklein.tropix.utils;
 
 import android.graphics.Point;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.shirzabolotnyklein.tropix.model.Board;
 import com.shirzabolotnyklein.tropix.model.Game;
@@ -9,6 +11,8 @@ import com.shirzabolotnyklein.tropix.model.Winner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 public class GameLogic {
@@ -244,77 +248,103 @@ public class GameLogic {
         return true;
     }
 
-
     /**
-     * Get a deep copy of the Tic Tac Toe board.
+     * Generate rival move according to my rival move.
+     * Place Rival Player besides My Player in order to attack and break his sequence.
      *
-     * @return an identical copy of the board
+     * @param myPlayer My Player position on the board
+     * @return Rival Player position on the board
      */
-    public void getDeepCopy() {
+    public Point rivalMove(Point myPlayer) {
 
-        // Init new matrix board
-        ArrayList<ArrayList<Integer>> boardMatrixCopy = new ArrayList<ArrayList<Integer>>(board.getSize());
+        int myRow = myPlayer.x;
+        int myCol = myPlayer.y;
 
-        // Init the matrix board with -1
-        for (int i = 0; i < board.getSize(); i++) {
-            boardMatrixCopy.add(new ArrayList<Integer>(board.getSize()));
+        ArrayList<Integer> rivalAttackRow = new ArrayList<Integer>();
+        ArrayList<Integer> rivalAttackCol = new ArrayList<Integer>();
 
-            for (int j = 0; j < board.getSize(); j++) {
-                boardMatrixCopy.get(i).add(i, boardMatrix.get(j).get(i));
+        // init possible attack row indexes
+
+        // If My Player is placed in the top row, place Rival Player in the same row or below.
+        if (myRow == 0) {
+            rivalAttackRow.add(myRow + 1);
+        }
+
+        // If My Player is placed in the bottom row, place Rival Player in the same row or above.
+        else if (myRow == board.getSize() - 1) {
+            rivalAttackRow.add(myRow - 1);
+        }
+
+        // Place Rival Player in the same row / below / above My Player position.
+        else {
+            rivalAttackRow.add(myRow + 1);
+            rivalAttackRow.add(myRow - 1);
+        }
+        rivalAttackRow.add(myRow);
+
+        // init possible attack col indexes
+
+        // If My Player is placed in the left col, place Rival Player in the same col or to the right.
+        if (myCol == 0) {
+            rivalAttackCol.add(myCol + 1);
+        }
+
+        // If My Player is placed in the right col, place Rival Player in the same col or to the left.
+        else if (myCol == board.getSize() - 1) {
+            rivalAttackCol.add(myCol - 1);
+        }
+
+        // Place Rival Player in the same col / to the left /  to the right of My Player position.
+        else {
+            rivalAttackCol.add(myCol + 1);
+            rivalAttackCol.add(myCol - 1);
+        }
+        rivalAttackCol.add(myCol);
+
+        // Create an array of all the possible attacks
+        ArrayList<Point> rivalAttackPoints = new ArrayList<Point>();
+
+        // Iterate thorough all the possible row/col moves and
+        // create a combination of the possible attack points to place Rival Player in the board.
+        for (int i = 0; i < rivalAttackRow.size(); i++) {
+            for (int j = 0; j < rivalAttackCol.size(); j++) {
+
+                int rivalRow = rivalAttackRow.get(i);
+                int rivalCol = rivalAttackCol.get(j);
+
+                // Don't add the point where My Player stands
+                if (!(rivalRow == myRow && rivalCol == myCol)) {
+
+                    // Check if the current point in the board is empty
+                    if (boardMatrix.get(rivalRow).get(rivalCol) == 0) {
+
+                        Point point = new Point(rivalRow, rivalCol);
+                        rivalAttackPoints.add(point);
+                    }
+                }
             }
         }
-    }
-
-//        for (int i = 0; i < board.board.length; i++) {
-//            board.board[i] = this.board[i].clone();
-//        }
-//
-//
-//        for (int i = 0; i < size; i++) {
-//            for (int j = 0; j < size; j++) {
-//
-//                boardCopy.playersTurn       = this.playersTurn;
-//                boardCopy.winner            = this.winner;
-//                boardCopy.movesAvailable    = new HashSet<>();
-//                boardCopy.movesAvailable.addAll(this.movesAvailable);
-//                boardCopy.moveCount         = this.moveCount;
-//                boardCopy.gameOver          = this.gameOver;
-//        return boardCopy;
-//    }
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    //-------------------------------- Alpha Beta Algorithm -------------------------------------
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-    public Point random() {
 
         Random randomGenerator = new Random();
+        int randomMove;
+        Point randomPoint;
 
-        int randomMove = randomGenerator.nextInt(availableMoves.size());
+        // Place Rival Player besides My Player last move cell position
+        if (!rivalAttackPoints.isEmpty()) {
+            randomMove = randomGenerator.nextInt(rivalAttackPoints.size());
+            randomPoint = rivalAttackPoints.get(randomMove);
+        }
 
-        return availableMoves.get(randomMove);
+        // If there are no any closer available cells besides My Player last move cell position (rivalAttackPoints is empty)
+        else {
+            randomMove = randomGenerator.nextInt(availableMoves.size());
+            randomPoint = availableMoves.get(randomMove);
+        }
+        return randomPoint;
     }
 
-//    /**
-//     * Execute the algorithm.
-//     * @param board     the Tic Tac Toe board to play on
-//     */
-//    static void run (Board board) {
-//        int[] moves = new int[board.getAvailableMoves().size()];
-//        int index = 0;
-//
-//        for (Integer item : board.getAvailableMoves()) {
-//            moves[index++] = item;
-//        }
-//
-//        int randomMove = moves[new java.util.Random().nextInt(moves.length)];
-//        board.move(randomMove);
-//    }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
     //-------------------------------- Getters & Setters -------------------------------------
+
 
     /**
      * Update "My Player" parameter of the game according to the user choice.
