@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="10dp"
@@ -13,62 +14,85 @@
         android:id="@+id/tv_purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_purchase"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/img_purchase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_purchase"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/tv_totalCoinsNew"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_purchase"
         app:srcCompat="@drawable/t006_beach_ball" />
 
     <TextView
         android:id="@+id/tv_totalCoinsNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_totalCoinsNew"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/tv_totalCoinsNewSum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_purchase" />
 
 
     <TextView
         android:id="@+id/tv_totalCoinsNewSum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_totalCoinsNewSum"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
-        android:textSize="22dp" />
+        android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalCoinsNew" />
 
-
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp">
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalCoinsNewSum">>
+
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/drw_fill_white_border_blue"
-            android:text="@string/btn_cancel" />
+            android:text="@string/btn_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_approve"
+            app:layout_constraintEnd_toStartOf="@+id/btn_approve"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
@@ -76,13 +100,16 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
             android:background="@drawable/drw_fill_blue_border_blue"
-            android:text="@string/btn_approve" />
-    </LinearLayout>
+            android:text="@string/btn_approve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="10dp"
@@ -13,30 +14,42 @@
         android:id="@+id/tv_whoFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_who_first"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="80dp"
-        >
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_whoFirst"
+        app:layout_constraintVertical_bias="0.5">
 
         <LinearLayout
             android:id="@+id/ll_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@drawable/drw_fill_white_border_red"
-            >
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ll_second"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
@@ -46,34 +59,31 @@
                 android:background="@drawable/drw_fill_red_border_red"
                 android:gravity="center"
                 android:padding="10dp"
-                android:textStyle="bold"
+                android:text="@string/tv_fist"
                 android:textAlignment="center"
-                android:text="@string/tv_fist" />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/img_first"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp"
-
                 app:srcCompat="@drawable/t005_banana" />
 
             <TextView
                 android:id="@+id/tv_first_player"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:text="TextView"
-                android:layout_marginBottom="20dp"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -81,36 +91,38 @@
             android:id="@+id/ll_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
             android:background="@drawable/drw_fill_white_border_red"
-            >
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ll_first"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
                 android:id="@+id/tv_second_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/drw_fill_red_border_red"
                 android:gravity="center"
                 android:padding="10dp"
-                android:textStyle="bold"
+                android:text="@string/tv_second"
                 android:textAlignment="center"
-                android:background="@drawable/drw_fill_red_border_red"
-                android:text="@string/tv_second" />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/img_second"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/t004_starfish"
-                android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp"
-                android:layout_marginRight="10dp"/>
+                app:srcCompat="@drawable/t004_starfish" />
 
             <TextView
                 android:id="@+id/tv_second_player"
@@ -119,40 +131,50 @@
                 android:layout_marginBottom="20dp"
 
                 android:gravity="center"
-                android:textAlignment="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAlignment="center" />
         </LinearLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp">
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <Button
             android:id="@+id/btn_switch"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
             android:background="@drawable/drw_fill_white_border_red"
-            android:text="@string/btn_switch" />
+            android:text="@string/btn_switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_start"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_start"
-            android:layout_width="110dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
             android:background="@drawable/drw_fill_red_border_red"
-            android:text="@string/btn_start" />
+            android:text="@string/btn_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_switch"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

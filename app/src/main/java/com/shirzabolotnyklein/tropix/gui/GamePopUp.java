@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -152,7 +153,7 @@ public class GamePopUp extends AppCompatActivity {
 
         int sdk = android.os.Build.VERSION.SDK_INT;
 
-        RelativeLayout rl_popup = (RelativeLayout) findViewById(R.id.rl_popup);
+        ConstraintLayout rl_popup = (ConstraintLayout) findViewById(R.id.rl_popup);
 
         switch (size) {
 

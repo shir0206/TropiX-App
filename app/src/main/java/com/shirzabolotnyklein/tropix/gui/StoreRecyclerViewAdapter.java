@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -156,7 +157,8 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         TextView playerPrice; // Price of the Player
         ImageView playerLock; // Image of the lock status of the Player
 
-        RelativeLayout layoutStore;
+        //RelativeLayout layoutStore;
+        ConstraintLayout layoutStore;
         String status; // The status of the Player
         int playerId; // The Player ID
 

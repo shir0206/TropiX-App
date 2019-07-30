@@ -8,61 +8,60 @@
     tools:context=".gui.Store">
 
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/tbl_coins"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:background="@drawable/drw_fill_white_border_blue"
+        app:layout_constraintBottom_toTopOf="@+id/ll_store"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <ImageView
+            android:id="@+id/img_coins"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/t000_coins"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/tv_coinsSum"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_coinsSum"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_coinsSum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/tv_coinsSum"
             android:textAlignment="center"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_coins"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_coins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
-            android:layout_marginLeft="200dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/tv_coins"
-            android:textAlignment="center"
-            android:textColor="@color/colorBlack" />
-
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/ll_store"
         android:layout_width="300dp"
-        android:layout_height="450dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="500dp"
         android:background="@drawable/drw_fill_white_border_blue"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbl_coins">
 
@@ -74,16 +73,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_lock"
+                android:id="@+id/tv_char"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/tv_lock"
+                android:text="@string/tv_char"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -102,18 +101,18 @@
                 android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/tv_char"
+                android:id="@+id/tv_lock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginLeft="45dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/tv_char"
+                android:text="@string/tv_lock"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
         </LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +9,10 @@
     android:layout_marginVertical="10dp"
     android:background="@drawable/drw_fill_white_border_red"
     android:elevation="5dp">
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -19,38 +24,41 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/tv_rivalType"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/btn_friend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_friend"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="100dp"
         android:background="@drawable/t000_friend"
         android:gravity="center"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btn_computer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rivalType" />
 
     <Button
         android:id="@+id/btn_computer"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="250dp"
         android:background="@drawable/t000_computer"
         android:gravity="center"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_friend" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
