@@ -1,7 +1,6 @@
 # :pineapple: TropiX-App
-:hammer: Under development :hammer:
 </br>
-<img  align="right" src="https://user-images.githubusercontent.com/40990488/62011199-b8256e80-b17d-11e9-96a2-cf412e6e435a.png" alt="TropiX-App" width="250"/>
+<img  align="right" src="https://user-images.githubusercontent.com/40990488/62311150-db109500-b493-11e9-8bc4-ee84bc50da71.jpeg" alt="TropiX-App" width="250"/>
 
 ##  :pineapple: About
 TropiX is an Android Game designed for children in Israel.</br>
@@ -14,6 +13,10 @@ He can enter the TropiX-shop, and through the coins he has accumulated, he can p
 
 
 ## :pineapple: Flowchart
-<img src="https://user-images.githubusercontent.com/40990488/62011129-1bfb6780-b17d-11e9-899c-7cb6f1527354.png"
+<img src="https://user-images.githubusercontent.com/40990488/62310958-56257b80-b493-11e9-8ace-fb5776517b78.png"
 alt="Tropix Flowchart"/>
+
+### :pineapple: Icom pack credits 
+<p>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+
 
