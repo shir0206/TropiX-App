@@ -222,8 +222,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void checkHasNext() {
         boolean hasNext = GameLogic.getGameLogic().hasNextTurn();
         if (!hasNext) {
-            String noNext = "נגמר המשחקיX";
-            Toast.makeText(GameActivity.this, noNext, Toast.LENGTH_LONG).show();
+//            String noNext = "נגמר המשחקיX";
+//            Toast.makeText(GameActivity.this, noNext, Toast.LENGTH_LONG).show();
 
             refreshGame();
         }
@@ -266,12 +266,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (win != -1) {
             GameLogic.getGameLogic().increaseTotalCoinsWin(win);
-            String winMsg = win + " ניצח!!! :)";
-            Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
+//            String winMsg = win + " ניצח!!! :)";
+//            Toast.makeText(GameActivity.this, winMsg, Toast.LENGTH_LONG).show();
 
         } else {
-            String drawMsg = "נגמר המשחק";
-            Toast.makeText(GameActivity.this, drawMsg, Toast.LENGTH_LONG).show();
+//            String drawMsg = "נגמר המשחק";
+//            Toast.makeText(GameActivity.this, drawMsg, Toast.LENGTH_LONG).show();
         }
 
 

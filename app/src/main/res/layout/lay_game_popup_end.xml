@@ -65,7 +65,7 @@
 
         <Button
             android:id="@+id/btn_popup_choose_board"
-            android:layout_width="100dp"
+            android:layout_width="105dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
             android:background="@drawable/drw_fill_blue_dark_border_blue"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/btn_popup_store"
-            android:layout_width="110dp"
+            android:layout_width="1050dp"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
             android:layout_marginStart="15dp"

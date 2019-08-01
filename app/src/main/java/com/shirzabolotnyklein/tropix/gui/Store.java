@@ -56,7 +56,6 @@ public class Store extends AppCompatActivity {
 
             // Add for each element in allId ArrayList the player ID
             allId.add(p.getId() - 1, p.getId());
-
         }
 
         initImageBitmapsForLocks();
@@ -79,15 +78,11 @@ public class Store extends AppCompatActivity {
         final StoreRecyclerViewAdapter adapter = new StoreRecyclerViewAdapter(this, allPlayers, allPrices, allStatus, allId, open, close);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
-
     }
 
     protected void initCoins() {
-
         tv_coinsSum = findViewById(R.id.tv_coinsSum);
-
         int totalCoins = Constants.getInstance().getTotalCoins();
-
         tv_coinsSum.setText(Integer.toString(totalCoins));
     }
 
@@ -115,5 +110,4 @@ public class Store extends AppCompatActivity {
         initImageBitmapsForLocks();
         initRecyclerViewForAllPlayers();
     }
-
 }

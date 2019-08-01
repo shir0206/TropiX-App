@@ -21,19 +21,19 @@
 
         <activity
             android:name=".gui.StorePopUpPurchase"
-            android:theme="@style/AppTheme.PopUp" />
+            android:theme="@style/PinkTheme.PopUp" />
 
         <activity
             android:name=".gui.GamePopUp"
-            android:theme="@style/AppTheme.PopUp" />
+            android:theme="@style/PinkTheme.PopUp" />
 
         <activity
             android:name=".gui.ChoosePlayerPopUpAgainstRival"
-            android:theme="@style/AppTheme.PopUp" />
+            android:theme="@style/PinkTheme.PopUp" />
 
         <activity
             android:name=".gui.ChoosePlayerPopUpFirst"
-            android:theme="@style/AppTheme.PopUp" />
+            android:theme="@style/PinkTheme.PopUp" />
 
         <activity
             android:name=".gui.ChooseBoard"
@@ -61,13 +61,11 @@
 
         <activity
             android:name=".gui.MainActivity"
-            android:theme="@style/PinkTheme">
+            android:theme="@style/AppTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
-
             </intent-filter>
         </activity>
     </application>

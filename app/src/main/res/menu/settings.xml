@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context="com.shirzabolotnyklein.tropix.gui.MainActivity" >
+
+<item android:id="@+id/menu_language"
+    android:title="@string/menu_language"
+    android:orderInCategory="100"
+    app:showAsAction="never" />
+</menu>

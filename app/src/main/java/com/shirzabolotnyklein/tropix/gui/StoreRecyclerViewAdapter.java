@@ -111,7 +111,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
                     // If cannot purchase (not have enough coins), return message
                     else {
-                        String purchaseFailed = "אין לך מספיק מטבעות :(";
+                        String purchaseFailed = context.getResources().getString(R.string.ts_purchase_failed);
                         Toast.makeText(context, purchaseFailed, Toast.LENGTH_SHORT).show();
 
                         ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
@@ -134,7 +134,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                 @Override
                 public void onClick(View view) {
 
-                    String alreadyAvailable = "אני כבר פעיל :)";
+                    String alreadyAvailable = context.getResources().getString(R.string.ts_already_available);
                     Toast.makeText(context, alreadyAvailable, Toast.LENGTH_SHORT).show();
 
                     ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);

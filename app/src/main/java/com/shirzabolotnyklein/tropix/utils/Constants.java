@@ -367,7 +367,7 @@ public class Constants implements Serializable {
     //--------------------------------- Write, Read & Edit file ------------------------------------
 
     /**
-     * Write from SharedPreferences "allPlayersStatus" file.
+     * Write to SharedPreferences file all the Players status.
      * Get allPlayers status date from allPlayers ArrayList, update the data in the file.
      *
      */

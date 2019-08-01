@@ -87,21 +87,21 @@ public class ChoosePlayer extends AppCompatActivity {
 
         // If no Players were chosen, return false
         if (my <= 0 || rival <= 0) {
-            String noPlayer = "לא בחרת טרופיXים!";
+            String noPlayer = context.getResources().getString(R.string.ts_no_player);
             Toast.makeText(ChoosePlayer.this, noPlayer, Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // If same Players were chosen, return false
         else if (my == rival) {
-            String samePlayer = "בחרת שני טרופיXים זהים!";
+            String samePlayer = context.getResources().getString(R.string.ts_same_player);;
             Toast.makeText(ChoosePlayer.this, samePlayer, Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // If valid Players were chosen, return true
         else if (my > 0 && rival > 0) {
-            String choosePlayer = "נבחרו הטרופיXים :)";
+            String choosePlayer = context.getResources().getString(R.string.ts_choose_player);
             Toast.makeText(ChoosePlayer.this, choosePlayer, Toast.LENGTH_SHORT).show();
             return true;
         }

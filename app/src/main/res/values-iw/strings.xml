@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">טרופיX</string>
+
+    <string name="btn_startGame">התחל משחקיX</string>
+    <string name="btn_store">החנות הטרופיX</string>
+
+    <string name="tv_chooseBoard">בחר לוחיX</string>
+    <string name="tv_board_3x3">3x3</string>
+    <string name="tv_board_4x4">4x4</string>
+    <string name="tv_board_5x5">5x5</string>
+    <string name="tv_board_6x6">6x6</string>
+
+    <string name="tv_me">אני</string>
+    <string name="tv_rival">היריב</string>
+    <string name="tv_choosePlayer">בחר טרופיXים</string>
+
+    <string name="tv_coins">נקודות</string>
+    <string name="tv_coinsSum">XX</string>
+
+    <string name="tv_char">טרופיX</string>
+    <string name="tv_price">מחיריX</string>
+    <string name="tv_lock">מנעוליX</string>
+
+    <string name="tv_gameCoins">מטבעות לנצחון</string>
+    <string name="tv_gameCoinsSum">XX</string>
+
+    <string name="tv_totalCoins">סך מטבעות</string>
+    <string name="tv_totalCoinsSum">YY</string>
+
+    <string name="btn_approve">אישור</string>
+    <string name="btn_cancel">ביטול</string>
+
+    <string name="tv_purchase">בחרת לרכוש את</string>
+    <string name="tv_totalCoinsNew">יתרת המטבעות החדשה שלך תהיה</string>
+    <string name="tv_totalCoinsNewSum">ZZ</string>
+
+    <string name="tv_win">(: ישששש, ניצחת</string>
+    <string name="tv_totalCoinsWin">יתרת המטבעות החדשה שלך היא</string>
+
+    <string name="tv_lose">אולי בפעם הבאה</string>
+    <string name="tv_totalCoinsLose">יתרת המטבעות החדשה שלך נשארה</string>
+
+    <string name="tv_draw">נגמר המשחקיX</string>
+    <string name="tv_totalCoinsDraw">יתרת המטבעות החדשה שלך נשארה</string>
+
+    <string name="btn_popup_store">רכישת טרופיXים</string>
+
+    <string name="tv_rivalType">איזה סוג היריב שלך?</string>
+
+    <string name="tv_who_first">מי ראשון?</string>
+    <string name="tv_fist">1</string>
+    <string name="tv_second">2</string>
+    <string name="btn_switch">החלף</string>
+    <string name="btn_start">התחל</string>
+    <string name="btn_popup_main">למשחק חוזר</string>
+
+    <string name="ts_purchase_failed">אין לך מספיק מטבעות :(</string>
+    <string name="ts_already_available">אני כבר פעיל :)</string>
+
+    <string name="ts_no_player">לא בחרת טרופיXים!</string>
+    <string name="ts_same_player">בחרת שני טרופיXים זהים!</string>
+    <string name="ts_choose_player">נבחרו הטרופיXים :)</string>
+
+    <string name = "menu_language">שפה</string>
+
+</resources>

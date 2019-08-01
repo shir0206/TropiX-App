@@ -1,10 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPinkDark</item>
+        <item name="colorPrimaryDark">@color/colorPinkDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
 
@@ -12,42 +14,56 @@
         <item name="colorPrimary">@color/colorWhiteBright</item>
         <item name="colorPrimaryDark">@color/colorWhiteMedium</item>
         <item name="colorAccent">@color/colorWhiteDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
     <style name="PinkTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPinkBright</item>
         <item name="colorPrimaryDark">@color/colorPinkMedium</item>
         <item name="colorAccent">@color/colorPinkDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
     <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorRedBright</item>
         <item name="colorPrimaryDark">@color/colorRedMedium</item>
         <item name="colorAccent">@color/colorRedDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
     <style name="YellowTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorYellowBright</item>
         <item name="colorPrimaryDark">@color/colorYellowMedium</item>
         <item name="colorAccent">@color/colorYellowDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
     <style name="GreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorGreenBright</item>
         <item name="colorPrimaryDark">@color/colorGreenMedium</item>
         <item name="colorAccent">@color/colorGreenDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorBlueBright</item>
         <item name="colorPrimaryDark">@color/colorBlueMedium</item>
         <item name="colorAccent">@color/colorBlueDark</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
-    <style name="AppTheme.PopUp" >
+    <style name="PinkTheme.PopUp" >
         <item name = "android:windowIsTranslucent" >true</item>
         <item name = "android:windowCloseOnTouchOutside" >true</item>
         <item name = "android:windowBackground" > @android:color/transparent</item>
+        <item name="android:textAllCaps">false</item>
+
     </style>
 
 </resources>
