@@ -3,11 +3,15 @@ package com.shirzabolotnyklein.tropix.gui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +22,12 @@ import com.shirzabolotnyklein.tropix.R;
 import com.shirzabolotnyklein.tropix.model.Player;
 import com.shirzabolotnyklein.tropix.utils.Constants;
 import com.shirzabolotnyklein.tropix.utils.GameLogic;
+import com.shirzabolotnyklein.tropix.utils.Settings;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import static com.shirzabolotnyklein.tropix.gui.ApplicationContextProvider.getContext;
 
 public class ChoosePlayer extends AppCompatActivity {
 
@@ -85,23 +93,29 @@ public class ChoosePlayer extends AppCompatActivity {
         int my = GameLogic.getGameLogic().getMy();
         int rival = GameLogic.getGameLogic().getRival();
 
+        String language = Settings.getSettings().readFromFileLanguage();
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration configuration = getContext().getResources().getConfiguration();
+        configuration.locale = locale;
+
         // If no Players were chosen, return false
         if (my <= 0 || rival <= 0) {
-            String noPlayer = context.getResources().getString(R.string.ts_no_player);
+            String noPlayer = getBaseContext().getResources().getString(R.string.ts_no_player);
             Toast.makeText(ChoosePlayer.this, noPlayer, Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // If same Players were chosen, return false
         else if (my == rival) {
-            String samePlayer = context.getResources().getString(R.string.ts_same_player);;
+            String samePlayer = getBaseContext().getResources().getString(R.string.ts_same_player);;
             Toast.makeText(ChoosePlayer.this, samePlayer, Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // If valid Players were chosen, return true
         else if (my > 0 && rival > 0) {
-            String choosePlayer = context.getResources().getString(R.string.ts_choose_player);
+            String choosePlayer = getBaseContext().getResources().getString(R.string.ts_choose_player);
             Toast.makeText(ChoosePlayer.this, choosePlayer, Toast.LENGTH_SHORT).show();
             return true;
         }

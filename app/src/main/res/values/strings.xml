@@ -31,34 +31,34 @@
     <string name="btn_cancel">Cancel</string>
 
     <string name="tv_purchase">You have chosen to purchase</string>
-    <string name="tv_totalCoinsNew">Your new coin balance will be</string>
+    <string name="tv_totalCoinsNew">Your new balance will be</string>
     <string name="tv_totalCoinsNewSum">ZZ</string>
 
-    <string name="tv_win"> Yay, you won :) </string>
-    <string name="tv_totalCoinsWin">Your new coin balance is</string>
+    <string name="tv_win">Yay, you won :)</string>
+    <string name="tv_totalCoinsWin">Your new balance is</string>
 
     <string name="tv_lose">Maybe next time</string>
-    <string name="tv_totalCoinsLose">Your coin balance remains</string>
+    <string name="tv_totalCoinsLose">Your balance remains</string>
 
     <string name="tv_draw">Game Over</string>
-    <string name="tv_totalCoinsDraw">Your coin balance remains</string>
+    <string name="tv_totalCoinsDraw">Your balance remains</string>
 
-    <string name="btn_popup_store">Purchase TropiX</string>
+    <string name="btn_popup_store">TropiX Store</string>
     <string name="btn_popup_main">Play Again</string>
 
-    <string name="tv_rivalType">What kind of opponent is you?</string>
+    <string name="tv_rivalType">Play against friend or computer?</string>
 
-    <string name="tv_who_first">Who\'s first?</string>
-    <string name="tv_fist"> 1 </string>
-    <string name="tv_second"> 2 </string>
+    <string name="tv_who_first">Who begins?</string>
+    <string name="tv_fist">1</string>
+    <string name="tv_second">2</string>
     <string name="btn_switch">Switch</string>
     <string name="btn_start">Start</string>
 
-    <string name = "ts_purchase_failed"> You do not have enough coins :( </string>
-    <string name = "ts_already_available"> I\'m already active :) </string>
+    <string name = "ts_purchase_failed">You do not have enough coins :(</string>
+    <string name = "ts_already_available">I\'m already active :)</string>
 
-    <string name = "ts_no_player"> You haven\'t selected any tropiX\'s! </string>
-    <string name = "ts_same_player"> You have selected two identical tropiX\'s!</string>
+    <string name = "ts_no_player">You haven\'t selected any tropiX\'s</string>
+    <string name = "ts_same_player">You have selected two identical tropiX\'s!</string>
     <string name = "ts_choose_player">TropiX\'s selected :) </string>
 
     <string name = "menu_language">Language</string>

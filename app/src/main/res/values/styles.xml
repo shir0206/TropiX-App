@@ -3,12 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPinkDark</item>
-        <item name="colorPrimaryDark">@color/colorPinkDark</item>
+        <item name="colorPrimaryDark">@color/colorPinkDarker</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textAllCaps">false</item>
-
     </style>
-
 
     <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorWhiteBright</item>

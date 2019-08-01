@@ -1,6 +1,7 @@
 package com.shirzabolotnyklein.tropix.gui;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +29,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     private ArrayList<Integer> allPrices; // ArrayList of all players prices
     private ArrayList<String> allStatus; // ArrayList of all players status
     private ArrayList<Integer> allId; // ArrayList of all players id
-
+    ContextWrapper contextWrapper = new ContextWrapper(context);
     Lock open;
     Lock close;
 
@@ -111,7 +111,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
                     // If cannot purchase (not have enough coins), return message
                     else {
-                        String purchaseFailed = context.getResources().getString(R.string.ts_purchase_failed);
+                        String purchaseFailed = contextWrapper.getBaseContext().getResources().getString(R.string.ts_purchase_failed);
                         Toast.makeText(context, purchaseFailed, Toast.LENGTH_SHORT).show();
 
                         ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);
@@ -134,7 +134,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
                 @Override
                 public void onClick(View view) {
 
-                    String alreadyAvailable = context.getResources().getString(R.string.ts_already_available);
+                    String alreadyAvailable = contextWrapper.getBaseContext().getResources().getString(R.string.ts_already_available);
                     Toast.makeText(context, alreadyAvailable, Toast.LENGTH_SHORT).show();
 
                     ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20);

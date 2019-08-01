@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-
         Settings.getSettings().writeToFileLanguage(language);
     }
 
