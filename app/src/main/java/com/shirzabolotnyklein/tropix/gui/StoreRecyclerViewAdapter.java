@@ -29,7 +29,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     private ArrayList<Integer> allPrices; // ArrayList of all players prices
     private ArrayList<String> allStatus; // ArrayList of all players status
     private ArrayList<Integer> allId; // ArrayList of all players id
-    ContextWrapper contextWrapper = new ContextWrapper(context);
+    ContextWrapper contextWrapper;
     Lock open;
     Lock close;
 
@@ -45,6 +45,8 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
         this.open = open;
         this.close = close;
+
+        contextWrapper = new ContextWrapper(context);
     }
 
     @NonNull

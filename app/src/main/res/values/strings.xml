@@ -54,7 +54,7 @@
     <string name="btn_switch">Switch</string>
     <string name="btn_start">Start</string>
 
-    <string name = "ts_purchase_failed">You do not have enough coins :(</string>
+    <string name = "ts_purchase_failed">You don\'t have enough coins :(</string>
     <string name = "ts_already_available">I\'m already active :)</string>
 
     <string name = "ts_no_player">You haven\'t selected any tropiX\'s</string>
