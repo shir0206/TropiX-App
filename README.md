@@ -11,10 +11,16 @@ He can enter the TropiX-shop, and through the coins he has accumulated, he can p
 
 
 
+##### :pineapple: Link to Play Store: https://play.google.com/store/apps/details?id=com.shirzabolotnyklein.tropix
+
+
+
 
 ## :pineapple: Flowchart
 <img src="https://user-images.githubusercontent.com/40990488/62310958-56257b80-b493-11e9-8ace-fb5776517b78.png"
 alt="Tropix Flowchart"/>
+
+
 
 ### :pineapple: Icom pack credits 
 <p>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
