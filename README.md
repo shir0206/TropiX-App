@@ -3,7 +3,7 @@
 <img  align="right" src="https://user-images.githubusercontent.com/40990488/62311150-db109500-b493-11e9-8bc4-ee84bc50da71.jpeg" alt="TropiX-App" width="250"/>
 
 ##  :pineapple: About
-TropiX is an Android Game designed for children in Israel.</br>
+TropiX is an Android Game designed for children.</br>
 At the beginning of the game, the user receives a list of characters, known as TropiX, from which he can choose a character representing his player and a character representing the opponent's player.</br>
 Then the user can choose the game board he wants to play. The user can choose whether he wants to play against another player (offline) or against the computer.</br>
 During the game, the user chooses which position on the board to put his character and so does the opponent. The winner is the character that is in sequence in a row / column / diagonal along the board. When the user wins, he wins coins.</br>
