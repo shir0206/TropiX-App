@@ -6,6 +6,7 @@
 - The app was written in `Java` for `Android` devices.
 - The **architecture** of the app was designed using `MVC` model.
 - **Permanent data** is stored on the device using `SharedPreferance`.
+- The app supports different **languages** (Hebrew & English).
 - The screens, icons and colors were designed by **mockups**. (The icons were manually painted while the Tropix package was downloaded from Freepik).
 
 </br>
